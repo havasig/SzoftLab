@@ -1,5 +1,8 @@
 package Main;
 
+import java.util.ArrayList;
+
 public class Factory {
-    //TODO mezők megoldása
+    private ArrayList<Field> fields;
+
 }

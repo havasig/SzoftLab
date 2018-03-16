@@ -3,14 +3,8 @@ package Main;
 import java.util.Map;
 
 public class Field {
-    public enum Direction{
-        Left,
-        Right,
-        Up,
-        Down
-    }
-
     private Map<Direction, Field> neighbors;
+    private Movable movable;
 
     public boolean AcceptWorker(Worker w){
        return false;

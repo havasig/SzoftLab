@@ -13,12 +13,12 @@ public class Worker extends Movable {
     }
 
     @Override
-    public Movement CollideWorker(Field.Direction d) {
+    public Movement CollideWorker(Direction d) {
         return null;
     }
 
     @Override
-    public Movement CollideBox(Field.Direction d) {
+    public Movement CollideBox(Direction d) {
         return null;
     }
 

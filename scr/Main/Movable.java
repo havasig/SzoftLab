@@ -1,12 +1,12 @@
 package Main;
 
-import Main.Field.Direction;
-
 public abstract class Movable {
     public enum Movement{
         Moved,
         Stayed
     }
+
+    private Field field;
 
     public abstract void Die();
     public abstract Movement CollideWorker(Direction d);
