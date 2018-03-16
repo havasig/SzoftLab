@@ -3,17 +3,24 @@ package Main;
 public class Switch extends Field {
     private Hole hole;
 
-    @Override
-    public boolean AcceptBox(Box b) {
-        return super.AcceptBox(b);
+    public Switch() {
+        super();
     }
 
     @Override
-    public void RemoveBox() {
-        super.RemoveBox();
+    public boolean AcceptBox(Box b) {
+        super.AcceptBox(b);
+        hole.SetOpen();
+        return true;
+    }
+
+    @Override
+    public void RemoveBox(Box b) {
+        super.RemoveBox(b);
+        hole.SetClosed();
     }
 
     public void SetHole(Hole h){
-
+        hole = h;
     }
 }

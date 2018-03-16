@@ -8,21 +8,36 @@ public class Hole extends Field {
 
     private HoleState state;
 
+    public Hole() {
+        super();
+        state = HoleState.Open;
+    }
+
     @Override
     public boolean AcceptWorker(Worker w) {
-        return super.AcceptWorker(w);
+        if (state == HoleState.Open) {
+            w.Fall();
+            return true;
+        } else {
+            return super.AcceptWorker(w);
+        }
     }
 
     @Override
     public boolean AcceptBox(Box b) {
-        return super.AcceptBox(b);
+        if (state == HoleState.Open) {
+            b.Fall();
+            return true;
+        } else {
+            return super.AcceptBox(b);
+        }
     }
 
     public void SetOpen(){
-
+        state = HoleState.Open;
     }
 
     public void SetClosed(){
-
+        state = HoleState.Closed;
     }
 }

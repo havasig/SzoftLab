@@ -1,38 +1,46 @@
 package Main;
 
-import java.util.Map;
+import java.util.HashMap;
 
 public class Field {
-    private Map<Direction, Field> neighbors;
-    private Movable movable;
+    private HashMap<Direction, Field> neighbors;
+    protected Movable movable;
 
-    public boolean AcceptWorker(Worker w){
-       return false;
-    }
-
-    public boolean AcceptBox(Box b){
-       return false;
-    }
-
-    public void RemoveWorker(Worker w){
-
-    }
-
-    public void RemoveBox(){
-
+    public Field() {
+        neighbors = new HashMap<>();
     }
 
     public Field GetNeighbor(Direction d){
-        return null;
+        return neighbors.get(d);
     }
 
     public void SetNeighbor(Direction d, Field f){
-
+        neighbors.put(d,f);
     }
 
     public Movable GetMovable(){
-        return null;
+        return movable;
     }
 
+    public void setMovable(Movable movable) {
+        this.movable = movable;
+    }
 
+    public boolean AcceptWorker(Worker w){
+        movable = w;
+        return true;
+    }
+
+    public boolean AcceptBox(Box b){
+        movable = b;
+        return true;
+    }
+
+    public void RemoveWorker(Worker w){
+        movable = null;
+    }
+
+    public void RemoveBox(Box b){
+        movable = null;
+    }
 }
