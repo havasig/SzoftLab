@@ -8,6 +8,7 @@ public class Worker extends Movable {
 
     public Worker(Field startField) {
         field = startField;
+        startField.setMovable(this);
         points = 0;
     }
 

@@ -10,6 +10,7 @@ public class Box extends Movable {
 
     public Box(Field startField) {
         field = startField;
+        startField.setMovable(this);
         locked = false;
     }
 
