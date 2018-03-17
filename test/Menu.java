@@ -5,7 +5,6 @@ public class Menu {
     // Based on : http://chronicles.blog.ryanrampersad.com/2011/03/text-based-menu-in-java/ //
     //////////////////////////////////////////////////////////////////////////////////////////
     private Scanner input = new Scanner(System.in);
-    private Test test = new Test();
 
     public void displayMain() {
         System.out.println("-- Teszt --");
@@ -57,19 +56,19 @@ public class Menu {
 
         switch (selection) {
             case "1":
-                test.MoveToField()
+                Test.MoveToField();
                 break;
             case "2":
-                test.MoveToSwitch()
+                Test.MoveToSwitch();
                 break;
             case "3":
-                test.MoveToDestination()
+                Test.MoveToDestination();
                 break;
             case "4":
                 displayMoveToHole();
                 break;
             case "5":
-                test.MoveToColumn()
+                Test.MoveToColumn();
                 break;
             default:
                 System.out.println("Nem létező alpont.");
@@ -90,10 +89,10 @@ public class Menu {
 
         switch (selection) {
             case "1":
-                test.MoveToClosedHole()
+                Test.MoveToClosedHole();
                 break;
             case "2":
-                test.MoveToOpenedHole()
+                Test.MoveToOpenedHole();
                 break;
             default:
                 System.out.println("Nem létező alpont.");
@@ -138,10 +137,10 @@ public class Menu {
 
         switch (selection) {
             case "1":
-                test.CollideWithWorkerToColumn();
+                Test.CollideWithWorkerToColumn();
                 break;
             case "2":
-                test.CollideWithWorkerToField();
+                Test.CollideWithWorkerToField();
                 break;
             default:
                 System.out.println("Nem létező alpont.");
@@ -167,25 +166,25 @@ public class Menu {
 
         switch (selection) {
             case "1":
-                test.CollideWithBoxToSwitch()
+                Test.CollideWithBoxToSwitch();
                 break;
             case "2":
                 displayCollideWithBoxToWorker();
                 break;
             case "3":
-                test.CollideWithBoxToField()
+                Test.CollideWithBoxToField();
                 break;
             case "4":
                 displayCollideWithBoxToHole();
                 break;
             case "5":
-                test.CollideWithBoxToColumn()
+                Test.CollideWithBoxToColumn();
                 break;
             case "6":
-                test.CollideWithBoxToDestination()
+                Test.CollideWithBoxToDestination();
                 break;
             case "7":
-                test.CollideWithBoxOffFromSwitch()
+                Test.CollideWithBoxOffFromSwitch();
                 break;
             default:
                 System.out.println("Nem létező alpont.");
@@ -206,10 +205,10 @@ public class Menu {
 
         switch (selection) {
             case "1":
-                test.CollideWithBoxToClosedHole();
+                Test.CollideWithBoxToClosedHole();
                 break;
             case "2":
-                test.CollideWithBoxToOpenedHole();
+                Test.CollideWithBoxToOpenedHole();
                 break;
             default:
                 System.out.println("Nem létező alpont.");
@@ -230,10 +229,10 @@ public class Menu {
 
         switch (selection) {
             case "1":
-                test.CollideWithBoxToWorkerToColumn();
+                Test.CollideWithBoxToWorkerToColumn();
                 break;
             case "2":
-                test.CollideWithBoxTotoWorkerToWorkerToColumn();
+                Test.CollideWithBoxToWorkerToWorkerToColumn();
                 break;
             default:
                 System.out.println("Nem létező alpont.");
