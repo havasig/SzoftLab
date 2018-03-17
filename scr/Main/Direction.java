@@ -1,6 +1,6 @@
 package Main;
 
-public enum Direction{
+public enum Direction {
     Left,
     Right,
     Up,

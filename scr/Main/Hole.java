@@ -1,11 +1,6 @@
 package Main;
 
 public class Hole extends Field {
-    public enum HoleState{
-        Open,
-        Closed
-    }
-
     private HoleState state;
 
     public Hole() {
@@ -33,11 +28,16 @@ public class Hole extends Field {
         }
     }
 
-    public void SetOpen(){
+    public void SetOpen() {
         state = HoleState.Open;
     }
 
-    public void SetClosed(){
+    public void SetClosed() {
         state = HoleState.Closed;
+    }
+
+    public enum HoleState {
+        Open,
+        Closed
     }
 }

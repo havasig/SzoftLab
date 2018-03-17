@@ -20,7 +20,7 @@ public class Switch extends Field {
         hole.SetClosed();
     }
 
-    public void SetHole(Hole h){
+    public void SetHole(Hole h) {
         hole = h;
     }
 }

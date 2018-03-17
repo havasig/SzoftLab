@@ -1,6 +1,7 @@
 package Main;
 
-import static Main.Movement.*;
+import static Main.Movement.Moved;
+import static Main.Movement.Stayed;
 
 public class Box extends Movable {
     private boolean locked;
@@ -8,7 +9,7 @@ public class Box extends Movable {
     private Movable movable;
 
     public Box(Field startField) {
-        field= startField;
+        field = startField;
         locked = false;
     }
 
@@ -24,23 +25,23 @@ public class Box extends Movable {
 
     @Override
     public Movement CollideBox(Direction d) {
-       return CollideMovable(d);
+        return CollideMovable(d);
     }
 
     private Movement CollideMovable(Direction d) {
         if (!locked) {
             Field nextField = field.GetNeighbor(d);
-            Movable m =nextField.GetMovable();
-            if(m != null){
+            Movable m = nextField.GetMovable();
+            if (m != null) {
                 Movement state = m.CollideBox(d);
                 if (state == Moved) {
                     Move(nextField);
                     return Moved;
                 }
-            }else {
+            } else {
                 boolean b_state;
                 b_state = Move(nextField);
-                if (b_state){
+                if (b_state) {
                     return Moved;
                 }
             }
@@ -50,16 +51,16 @@ public class Box extends Movable {
 
     @Override
     public boolean Move(Field f) {
-        if(f.AcceptBox(this)){
+        if (f.AcceptBox(this)) {
             field.RemoveBox(this);
             field = f;
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
-    public void Lock(){
+    public void Lock() {
         Game.getInstance().SetPoint();
         locked = true;
     }

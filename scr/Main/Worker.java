@@ -1,6 +1,7 @@
 package Main;
 
-import static Main.Movement.*;
+import static Main.Movement.Moved;
+import static Main.Movement.Stayed;
 
 public class Worker extends Movable {
     private int points;
@@ -10,7 +11,7 @@ public class Worker extends Movable {
         points = 0;
     }
 
-    public void IncrementPoints(){
+    public void IncrementPoints() {
         points++;
     }
 
@@ -23,38 +24,38 @@ public class Worker extends Movable {
     @Override
     public Movement CollideWorker(Direction d) {
         Field nextField = field.GetNeighbor(d);
-        Movable m =nextField.GetMovable();
-        if (m != null){
+        Movable m = nextField.GetMovable();
+        if (m != null) {
             Movement state = m.CollideWorker(d);
-            if (state == Moved){
+            if (state == Moved) {
                 Move(nextField);
                 return Moved;
-            }else{
+            } else {
                 return Stayed;
             }
-        }else {
-           boolean w_state;
-           w_state = Move(nextField);
-           if (w_state){
-               return Moved;
-           }else {
-               return Stayed;
-           }
+        } else {
+            boolean w_state;
+            w_state = Move(nextField);
+            if (w_state) {
+                return Moved;
+            } else {
+                return Stayed;
+            }
         }
     }
 
     @Override
     public Movement CollideBox(Direction d) {
         Field nextField = field.GetNeighbor(d);
-        Movable m =nextField.GetMovable();
-        if (m != null){
+        Movable m = nextField.GetMovable();
+        if (m != null) {
             Movement state = m.CollideWorker(d);
-            if (state == Moved){
+            if (state == Moved) {
                 Move(nextField);
-            }else{
+            } else {
                 Die();
             }
-        }else {
+        } else {
             boolean w_state;
             w_state = Move(nextField);
             if (!w_state)
@@ -65,24 +66,23 @@ public class Worker extends Movable {
 
     @Override
     public boolean Move(Field f) {
-        if(f.AcceptWorker(this)){
+        if (f.AcceptWorker(this)) {
             field.RemoveWorker(this);
             field = f;
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
-    public void Control(Direction d){
+    public void Control(Direction d) {
         Field nextField = field.GetNeighbor(d);
-        Movable m =nextField.GetMovable();
-        if (m != null){
+        Movable m = nextField.GetMovable();
+        if (m != null) {
             Movement state = m.CollideWorker(d);
             if (state == Moved)
                 Move(nextField);
-        }else
+        } else
             Move(nextField);
     }
-
 }

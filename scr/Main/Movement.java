@@ -1,6 +1,6 @@
 package Main;
 
-public enum Movement{
+public enum Movement {
     Moved,
     Stayed
 }
