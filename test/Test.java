@@ -206,7 +206,7 @@ public class Test {
         Field w_field = new Field("w_field");
         Field b_field = new Field("b_field");
         Switch switcher = new Switch("switcher");
-        Field random_field = new Field();
+        Field random_field = new Field("random_field");
         w_field.SetNeighbor(Right, switcher);
         b_field.SetNeighbor(Right, random_field);
         Hole hole = new Hole("hole");
