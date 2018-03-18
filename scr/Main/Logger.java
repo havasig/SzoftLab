@@ -5,7 +5,7 @@ import Main.*;
 import java.rmi.UnexpectedException;
 
 /**
- *
+ * A loggolást segítő osztály. Futás közben kiírja terminálban az állapotváltozásokat
  */
 public class Logger {
     //A behúzás mértéke, formázás miatt.

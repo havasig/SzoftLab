@@ -4,6 +4,9 @@ import static Main.Direction.*;
 public class Test {
     public static Logger logger;
 
+    /**
+     * A Teszt osztály belépési pontja
+     */
     public static void main(String[] args) {
         Menu menu = new Menu();
         while (true)
