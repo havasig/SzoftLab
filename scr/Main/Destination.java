@@ -1,8 +1,8 @@
 package Main;
 
 public class Destination extends Field {
-    public Destination() {
-        super();
+    public Destination(String label) {
+        super(label);
     }
 
     @Override

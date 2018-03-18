@@ -2,6 +2,11 @@ package Main;
 
 public abstract class Movable {
     protected Field field;
+    protected String label;
+
+    public Movable(String label) {
+        this.label = label;
+    }
 
     public abstract void Die();
 
@@ -15,4 +20,7 @@ public abstract class Movable {
         Die();
     }
 
+    public String getLabel() {
+        return label;
+    }
 }

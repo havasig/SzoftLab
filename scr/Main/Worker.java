@@ -6,7 +6,8 @@ import static Main.Movement.Stayed;
 public class Worker extends Movable {
     private int points;
 
-    public Worker(Field startField) {
+    public Worker(Field startField, String label) {
+        super(label);
         field = startField;
         startField.setMovable(this);
         points = 0;

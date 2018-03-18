@@ -3,8 +3,8 @@ package Main;
 public class Switch extends Field {
     private Hole hole;
 
-    public Switch() {
-        super();
+    public Switch(String label) {
+        super(label);
     }
 
     @Override

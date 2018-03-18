@@ -3,8 +3,8 @@ package Main;
 public class Hole extends Field {
     private HoleState state;
 
-    public Hole() {
-        super();
+    public Hole(String label) {
+        super(label);
         state = HoleState.Open;
     }
 

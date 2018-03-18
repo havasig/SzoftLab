@@ -1,8 +1,8 @@
 package Main;
 
 public class Column extends Field {
-    public Column() {
-        super();
+    public Column(String label) {
+        super(label);
     }
 
     @Override

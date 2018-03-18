@@ -8,7 +8,8 @@ public class Box extends Movable {
 
     private Movable movable;
 
-    public Box(Field startField) {
+    public Box(Field startField, String label) {
+        super(label);
         field = startField;
         startField.setMovable(this);
         locked = false;

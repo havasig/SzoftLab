@@ -4,9 +4,11 @@ import java.util.HashMap;
 
 public class Field {
     protected Movable movable;
+    protected String label;
     private HashMap<Direction, Field> neighbors;
 
-    public Field() {
+    public Field(String label) {
+        this.label = label;
         neighbors = new HashMap<>();
     }
 
@@ -42,5 +44,9 @@ public class Field {
 
     public void RemoveBox(Box b) {
         movable = null;
+    }
+
+    public String getLabel() {
+        return label;
     }
 }
