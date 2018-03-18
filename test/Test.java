@@ -1,5 +1,6 @@
 import Main.*;
-import static Main.Direction.*;
+
+import static Main.Direction.Right;
 
 public class Test {
     public static Logger logger;
@@ -13,7 +14,7 @@ public class Test {
             menu.displayMain();
     }
 
-    public static void MoveToField(){
+    public static void MoveToField() {
         Field prev_field = new Field("prev_field");
         Field next_field = new Field("next_field");
         prev_field.SetNeighbor(Right, next_field);
@@ -22,7 +23,7 @@ public class Test {
         worker.Control(Right);
     }
 
-    public static void MoveToSwitch(){
+    public static void MoveToSwitch() {
         Field w_field = new Field("w_field");
         Switch switcher = new Switch("switcher");
         Hole hole = new Hole("hole");
@@ -33,7 +34,7 @@ public class Test {
         worker.Control(Right);
     }
 
-    public static void MoveToDestination(){
+    public static void MoveToDestination() {
         Field w_field = new Field("w_field");
         Destination dest = new Destination("destination");
         w_field.SetNeighbor(Right, dest);
@@ -42,7 +43,7 @@ public class Test {
         worker.Control(Right);
     }
 
-    public static void MoveToClosedHole(){
+    public static void MoveToClosedHole() {
         Field w_field = new Field("w_field");
         Hole hole = new Hole("hole");
         w_field.SetNeighbor(Right, hole);
@@ -52,7 +53,7 @@ public class Test {
         worker.Control(Right);
     }
 
-    public static void MoveToOpenedHole(){
+    public static void MoveToOpenedHole() {
         Field w_field = new Field("w_field");
         Hole hole = new Hole("hole");
         w_field.SetNeighbor(Right, hole);
@@ -71,7 +72,7 @@ public class Test {
         worker.Control(Right);
     }
 
-    public static void CollideWithWorkerToColumn(){
+    public static void CollideWithWorkerToColumn() {
         Field w1_field = new Field("w1_field");
         Field w2_field = new Field("w2_field");
         Column column = new Column("column");
@@ -83,7 +84,7 @@ public class Test {
         worker1.Control(Right);
     }
 
-    public static void CollideWithWorkerToField(){
+    public static void CollideWithWorkerToField() {
         Field w1_field = new Field("w1_field");
         Field w2_field = new Field("w2_field");
         Field free_field = new Field("free_field");
@@ -95,7 +96,7 @@ public class Test {
         worker1.Control(Right);
     }
 
-    public static void CollideWithBoxToSwitch(){
+    public static void CollideWithBoxToSwitch() {
         Field w_field = new Field("w_field");
         Field b_field = new Field("b_field");
         Switch switcher = new Switch("switcher");
@@ -109,7 +110,7 @@ public class Test {
         worker.Control(Right);
     }
 
-    public static void CollideWithBoxToWorkerToColumn(){
+    public static void CollideWithBoxToWorkerToColumn() {
         Field w1_field = new Field("w1_field");
         Field b1_field = new Field("b1_field");
         Field w2_field = new Field("w2_field");
@@ -124,7 +125,7 @@ public class Test {
         worker1.Control(Right);
     }
 
-    public static void CollideWithBoxToWorkerToWorkerToColumn(){
+    public static void CollideWithBoxToWorkerToWorkerToColumn() {
         Field w1_field = new Field("w1_field");
         Field b1_field = new Field("b1_field");
         Field w2_field = new Field("w2_field");
@@ -142,7 +143,7 @@ public class Test {
         worker1.Control(Right);
     }
 
-    public static void CollideWithBoxToField(){
+    public static void CollideWithBoxToField() {
         Field w_field = new Field("w_field");
         Field b_field = new Field("b_field");
         Field free_field = new Field("free_field");
@@ -154,7 +155,7 @@ public class Test {
         worker.Control(Right);
     }
 
-    public static void CollideWithBoxToClosedHole(){
+    public static void CollideWithBoxToClosedHole() {
         Field w_field = new Field("w_field");
         Field b_field = new Field("b_field");
         Hole hole = new Hole("hole");
@@ -167,7 +168,7 @@ public class Test {
         worker.Control(Right);
     }
 
-    public static void CollideWithBoxToOpenedHole(){
+    public static void CollideWithBoxToOpenedHole() {
         Field w_field = new Field("w_field");
         Field b_field = new Field("b_field");
         Hole hole = new Hole("hole");
@@ -180,7 +181,7 @@ public class Test {
         worker.Control(Right);
     }
 
-    public static void CollideWithBoxToColumn(){
+    public static void CollideWithBoxToColumn() {
         Field w_field = new Field("w_field");
         Field b_field = new Field("b_field");
         Column column = new Column("column");
@@ -192,7 +193,7 @@ public class Test {
         worker.Control(Right);
     }
 
-    public static void CollideWithBoxToDestination(){
+    public static void CollideWithBoxToDestination() {
         Field w_field = new Field("w_field");
         Field b_field = new Field("b_field");
         Destination dest = new Destination("destination");
@@ -205,7 +206,7 @@ public class Test {
         worker.Control(Right);
     }
 
-    public static void CollideWithBoxOffFromSwitch(){
+    public static void CollideWithBoxOffFromSwitch() {
         Field w_field = new Field("w_field");
         Field b_field = new Field("b_field");
         Switch switcher = new Switch("switcher");

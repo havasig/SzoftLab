@@ -13,6 +13,7 @@ public class Field {
 
     /**
      * A mező osztály konstruktora
+     *
      * @param label A logger osztály segéd stringje
      */
     public Field(String label) {
@@ -23,6 +24,7 @@ public class Field {
     /**
      * Visszatér azzal a mezővel, ami a paraméterként
      * kapott irányban található
+     *
      * @param d A lekérdezett szomszédos mező iránya
      * @return A szomszádos mező elem
      */
@@ -39,6 +41,7 @@ public class Field {
     /**
      * ​ Beállítja a paraméterként kapott irányba a
      * paraméterként kapott mezőt
+     *
      * @param d A beállítandó irány
      * @param f A beűllítandó mező
      */
@@ -48,10 +51,11 @@ public class Field {
 
     /**
      * ​Visszaadja a mezőn tartózkodó Movable objektumot
+     *
      * @return A mezőn lévő léptethető objektum
      */
     public Movable GetMovable() {
-        Logger.funcStart("GetMovable", label,"");
+        Logger.funcStart("GetMovable", label, "");
         Movable ret = movable;
         if (ret != null)
             Logger.funcEnd("GetMovable", label, ret.label);
@@ -62,6 +66,7 @@ public class Field {
 
     /**
      * A mezőn kezdetben álló léptethető objektum beállítására szolgál
+     *
      * @param movable A mezőn lévő léptethető objektum
      */
     public void SetMovable(Movable movable) {
@@ -70,6 +75,7 @@ public class Field {
 
     /**
      * ​Elfogadja a mezőre érkező Worker-t
+     *
      * @param w A mezőre lépő munkás referenciája
      * @return A lépés sikeressége szerinti érték
      */
@@ -82,6 +88,7 @@ public class Field {
 
     /**
      * :Elfogadja a mezőre érkező Box-t
+     *
      * @param b A mezőre érkető doboz referenciája
      * @return A mozgatás sikeressége szerinti érték
      */
@@ -94,6 +101,7 @@ public class Field {
 
     /**
      * ​ Eltávolítja a mezőről a Worker objektumot.
+     *
      * @param w ​ Az eltávolíttandó munkás referenciája
      */
     public void RemoveWorker(Worker w) {
@@ -104,6 +112,7 @@ public class Field {
 
     /**
      * ​ Eltávolítja a mezőről a Box objektumot
+     *
      * @param b Az eltávolíttandó doboz referenciája
      */
     public void RemoveBox(Box b) {
@@ -114,6 +123,7 @@ public class Field {
 
     /**
      * A logger osztály segéd változójának getter függvénye
+     *
      * @return Az objektum nevét adja vissza
      */
     public String getLabel() {

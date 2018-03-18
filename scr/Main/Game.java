@@ -10,6 +10,7 @@ public class Game {
     private int currentLevel = 1;
     ///////////////
     private int livePlayerCount;
+
     private Game() {
     }
 

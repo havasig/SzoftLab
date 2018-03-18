@@ -13,6 +13,7 @@ public class Destination extends Field {
     /**
      * ​ Meghívja a Box Lock() függvényét és a Game
      * SetPoints() függvényét is.
+     *
      * @param b A mezőre érkető doboz referenciája
      * @return A lépés sikeressége szerinti érték
      */

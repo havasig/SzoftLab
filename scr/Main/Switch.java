@@ -9,6 +9,7 @@ public class Switch extends Field {
 
     /**
      * A Switch konsturktora
+     *
      * @param label A logger osztály segéd stringje
      */
     public Switch(String label) {
@@ -18,6 +19,7 @@ public class Switch extends Field {
     /**
      * ​ Meghívja a kapcsolóhoz tartozó lyuk SetOpen()
      * függvényét és befogadja a Box-t
+     *
      * @param b A mezőre érkető doboz referenciája
      * @return A lépés sikeressége szerinti érték
      */
@@ -32,7 +34,8 @@ public class Switch extends Field {
 
     /**
      * Meghívja a Hole SetClosed() függvényét. Bezárja az adott Switch
-     objektumhoz tartozó lyukat és eltávolítja a Box-t a mezőről.
+     * objektumhoz tartozó lyukat és eltávolítja a Box-t a mezőről.
+     *
      * @param b Az eltávolíttandó doboz referenciája
      */
     @Override
@@ -45,6 +48,7 @@ public class Switch extends Field {
 
     /**
      * Beállítja, hogy melyik lyuk tartozik az adott kapcsolóhoz
+     *
      * @param h ​A kapcsolóhoz tartozó lyuk referenciája
      */
     public void SetHole(Hole h) {

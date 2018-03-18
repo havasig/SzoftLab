@@ -4,10 +4,10 @@ import static Main.Movement.Moved;
 import static Main.Movement.Stayed;
 
 /**
- *  Léptethető objektum. A játékosok tologatják. Ha a helyére kerül akkor már nem lehet
- *  mozgatni.
+ * Léptethető objektum. A játékosok tologatják. Ha a helyére kerül akkor már nem lehet
+ * mozgatni.
  *
- *  Movable → Box
+ * Movable → Box
  */
 public class Box extends Movable {
     private boolean locked;
@@ -17,8 +17,9 @@ public class Box extends Movable {
 
     /**
      * A Box osztály konsturktora.
+     *
      * @param startField Az objektum kezdő mezője
-     * @param label A logger osztály segéd stringje
+     * @param label      A logger osztály segéd stringje
      */
     public Box(Field startField, String label) {
         super(label);
@@ -40,6 +41,7 @@ public class Box extends Movable {
     /**
      * ​ Ez a függvény kezeli a Worker objektum által
      * indított ütközést a Box objektummal.
+     *
      * @param d Az ütközés iránya
      * @return Sikerült-e az ütközés során megtolni
      */
@@ -54,6 +56,7 @@ public class Box extends Movable {
     /**
      * ​ Ez a függvény kezeli a Box objektum által
      * indított ütközést a Box objektummal.
+     *
      * @param d Az ütközés iránya
      * @return Sikerült-e az ütközés során megtolni
      */
@@ -67,6 +70,7 @@ public class Box extends Movable {
 
     /**
      * A Collide függvények duplikált részét tartalmazza
+     *
      * @param d Az ütközés iránya
      * @return Sikerült-e az ütközés során megtolni
      */
@@ -99,6 +103,7 @@ public class Box extends Movable {
     /**
      * ​ Az objektumot egyik mezőről egy másikra próbálja
      * mozgatni. Ha sikeres a mozgás akkor true értéket ad vissza.
+     *
      * @param f A következő mező, amire lépni fog
      * @return Sikerült-e a lépés, annak megfelelő a visszatérési érték
      */

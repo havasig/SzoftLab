@@ -41,7 +41,7 @@ public class Menu {
         System.exit(1);
     }
 
-    private void displayMove(){
+    private void displayMove() {
         System.out.println("-- Move --");
         System.out.println(
                 "Válasz egy lehetőséget: \n" +
@@ -82,7 +82,7 @@ public class Menu {
         System.out.println(
                 "Válasz egy lehetőséget: \n" +
                         "  1. Move to Closed Hole\n" +
-                        "  2. Move to Opened Hole\n"+
+                        "  2. Move to Opened Hole\n" +
                         " Választott:"
         );
         String selection = input.next();
@@ -101,7 +101,7 @@ public class Menu {
         }
     }
 
-    private void displayCollide(){
+    private void displayCollide() {
         System.out.println("-- Collide --");
         System.out.println(
                 "Válasz egy lehetőséget: \n" +

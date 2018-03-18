@@ -6,7 +6,7 @@ import static Main.Movement.Stayed;
 /**
  * A játékos irányítja. Eltolhatja a dobozokat illetve meghalhat. Ha jó helyre tol egy dobozt
  * akkor pontot szerez.
- *
+ * <p>
  * Movable → Worker
  */
 public class Worker extends Movable {
@@ -17,8 +17,9 @@ public class Worker extends Movable {
 
     /**
      * A worker osztály konstruktora
+     *
      * @param startField Az objektum kezdő mezője
-     * @param label A logger osztály segéd stringje
+     * @param label      A logger osztály segéd stringje
      */
     public Worker(Field startField, String label) {
         super(label);
@@ -45,6 +46,7 @@ public class Worker extends Movable {
     /**
      * ​Ez a függvény kezeli a Worker objektum
      * által indított ütközést a Worker objektummal
+     *
      * @param d Az ütközés iránya
      * @return Sikerült-e az ütközés során megtolni
      */
@@ -77,8 +79,9 @@ public class Worker extends Movable {
     }
 
     /**
-     *  ​Ez a függvény kezeli a Box objektum által indított
-     *  ütközést a Worker objektummal
+     * ​Ez a függvény kezeli a Box objektum által indított
+     * ütközést a Worker objektummal
+     *
      * @param d Az ütközés iránya
      * @return Sikerült-e az ütközés során megtolni
      */
@@ -107,6 +110,7 @@ public class Worker extends Movable {
     /**
      * ​Az objektumot egyik mezőről egy másikra próbálja
      * mozgatni. Ha sikeres a mozgás akkor true értéket ad vissza.
+     *
      * @param f A következő mező, amire lépni fog
      * @return Sikerült-e a lépés, annak megfelelő a visszatérési érték
      */
@@ -126,6 +130,7 @@ public class Worker extends Movable {
 
     /**
      * A játékos által irányított munkás vezérléséért felel
+     *
      * @param d A munkás lépésének iránya
      */
     public void Control(Direction d) {

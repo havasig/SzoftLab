@@ -7,6 +7,7 @@ package Main;
 public class Column extends Field {
     /**
      * A Column osztály konstruktora
+     *
      * @param label A logger osztály segéd stringje
      */
     public Column(String label) {
@@ -16,6 +17,7 @@ public class Column extends Field {
     /**
      * ​ False-al tér vissza, mivel erre a mezőre nem
      * lehet lépni
+     *
      * @param w A mezőre lépő munkás referenciája
      * @return Konstans false
      */
@@ -28,6 +30,7 @@ public class Column extends Field {
 
     /**
      * ​False-al tér vissza, mivel erre a mezőre nem lehet lépni.
+     *
      * @param b A mezőre érkető doboz referenciája
      * @return Konstans false
      */

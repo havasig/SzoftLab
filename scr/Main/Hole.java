@@ -10,6 +10,7 @@ public class Hole extends Field {
 
     /**
      * A Hole osztály konstruktora
+     *
      * @param label A logger osztály segéd stringje
      */
     public Hole(String label) {
@@ -21,6 +22,7 @@ public class Hole extends Field {
      * ​ Ha nyitott állapotban van akkor meghívja az objektum Fall()
      * függvényét. Ha csukott állapotban akkor sima Field mezőkként
      * viselkedik.
+     *
      * @param w A mezőre lépő munkás referenciája
      * @return A lépés sikeressége szerinti érték
      */
@@ -42,6 +44,7 @@ public class Hole extends Field {
      * ​ Ha nyitott állapotban van akkor meghívja az objektum
      * Fall() függvényét. Ha csukott állapotban akkor sima Field
      * mezőkként viselkedik.
+     *
      * @param b A mezőre érkető doboz referenciája
      * @return A lépés sikeressége szerinti érték
      */
