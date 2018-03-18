@@ -1,30 +1,31 @@
 import Main.*;
-
 import static Main.Direction.*;
 
 public class Test {
-       public static void main(String[] args) {
-           Menu menu = new Menu();
-           while (true)
-               menu.displayMain();
+    public static Logger logger;
 
-       }
+    public static void main(String[] args) {
+        Menu menu = new Menu();
+        while (true)
+            menu.displayMain();
+    }
 
     public static void MoveToField(){
-        Field prev_field = new Field();
-        Field next_field = new Field();
+        Field prev_field = new Field("prev_field");
+        Field next_field = new Field("next_field");
         prev_field.SetNeighbor(Right, next_field);
-        Worker worker = new Worker(prev_field);
+        Worker worker = new Worker(prev_field, "worker");
 
         worker.Control(Right);
     }
 
     public static void MoveToSwitch(){
-        Field w_field = new Field();
-        Switch switcher = new Switch();
+        Field w_field = new Field("w_field");
+        Switch switcher = new Switch("switcher");
+        Hole hole = new Hole("hole");
         w_field.SetNeighbor(Right, switcher);
-        Worker worker = new Worker(w_field);
-        //Hole?? úgyse nyitja ki
+        switcher.SetHole(hole);
+        Worker worker = new Worker(w_field, "worker");
 
         worker.Control(Right);
     }
@@ -215,5 +216,4 @@ public class Test {
 
         worker.Control(Right);
     }
-
 }
