@@ -23,9 +23,7 @@ public class Field {
     }
 
     public void SetNeighbor(Direction d, Field f) {
-        Logger.funcStart("SetNeighbor", label, d.name() + ", " + f.label);
         neighbors.put(d, f);
-        Logger.funcEnd("SetNeighbor", label, "");
     }
 
     public Movable GetMovable() {
@@ -39,9 +37,7 @@ public class Field {
     }
 
     public void SetMovable(Movable movable) {
-        Logger.funcStart("SetMovable", label, movable.label);
         this.movable = movable;
-        Logger.funcEnd("SetMovable", label, "");
     }
 
     public boolean AcceptWorker(Worker w) {
