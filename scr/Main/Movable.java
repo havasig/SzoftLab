@@ -17,7 +17,9 @@ public abstract class Movable {
     public abstract boolean Move(Field f);
 
     public void Fall() {
+        Logger.funcStart("Fall", label, "");
         Die();
+        Logger.funcEnd("Fall", label, "");
     }
 
     public String getLabel() {
