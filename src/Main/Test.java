@@ -1,4 +1,4 @@
-import Main.*;
+package Main;
 
 import static Main.Direction.*;
 
