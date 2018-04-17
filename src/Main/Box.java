@@ -6,8 +6,6 @@ import static Main.Movement.Stayed;
 public class Box extends Movable {
     private boolean locked;
 
-    private Movable movable;
-
     public Box(Field startField) {
         field = startField;
         startField.setMovable(this);
