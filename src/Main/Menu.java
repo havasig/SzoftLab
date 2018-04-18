@@ -10,13 +10,7 @@ public class Menu {
 
     public void displayMain() {
         System.out.println("-- Teszt --");
-        System.out.println(
-                "Válasz egy lehetőséget: \n" +
-                        "  1. Move\n" +
-                        "  2. Collide\n" +
-                        "  3. Exit\n" +
-                        "Választott:"
-        );
+
 
         String selection = input.next();
         input.nextLine();

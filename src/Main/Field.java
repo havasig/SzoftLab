@@ -5,6 +5,24 @@ import java.util.HashMap;
 public class Field {
     protected Movable movable;
     private HashMap<Direction, Field> neighbors;
+    private FieldState splich;
+
+    public enum FieldState{
+        Honey(-1),
+        Oil(1),
+        None(0);
+
+        private int value;
+
+        private FieldState(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
+
 
     public Field() {
         neighbors = new HashMap<>();
@@ -42,5 +60,13 @@ public class Field {
 
     public void RemoveBox(Box b) {
         movable = null;
+    }
+
+    public FieldState getSplich() {
+        return splich;
+    }
+
+    public void setSplich(FieldState splich) {
+        this.splich = splich;
     }
 }

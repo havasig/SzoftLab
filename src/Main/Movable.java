@@ -5,13 +5,13 @@ public abstract class Movable {
 
     public abstract void Die();
 
-    public abstract Movement CollideWorker(Direction d);
+    public abstract Movement CollideWorker(Direction d, int sumFriction);
 
-    public abstract Movement CollideBox(Direction d);
+    public abstract Movement CollideBox(Direction d, int sumFriction);
 
     public abstract boolean Move(Field f);
 
-    public void Fall() {
+    void Fall() {
         Die();
     }
 

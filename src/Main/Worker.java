@@ -5,11 +5,16 @@ import static Main.Movement.Stayed;
 
 public class Worker extends Movable {
     private int points;
+    private int strength;
+    private boolean alive;
+
 
     public Worker(Field startField) {
         field = startField;
         startField.setMovable(this);
+        alive = true;
         points = 0;
+        strength = 5;
     }
 
     public void IncrementPoints() {
@@ -23,11 +28,11 @@ public class Worker extends Movable {
     }
 
     @Override
-    public Movement CollideWorker(Direction d) {
+    public Movement CollideWorker(Direction d, int sumFriction) {
         Field nextField = field.GetNeighbor(d);
         Movable m = nextField.GetMovable();
         if (m != null) {
-            Movement state = m.CollideWorker(d);
+            Movement state = m.CollideWorker(d, sumFriction);
             if (state == Moved) {
                 Move(nextField);
                 return Moved;
@@ -46,11 +51,11 @@ public class Worker extends Movable {
     }
 
     @Override
-    public Movement CollideBox(Direction d) {
+    public Movement CollideBox(Direction d, int sumFriction) {
         Field nextField = field.GetNeighbor(d);
         Movable m = nextField.GetMovable();
         if (m != null) {
-            Movement state = m.CollideWorker(d);
+            Movement state = m.CollideWorker(d, sumFriction);
             if (state == Moved) {
                 Move(nextField);
             } else {
@@ -80,10 +85,22 @@ public class Worker extends Movable {
         Field nextField = field.GetNeighbor(d);
         Movable m = nextField.GetMovable();
         if (m != null) {
-            Movement state = m.CollideWorker(d);
+            Movement state = m.CollideWorker(d, strength);
             if (state == Moved)
                 Move(nextField);
         } else
             Move(nextField);
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public int getStrength() {
+        return strength;
     }
 }
