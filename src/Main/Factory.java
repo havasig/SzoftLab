@@ -8,6 +8,7 @@ public class Factory implements Drawable {
 
 
     void Load(String name) {
+        fields = new ArrayList<>();
         //TODO
     }
 
@@ -66,6 +67,21 @@ public class Factory implements Drawable {
         }
         //TODO Switch hole kapcsolat
         return map.toString();
+    }
+
+    public void createColumn(int x, int y ){
+        Column column = new Column();
+        column.SetNeighbor(Direction.Up, fields.get(x+y*height).GetNeighbor(Direction.Up));
+        column.SetNeighbor(Direction.Down, fields.get(x+y*height).GetNeighbor(Direction.Down));
+        column.SetNeighbor(Direction.Left, fields.get(x+y*height).GetNeighbor(Direction.Left));
+        column.SetNeighbor(Direction.Right, fields.get(x+y*height).GetNeighbor(Direction.Right));
+
+        column.GetNeighbor(Direction.Up).SetNeighbor(Direction.Down,column );
+        column.GetNeighbor(Direction.Down).SetNeighbor(Direction.Up,column );
+        column.GetNeighbor(Direction.Left).SetNeighbor(Direction.Right,column );
+        column.GetNeighbor(Direction.Right).SetNeighbor(Direction.Left,column );
+        fields.set(x+y*height, column);
+
     }
 
     public void addWorker(int x, int y, int id){

@@ -85,7 +85,8 @@ public class Test {
                     if(autoShow) System.out.println(factory.Draw());
                     break;
                 case "createColumn":
-                    //TODO
+                    factory.createColumn(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)));
+                    if(autoShow) System.out.println(factory.Draw());
                     break;
                 case "createDestination":
                     //TODO

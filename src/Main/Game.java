@@ -27,6 +27,7 @@ public class Game {
     }
 
     private void StartGame() {
+        map.Load("");
         //TODO
 
     }
@@ -37,6 +38,7 @@ public class Game {
 
     public void SetPoint() {
         //TODO
+        currentWorker.IncrementPoints();
     }
 
     public void PlayerDied() {
@@ -60,5 +62,6 @@ public class Game {
 
     public void moveWorker(int id, String dir) {
         workers.get(id).Control(Direction.valueOf(dir));
+        setCurrentWorker(workers.get(id));
     }
 }
