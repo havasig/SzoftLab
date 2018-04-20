@@ -1,6 +1,6 @@
 package Main;
 
-public abstract class Movable {
+public abstract class Movable implements Drawable {
     protected Field field;
 
     public abstract void Die();
@@ -14,5 +14,7 @@ public abstract class Movable {
     void Fall() {
         Die();
     }
+
+
 
 }

@@ -7,14 +7,15 @@ public class Worker extends Movable {
     private int points;
     private int strength;
     private boolean alive;
+    private int identifier;
 
-
-    public Worker(Field startField) {
+    public Worker(Field startField, int id) {
         field = startField;
         startField.setMovable(this);
         alive = true;
         points = 0;
         strength = 5;
+        this.identifier = id;
     }
 
     public void IncrementPoints() {
@@ -102,5 +103,10 @@ public class Worker extends Movable {
 
     public int getStrength() {
         return strength;
+    }
+
+    @Override
+    public String Draw() {
+        return String.valueOf(identifier);
     }
 }

@@ -12,4 +12,16 @@ public class Destination extends Field {
         Game.getInstance().SetPoint();
         return true;
     }
+
+    @Override
+    public String Draw() {
+        StringBuilder field = new StringBuilder();
+        field.append("D");
+        if (movable == null)
+            field.append("_");
+        else
+            field.append(movable.toString());
+        DrawSplich(field);
+        return field.toString();
+    }
 }

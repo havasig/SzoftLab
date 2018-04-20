@@ -40,4 +40,23 @@ public class Hole extends Field {
         Open,
         Closed
     }
+
+    @Override
+    public String Draw() {
+        StringBuilder field = new StringBuilder();
+        switch (state){
+            case Open:
+                field.append("H");
+                break;
+            case Closed:
+                field.append("h");
+                break;
+        }
+        if (movable == null)
+            field.append("_");
+        else
+            field.append(movable.toString());
+        DrawSplich(field);
+        return field.toString();
+    }
 }

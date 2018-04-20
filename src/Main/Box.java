@@ -5,13 +5,13 @@ import static Main.Movement.Stayed;
 
 public class Box extends Movable {
     private boolean locked;
-    private int friction;
+    private int defFriction;
 
     public Box(Field startField, int friction) {
         field = startField;
         startField.setMovable(this);
         locked = false;
-        this.friction=friction;
+        this.defFriction = friction;
     }
 
     @Override
@@ -30,13 +30,13 @@ public class Box extends Movable {
     }
 
     private Movement CollideMovable(Direction d, int sumFriction) {
-        friction += field.getSplich().getValue();
-        if (friction>=sumFriction) {
+        int friction = defFriction + field.getSplich().getValue();
+        if (friction <= sumFriction) {
             if (!locked) {
                 Field nextField = field.GetNeighbor(d);
                 Movable m = nextField.GetMovable();
                 if (m != null) {
-                    Movement state = m.CollideBox(d, (sumFriction-friction));
+                    Movement state = m.CollideBox(d, (sumFriction - friction));
                     if (state == Moved) {
                         Move(nextField);
                         return Moved;
@@ -70,6 +70,14 @@ public class Box extends Movable {
     }
 
     public int getFriction() {
-        return friction;
+        return defFriction;
+    }
+
+    @Override
+    public String Draw() {
+        if (locked)
+            return "b";
+        else
+            return "B";
     }
 }

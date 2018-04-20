@@ -1,25 +1,26 @@
 package Main;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class Game {
 
-    //singleton////
+    //singleton/////////////////////
     private static Game game = new Game();
-    private Game() {
-    }
 
     public static Game getInstance() {
         return game;
     }
-    ///////////////
 
+    private Game() {
+        map = new Factory();
+        workers = new HashMap<>();
+    }
+
+    ///////////////////////////////
+    private HashMap<Integer, Worker> workers;
+    private Worker currentWorker;
     private int livePlayerCount;
     private Factory map;
-    private int currentLevel = 1;
-    private ArrayList<Worker> workers;
-    private Worker currentWorker;
 
     public static void main(String[] args) {
         Game.getInstance().StartGame();
@@ -27,6 +28,7 @@ public class Game {
 
     private void StartGame() {
         //TODO
+
     }
 
     private void EndGame() {
@@ -44,11 +46,19 @@ public class Game {
         }
     }
 
+    public Factory getMap() {
+        return map;
+    }
+
     public void setCurrentWorker(Worker currentWorker) {
         this.currentWorker = currentWorker;
     }
 
-    public void addWorker(Worker w){
-        workers.add(w);
+    public void addWorker(Worker w, int id) {
+        workers.put(id, w);
+    }
+
+    public void moveWorker(int id, String dir) {
+        workers.get(id).Control(Direction.valueOf(dir));
     }
 }
