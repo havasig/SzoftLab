@@ -84,7 +84,6 @@ public class Worker extends Movable {
         if (m != null) {
             return m.PseudoCollideWorker(d, sumFriction);
         } else {
-            //Might be bad, is there any scenario where the next field is empty, but it can't move there?
             return Moved;
         }
     }
@@ -120,44 +119,16 @@ public class Worker extends Movable {
         //This will be returned, it is Stayed if all of the recursive functions returned Stayed, else Moved
         Movement retMov = Stayed;
 
-        Field nextField = currentField.GetNeighbor(Direction.Up);
-        Movable m = nextField.GetMovable();
-        if (m != null)
-            return m.PseudoCollideWorker(Direction.Up, strength);
-        else
-        {
-            if(IsThereMovement(nextField) == Moved)
-                retMov = Moved;
-        }
-
-        nextField = currentField.GetNeighbor(Direction.Right);
-        m = nextField.GetMovable();
-        if (m != null)
-            return m.PseudoCollideWorker(Direction.Right, strength);
-        else
-        {
-            if (IsThereMovement(nextField) == Moved)
-            retMov = Moved;
-        }
-
-        nextField = currentField.GetNeighbor(Direction.Down);
-        m = nextField.GetMovable();
-        if (m != null)
-            return m.PseudoCollideWorker(Direction.Down, strength);
-        else
-        {
-            if (IsThereMovement(nextField) == Moved)
-                retMov = Moved;
-        }
-
-        nextField = currentField.GetNeighbor(Direction.Left);
-        m = nextField.GetMovable();
-        if (m != null)
-            return m.PseudoCollideWorker(Direction.Left, strength);
-        else
-        {
-            if (IsThereMovement(nextField) == Moved)
-                retMov = Moved;
+        for(Direction dir: Direction.values()){
+            Field nextField = currentField.GetNeighbor(dir);
+            Movable m = nextField.GetMovable();
+            if (m != null)
+                return m.PseudoCollideWorker(dir, strength);
+            else
+            {
+                if(IsThereMovement(nextField) == Moved)
+                    retMov = Moved;
+            }
         }
 
         return retMov;
