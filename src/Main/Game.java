@@ -1,6 +1,7 @@
 package Main;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Game {
 
@@ -28,6 +29,7 @@ public class Game {
 
     private void StartGame() {
         map.Load("");
+        gameLoop();
         //TODO
 
     }
@@ -68,5 +70,44 @@ public class Game {
     public void moveWorker(int id, String dir) {
         workers.get(id).Control(Direction.valueOf(dir));
         setCurrentWorker(workers.get(id));
+    }
+
+    //This is the game itself, handles the inputs
+    public void gameLoop(){
+        //A round:
+        while(true)
+        {
+            //Loop for each worker
+            for (Map.Entry<Integer, Worker> worker : workers.entrySet())
+            {
+                System.out.print(map.Draw());
+                System.out.println("This is worker " + worker.getKey() + "'s turn.");
+                System.out.println("Type Up, Right, Left or Down to move");
+                //TODO - reliable input
+                String input = new String("");
+                switch(input)
+                {
+                    case "Up":
+                        worker.getValue().Control(Direction.Up);
+                        break;
+                    case "Left":
+                        worker.getValue().Control(Direction.Left);
+                        break;
+                    case "Right":
+                        worker.getValue().Control(Direction.Right);
+                        break;
+                    case "Down":
+                        worker.getValue().Control(Direction.Down);
+                        break;
+                }
+                //Must we check every worker step, or is it enough to check every round outside the foreach?
+                if(map.ThisIsTheEnd())
+                {
+                    EndGame();
+                    return;
+                }
+            }
+
+        }
     }
 }
