@@ -48,6 +48,11 @@ public class Game {
         }
     }
 
+    public HashMap<Integer, Worker> getWorkers()
+    {
+        return workers;
+    }
+
     public Factory getMap() {
         return map;
     }

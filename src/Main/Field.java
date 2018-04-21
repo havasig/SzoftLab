@@ -6,10 +6,20 @@ public class Field implements Drawable {
     protected Movable movable;
     private HashMap<Direction, Field> neighbors;
     protected FieldState splich;
+    private Boolean checked;
 
     public Field() {
         neighbors = new HashMap<>();
         splich = FieldState.None;
+        checked = false;
+    }
+
+    public Boolean getChecked() {
+        return checked;
+    }
+
+    public void setChecked(Boolean checked) {
+        this.checked = checked;
     }
 
     public Field GetNeighbor(Direction d) {

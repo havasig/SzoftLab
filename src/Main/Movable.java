@@ -9,6 +9,10 @@ public abstract class Movable implements Drawable {
 
     public abstract Movement CollideBox(Direction d, int sumFriction);
 
+    public abstract Movement PseudoCollideWorker(Direction d, int sumFriction);
+
+    public abstract Movement PseudoCollideBox(Direction d, int sumFriction);
+
     public abstract boolean Move(Field f);
 
     void Fall() {

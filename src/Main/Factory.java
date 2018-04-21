@@ -1,6 +1,10 @@
 package Main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static Main.Movement.Moved;
+import static Main.Movement.Stayed;
 
 public class Factory implements Drawable {
     private ArrayList<Field> fields;
@@ -13,8 +17,17 @@ public class Factory implements Drawable {
     }
 
     public boolean ThisIsTheEnd() {
-        //TODO
-        return false;
+        //set all field to unchecked
+        for(Field field : fields)
+            field.setChecked(false);
+
+        //Iterate through workers, if any of them can move something, then it is not over
+        HashMap<Integer, Worker> workers = Game.getInstance().getWorkers();
+        for (Worker worker: workers.values()) {
+            if (worker.IsThereMovement(worker.field) == Moved)
+                return false;
+        }
+        return true;
     }
 
     public void GenerateMap(int width, int height) {

@@ -54,6 +54,35 @@ public class Box extends Movable {
     }
 
     @Override
+    public Movement PseudoCollideWorker(Direction d, int sumFriction) {
+        return PseudoCollideMovable(d, sumFriction);
+    }
+
+    @Override
+    public Movement PseudoCollideBox(Direction d, int sumFriction) {
+        return PseudoCollideMovable(d, sumFriction);
+    }
+
+    private Movement PseudoCollideMovable(Direction d, int sumFriction) {
+        int friction = defFriction + field.getSplich().getValue();
+        if (friction <= sumFriction) {
+            if (!locked) {
+                Field nextField = field.GetNeighbor(d);
+                Movable m = nextField.GetMovable();
+                if (m != null) {
+                    Movement state = m.PseudoCollideBox(d, (sumFriction - friction));
+                    if (state == Moved) {
+                        return Moved;
+                    }
+                } else {
+                    return Moved;
+                }
+            }
+        }
+        return Stayed;
+    }
+
+    @Override
     public boolean Move(Field f) {
         if (f.AcceptBox(this)) {
             field.RemoveBox(this);
