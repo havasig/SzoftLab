@@ -99,17 +99,13 @@ public class Factory implements Drawable {
         replaceField(x, y, destination);
     }
 
-    public void createHole(int x, int y, String state) {
+    public void createHole(int x, int y, HoleState state) {
         Hole hole = new Hole();
         replaceField(x, y, hole);
-        switch (state) {
-            case "Open":
-                hole.SetOpen();
-                break;
-            case "Closed":
-                hole.SetClosed();
-                break;
-        }
+        if (state == HoleState.Open)
+            hole.SetOpen();
+        else
+            hole.SetClosed();
         holes.put((y * width) + x, hole);
     }
 
@@ -141,4 +137,6 @@ public class Factory implements Drawable {
         new Box(getField(x, y), 1);
     }
 
+    public int getWidth(){ return width; }
+    public int getHeight(){ return height; }
 }

@@ -56,6 +56,80 @@ public class Test {
         return null;
     }
 
+    private void TestGenerateMap(List<String> input){
+        try {
+            if (input.size() != 3) {
+                throw new NumberFormatException();
+            }
+            factory.GenerateMap(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)));
+            if(autoShow) System.out.println(factory.Draw());
+        } catch (NumberFormatException e){
+            Error("Nincs ilyen parancs");
+        }
+    }
+
+    private void TestCreateColumn(List<String> input){
+        try {
+            if (input.size() != 3) {
+                throw new NumberFormatException();
+            }
+            int x = Integer.parseInt(input.get(1));
+            int y = Integer.parseInt(input.get(2));
+
+            if(x > factory.getWidth() || x < 1 || y > factory.getHeight() || y < 1) {
+                throw new Exception();
+            }
+            factory.createColumn(x, y);
+            if(autoShow) System.out.println(factory.Draw());
+        } catch (NumberFormatException e){
+            Error("Nincs ilyen parancs");
+        } catch (Exception e){
+            Error("Nem a palya resze");
+        }
+    }
+
+    private void TestCreateDestination(List<String> input){
+        try {
+            if (input.size() != 3) {
+                throw new NumberFormatException();
+            }
+            int x = Integer.parseInt(input.get(1));
+            int y = Integer.parseInt(input.get(2));
+
+            if(x > factory.getWidth() || x < 1 || y > factory.getHeight() || y < 1) {
+                throw new Exception();
+            }
+            factory.createDestination(x, y);
+            if(autoShow) System.out.println(factory.Draw());
+        } catch (NumberFormatException e){
+            Error("Nincs ilyen parancs");
+        } catch (Exception e){
+            Error("Nem a palya resze");
+        }
+    }
+    //TODO: Havi Hibakezelés
+    private void TestCreateHole(List<String> input) {
+        try {
+            if (input.size() != 4) {
+                throw new NumberFormatException();
+            }
+            int x = Integer.parseInt(input.get(1));
+            int y = Integer.parseInt(input.get(2));
+            HoleState hs = HoleState.valueOf(input.get(3));
+
+
+            if(x > factory.getWidth() || x < 1 || y > factory.getHeight() || y < 1) {
+                throw new Exception();
+            }
+            factory.createHole(x, y, hs);
+            if(autoShow) System.out.println(factory.Draw());
+        } catch (NumberFormatException e){
+            Error("Nincs ilyen parancs");
+        } catch (Exception e){
+            Error("Nem a palya resze vagy a HoleState szar");
+        }
+    }
+
     private void Initial(List<String> input) {
         if (!input.isEmpty()) {
             switch (input.get(0)) {
@@ -80,28 +154,23 @@ public class Test {
                     if (autoShow) System.out.println(factory.Draw());
                     break;
                 case "generateMap":
-                    factory.GenerateMap(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)));
-                    if (autoShow) System.out.println(factory.Draw());
+                    this.TestGenerateMap(input);
                     break;
                 case "createColumn":
-                    factory.createColumn(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)));
-                    if (autoShow) System.out.println(factory.Draw());
+                    this.TestCreateColumn(input);
                     break;
                 case "createDestination":
-                    factory.createDestination(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)));
-                    if (autoShow) System.out.println(factory.Draw());
+                    this.TestCreateDestination(input);
                     break;
                 case "createHole":
-                    factory.createHole(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)),
-                            input.get(3));
-                    if (autoShow) System.out.println(factory.Draw());
+                    this.TestCreateHole(input);
                     break;
-                case "createSwitch":
+                case "createSwitch": //TODO: Havi
                     factory.createSwitch(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)),
                             Integer.parseInt(input.get(3)), Integer.parseInt(input.get(4)));
                     if (autoShow) System.out.println(factory.Draw());
                     break;
-                case "addWorker":
+                case "addWorker": //TODO: Havi
                     factory.addWorker(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)),
                             Integer.parseInt(input.get(3)));
                     if (autoShow) System.out.println(factory.Draw());

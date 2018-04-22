@@ -36,11 +36,6 @@ public class Hole extends Field {
         state = HoleState.Closed;
     }
 
-    public enum HoleState {
-        Open,
-        Closed
-    }
-
     @Override
     public String Draw() {
         StringBuilder field = new StringBuilder();
