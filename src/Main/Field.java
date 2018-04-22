@@ -34,10 +34,6 @@ public class Field implements Drawable {
         return movable;
     }
 
-    public void setMovable(Movable movable) {
-        this.movable = movable;
-    }
-
     public boolean AcceptWorker(Worker w) {
         movable = w;
         return true;

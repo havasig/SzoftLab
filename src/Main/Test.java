@@ -208,7 +208,7 @@ public class Test {
                     isThisTheEnd();
                     break;
                 case "placeObject": //TODO: Havi
-                    Game.getInstance().placeObject(Integer.parseInt(input.get(1)), input.get(2), input.get(2));
+                    Game.getInstance().placeObject(Integer.parseInt(input.get(1)), input.get(2), input.get(3));
                     System.out.println(factory.Draw());
                     break;
                 case "":
@@ -224,7 +224,7 @@ public class Test {
     private void isThisTheEnd() {
         if (Game.getInstance().getMap().ThisIsTheEnd()) {
             System.out.println("This is the end.");//TODO
-            running = false;
+            //running = false;
         }
     }
 
