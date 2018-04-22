@@ -21,13 +21,13 @@ public class Test {
         factory = Game.getInstance().getMap();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException{
         System.out.println("Boldogot Havi! :*");
         Test test = new Test();
         test.Run();
     }
 
-    private void Run() {
+    private void Run() throws IOException{
         while (!exit) {
             List<String> input = ReadLine();
 
@@ -134,7 +134,7 @@ public class Test {
         }
     }
 
-    private void Initial(List<String> input) {
+    private void Initial(List<String> input) throws IOException {
         if (!input.isEmpty()) {
             switch (input.get(0)) {
                 case "start":
@@ -155,7 +155,7 @@ public class Test {
                     save = true;
                     break;
                 case "loadLevel": //TODO: Havi
-                    factory.Load(input.get(1));
+                    factory.ReadMap(input.get(1));
                     if (autoShow) Draw(factory.Draw());
                     break;
                 case "generateMap":

@@ -101,10 +101,10 @@ public class Factory implements Drawable {
             String line = null;
             line = br.readLine();
             String[] parts = line.split(" ");
-            for(int i = 0; i < parts.length; i++){
-                if(parts[i].length()!=0)
-                    throw new Error("A tesztesetet nem sikerült futtatni.");
-            }
+        for (String part : parts) {
+            if (part.length() != 1)
+                throw new Error("A tesztesetet nem sikerült futtatni.");
+        }
             if(parts.length!=2)
                 throw new Error("A tesztesetet nem sikerült futtatni.");
         int width = Integer.parseInt(parts[0]);
@@ -135,8 +135,8 @@ public class Factory implements Drawable {
                     switchAndHole.add(hy);
                 }
             }
-            for(int i = 0; i < map.size(); i++){
-                for(int j = 0; j < width; j++){
+            for(int i = 1; i < map.size()-1; i++){
+                for(int j = 1; j < width-1; j++){
                     char x = map.get(i)[j].charAt(0);
                     switch (x){
                         case 'X':
@@ -152,31 +152,31 @@ public class Factory implements Drawable {
                             createHole(j, i, HoleState.Closed);
                             break;
                         case 's':
-                            int index=0;
+                            int index=-1;
                             for(int k=0; k < switchAndHole.size(); k++) {
                             if (switchAndHole.get(k).equals(j))
                                 if (switchAndHole.get(k + 1).equals(i))
                                     index=k;
                             }
-                            if(index==0)
+                            if(index==-1)
                                 throw new Error("A tesztesetet nem sikerült futtatni.");
                             createSwitch(j,i,switchAndHole.get(index+2), switchAndHole.get(index+3));
                             break;
                         case 'S':
-                            int indexS=0;
+                            int indexS=-1;
                             for(int k=0; k < switchAndHole.size(); k++) {
                                 if (switchAndHole.get(k).equals(j))
                                     if (switchAndHole.get(k + 1).equals(i))
-                                        index=k;
+                                        indexS=k;
                             }
-                            if(indexS==0)
+                            if(indexS==-1)
                                 throw new Error("A tesztesetet nem sikerült futtatni.");
                             createSwitch(j,i,switchAndHole.get(indexS+2), switchAndHole.get(indexS+3));
                             break;
                         case '_':
                             break;
                         default:
-                            new Error("A tesztesetet nem sikerült futtatni.");
+                            throw new Error("A tesztesetet nem sikerült futtatni.");
                     }
                     char y = map.get(i)[j].charAt(1);
                     switch (y){
@@ -213,7 +213,7 @@ public class Factory implements Drawable {
                         case '_':
                             break;
                         default:
-                            new Error("A tesztesetet nem sikerült futtatni.");
+                            throw new Error("A tesztesetet nem sikerült futtatni.");
                     }
                     char z = map.get(i)[j].charAt(2);
                     switch (z){
@@ -226,7 +226,7 @@ public class Factory implements Drawable {
                         case '_':
                             break;
                         default:
-                            new Error("A tesztesetet nem sikerült futtatni.");
+                            throw new Error("A tesztesetet nem sikerült futtatni.");
                     }
                 }
             }
