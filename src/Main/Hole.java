@@ -1,13 +1,29 @@
 package Main;
 
+/**
+ * Egyfajta mezo. Ha nyitva van, es rakerul egy Movable, akkor az leesik. Ha zarva van, akkor Field-kent viselkedik.
+ * Ha tartozik hozza Switch, akkor az kinyitni es bezarni kepes.
+ * Field → Hole
+ */
 public class Hole extends Field {
+    /**
+     * A Hole allapotat tarolja.
+     */
     private HoleState state;
 
+    /**
+     * A Hole konstruktora.
+     */
     public Hole() {
         super();
         state = HoleState.Open;
     }
 
+    /**
+     * Beallitja, hogy van rajta egy Worker. Ha nyitva van, akkor a Worker leesik.
+     * @param w: a Worker, ami rakerult.
+     * @return igaz, ha rakerult a Worker, hamis, ha nem.
+     */
     @Override
     public boolean AcceptWorker(Worker w) {
         if (state == HoleState.Open) {
@@ -18,6 +34,11 @@ public class Hole extends Field {
         }
     }
 
+    /**
+     * Beallitja, hogy van rajta egy Box. Ha nyitva van, akkor a Box leesik.
+     * @param b: a Box, ami rakerult.
+     * @return igaz, ha rakerult a Box, hamis, ha nem.
+     */
     @Override
     public boolean AcceptBox(Box b) {
         if (state == HoleState.Open) {
@@ -28,6 +49,9 @@ public class Hole extends Field {
         }
     }
 
+    /**
+     * Kinyitja a lyukat.
+     */
     public void SetOpen() {
         state = HoleState.Open;
         if (movable != null) {
@@ -35,6 +59,9 @@ public class Hole extends Field {
         }
     }
 
+    /**
+     * Bezarja a lyukat.
+     */
     public void SetClosed() {
         state = HoleState.Closed;
     }

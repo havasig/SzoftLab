@@ -2,13 +2,34 @@ package Main;
 
 import static Main.Movement.Moved;
 import static Main.Movement.Stayed;
-
+/**
+ * A játékos irányítja. Eltolhatja a dobozokat, ha megfelelo nagysagu az ereje, illetve meghalhat.
+ * Ha jó helyre tol egy dobozt, akkor pontot szerez.
+ * Movable → Worker
+ */
 public class Worker extends Movable {
+    /**
+     * Tárolja a játékos pontjait.
+     */
     private int points;
-    private int strength;
+    /**
+     * Tárolja a játékos erejet.
+     */
+    int strength;
+    /**
+     * Tárolja, hogy a játékos eletben van-e.
+     */
     private boolean alive;
+    /**
+     * Tárolja a játékos azonositojat.
+     */
     private int identifier;
 
+    /**
+     *Ez a Worker konstruktora.
+     * @param startField: a Worker kezo mezeje
+     * @param id: a Worker azonosotioja
+     */
     public Worker(Field startField, int id) {
         field = startField;
         startField.AcceptWorker(this);
@@ -18,10 +39,16 @@ public class Worker extends Movable {
         this.identifier = id;
     }
 
+    /**
+     * Megnoveli a Worker pontjait eggyel.
+     */
     public void IncrementPoints() {
         points++;
     }
 
+    /**
+     * A Worker meghal. Eltavolitja a mezorol a Workert, es ertesiti a halalesetrol a Game-et.
+     */
     @Override
     public void Die() {
         field.RemoveWorker(this);
@@ -29,6 +56,12 @@ public class Worker extends Movable {
         alive = false;
     }
 
+    /**
+     * A Worker egy Worker-rel valo utkozeset kezeli.
+     * @param d: az irany, amelyre mozog a Worker.
+     * @param sumFriction: az osszsurlodas, amit el kell tolnia a Worker-nek.
+     * @return visszaadja, hogy sikeres volt-e a tolas az adott iranyba.
+     */
     @Override
     public Movement CollideWorker(Direction d, int sumFriction) {
         Field nextField = field.GetNeighbor(d);
@@ -52,6 +85,12 @@ public class Worker extends Movable {
         }
     }
 
+    /**
+     * A Worker egy Box-szal valo utkozeset kezeli.
+     * @param d: az irany, amelyre mozog a Worker.
+     * @param sumFriction: az osszsurlodas, amit el kell tolnia a Worker-nek.
+     * @return visszaadja, hogy sikeres volt-e a tolas az adott iranyba.
+     */
     @Override
     public Movement CollideBox(Direction d, int sumFriction) {
         Field nextField = field.GetNeighbor(d);
@@ -82,6 +121,11 @@ public class Worker extends Movable {
         return Stayed;
     }
 
+    /**
+     * A Worker-t mozgatja.
+     * @param f: erre a mezore mozog a Worker.
+     * @return Igaz, ha sikeres volt a mozgas, s hamis, ha nem.
+     */
     @Override
     public boolean Move(Field f) {
         if (f.AcceptWorker(this)) {
@@ -93,6 +137,10 @@ public class Worker extends Movable {
         }
     }
 
+    /**
+     * A patameteret a jatekostol kapja. Ez altal iranyitott a Worker.
+     * @param d: ebbe az iranyba szeretne mozgatni a Worker-t a jatekos.
+     */
     public void Control(Direction d) {
         Field nextField = field.GetNeighbor(d);
         Movable m = nextField.GetMovable();
@@ -104,6 +152,11 @@ public class Worker extends Movable {
             Move(nextField);
     }
 
+    /**
+     * Kenoanyagot helyez el egy mezon a Worker.
+     * @param d: ebbe az iranyba helyez el kenoanyagot.
+     * @param f: ilyen tipusu kenoanyagot helyez el.
+     */
     public void placeObject(Direction d, Field.FieldState f) {
         field.GetNeighbor(d).setSplich(f);
     }
@@ -135,14 +188,23 @@ public class Worker extends Movable {
         return Stayed;
     }
 
+    /**
+     * @return igaz, ha meg el a Worker, s hamis, ha nem.
+     */
     public boolean isAlive() {
         return alive;
     }
 
+    /**
+     * @return az adott Worker pontjai
+     */
     public int getPoints() {
         return points;
     }
 
+    /**
+     * @return az adott Worker ereje
+     */
     public int getStrength() {
         return strength;
     }

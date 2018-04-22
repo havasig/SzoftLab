@@ -100,7 +100,7 @@ public class Factory implements Drawable {
             String line = br.readLine();
             String[] parts = line.split(" ");
             if(parts.length!=2)
-                throw new Error("A tesztesetet nem sikerült futtatni.");
+                Error("A tesztesetet nem sikerült futtatni.");
         int width = Integer.parseInt(parts[0]);
         int height = Integer.parseInt(parts[1]);
         this.width = width;
@@ -118,16 +118,36 @@ public class Factory implements Drawable {
                     actLine++;
                 }
                     else {
-                    Integer sx = Integer.parseInt(Character.toString(line.charAt(3)));
-                    Integer sy = Integer.parseInt(Character.toString(line.charAt(5)));
-                    Integer hx = Integer.parseInt(Character.toString(line.charAt(7)));
-                    Integer hy = Integer.parseInt(Character.toString(line.charAt(9)));
+                    String[] row = line.split(" ");
+                    String[] coords = row[1].split(";");
+                    String[] switchCoords = coords[0].split(":");
+                    String[] holeCoords = coords[1].split(":");
+                    Integer sx = Integer.parseInt(switchCoords[0]);
+                    Integer sy = Integer.parseInt(switchCoords[1]);
+                    Integer hx = Integer.parseInt(holeCoords[0]);
+                    Integer hy = Integer.parseInt(holeCoords[1]);
 
                     switchAndHole.add(sx);
                     switchAndHole.add(sy);
                     switchAndHole.add(hx);
                     switchAndHole.add(hy);
                 }
+            }
+            for(int i = 0; i < map.size(); i++){
+                if(map.get(i)[0].charAt(0)!='X'||map.get(i)[0].charAt(1)!='_'||map.get(i)[0].charAt(2)!='_')
+                    Error("A tesztesetet nem sikerült futtatni.");
+            }
+            for(int i = 0; i < map.size(); i++){
+                if(map.get(i)[width-1].charAt(0)!='X'||map.get(i)[width-1].charAt(1)!='_'||map.get(i)[width-1].charAt(2)!='_')
+                    Error("A tesztesetet nem sikerült futtatni.");
+            }
+            for(int i = 0; i < width; i++){
+                if(map.get(0)[i].charAt(0)!='X'||map.get(0)[i].charAt(1)!='_'||map.get(0)[i].charAt(2)!='_')
+                    Error("A tesztesetet nem sikerült futtatni.");
+            }
+            for(int i = 0; i < width; i++){
+                if(map.get(map.size()-1)[i].charAt(0)!='X'||map.get(map.size()-1)[i].charAt(1)!='_'||map.get(map.size()-1)[i].charAt(2)!='_')
+                    Error("A tesztesetet nem sikerült futtatni.");
             }
             for(int i = 1; i < map.size()-1; i++){
                 for(int j = 1; j < width-1; j++){
@@ -153,7 +173,7 @@ public class Factory implements Drawable {
                                     index=k;
                             }
                             if(index==-1)
-                                throw new Error("A tesztesetet nem sikerült futtatni.");
+                                Error("A tesztesetet nem sikerült futtatni.");
                             createSwitch(j,i,switchAndHole.get(index+2), switchAndHole.get(index+3));
                             break;
                         case 'S':
@@ -164,13 +184,13 @@ public class Factory implements Drawable {
                                         indexS=k;
                             }
                             if(indexS==-1)
-                                throw new Error("A tesztesetet nem sikerült futtatni.");
+                                Error("A tesztesetet nem sikerült futtatni.");
                             createSwitch(j,i,switchAndHole.get(indexS+2), switchAndHole.get(indexS+3));
                             break;
                         case '_':
                             break;
                         default:
-                            throw new Error("A tesztesetet nem sikerült futtatni.");
+                            Error("A tesztesetet nem sikerült futtatni.");
                     }
                     char y = map.get(i)[j].charAt(1);
                     switch (y){
@@ -207,7 +227,7 @@ public class Factory implements Drawable {
                         case '_':
                             break;
                         default:
-                            throw new Error("A tesztesetet nem sikerült futtatni.");
+                            Error("A tesztesetet nem sikerült futtatni.");
                     }
                     char z = map.get(i)[j].charAt(2);
                     switch (z){
@@ -227,6 +247,9 @@ public class Factory implements Drawable {
 
     }
 
+    private void Error(String err) {
+        System.out.println(err);
+    }
 
     public String Draw() {
         StringBuilder map = new StringBuilder();

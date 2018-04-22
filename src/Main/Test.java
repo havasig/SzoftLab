@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Teszteli a jatek porotipusanak mukodeset.
+ */
 public class Test {
     private boolean exit;
     private boolean running;
@@ -22,7 +25,6 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        System.out.println("Boldogot Havi! :*");
         Test test = new Test();
         test.Run();
     }
@@ -208,6 +210,10 @@ public class Test {
         saveFile = path;
     }
 
+    /**
+     * Betolti a jatek egy regebbi allapotat.
+     * @param string: ezen nevu file-bol tolti be a jatek egy regebbi allapotat.
+     */
     private void Load(String string) {
         String line;
         List<String> input;
@@ -229,6 +235,10 @@ public class Test {
     }
 
 
+    /**
+     * Szimulalja a jatek mukodeset a bemeneti nyelvnek megfelelo formaban kapott utasiatsok alapjan.
+     * @param input: a lista elemei a bemeneti utasitasok.
+     */
     private void GameSimulate(List<String> input) {
         if (!input.isEmpty()) {
             switch (input.get(0)) {
@@ -254,6 +264,9 @@ public class Test {
         }
     }
 
+    /**
+     * Ellenorzi, hogy le kell-e allnia a jateknak.
+     */
     private void isThisTheEnd() {
         if (Game.getInstance().getMap().ThisIsTheEnd()) {
             System.out.println("Game over.");
@@ -307,6 +320,10 @@ public class Test {
         if (save) Save(output);
     }
 
+    /**
+     * Kimenti a jatek adott pillanatban levo allasat
+     * @param output: ilyen nevu file-ba menti ki az aktualis allast.
+     */
     private void Save(String output) {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(saveFile, true)))) {
             out.println(output);
@@ -315,11 +332,13 @@ public class Test {
         }
     }
 
-
     private void Error(String err) {
         System.out.println(err);
     }
 
+    /**
+     * Kilep a jatekbol
+     */
     private void Exit() {
         exit = true;
         System.out.println("Exiting...");
