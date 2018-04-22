@@ -1,12 +1,12 @@
 package Main;
 
 public abstract class Movable implements Drawable {
-    protected Field field;
+    Field field;
 
     /**
      * Meghal a Movable. Absztrakt fuggveny, a leszarmazottak felulirjak.
      */
-    public abstract void Die();
+    protected abstract void Die();
 
     /**
      * A Movable egy Worker-rel valo utkozeset kezeli.
@@ -17,7 +17,7 @@ public abstract class Movable implements Drawable {
      * @return visszaadja, hogy sikeres volt-e a tolas az adott iranyba.
      */
 
-    public abstract Movement CollideWorker(Direction d, int sumFriction);
+    protected abstract Movement CollideWorker(Direction d, int sumFriction);
 
     /**
      * A Movable egy Box-szal valo utkozeset kezeli.
@@ -28,11 +28,11 @@ public abstract class Movable implements Drawable {
      * @return visszaadja, hogy sikeres volt-e a tolas az adott iranyba.
      */
 
-    public abstract Movement CollideBox(Direction d, int sumFriction);
+    protected abstract Movement CollideBox(Direction d, int sumFriction);
 
-    public abstract Movement PseudoCollideWorker(Direction d, int sumFriction);
+    protected abstract Movement PseudoCollideWorker(Direction d, int sumFriction);
 
-    public abstract Movement PseudoCollideBox(Direction d, int sumFriction);
+    protected abstract Movement PseudoCollideBox(Direction d, int sumFriction);
 
     /**
      * A Movable-t mozgatja.

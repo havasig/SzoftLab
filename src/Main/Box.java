@@ -23,7 +23,7 @@ public class Box extends Movable {
      * @param startField: a Worker kezo mezeje
      * @param friction:   a doboz sulya
      */
-    public Box(Field startField, int friction) {
+    Box(Field startField, int friction) {
         field = startField;
         startField.AcceptBox(this);
         locked = false;

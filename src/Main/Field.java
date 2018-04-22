@@ -35,7 +35,7 @@ public class Field implements Drawable {
     /**
      * @return igaz, ha volt ellenorizve a mezo, s hamis, ha nem.
      */
-    public Boolean getChecked() {
+    Boolean getChecked() {
         return checked;
     }
 
@@ -44,7 +44,7 @@ public class Field implements Drawable {
      *
      * @param checked: erre allitja be a tagvaltozot.
      */
-    public void setChecked(Boolean checked) {
+    void setChecked(Boolean checked) {
         this.checked = checked;
     }
 
@@ -54,7 +54,7 @@ public class Field implements Drawable {
      * @param d: egy irany
      * @return a d iranyban levo mezo
      */
-    public Field GetNeighbor(Direction d) {
+    Field GetNeighbor(Direction d) {
         return neighbors.get(d);
     }
 
@@ -62,16 +62,15 @@ public class Field implements Drawable {
      * Beallitja a d iranyban levo szomszedjat a mezonek.
      *
      * @param d: egy irany
-     * @return a d iranyba kivant mezo
      */
-    public void SetNeighbor(Direction d, Field f) {
+    void SetNeighbor(Direction d, Field f) {
         neighbors.put(d, f);
     }
 
     /**
      * @return a mezon levo Movable
      */
-    public Movable GetMovable() {
+    Movable GetMovable() {
         return movable;
     }
 
@@ -106,7 +105,7 @@ public class Field implements Drawable {
      *
      * @param w: a Worker, ami lekerult rola.
      */
-    public void RemoveWorker(Worker w) {
+    void RemoveWorker(Worker w) {
         movable = null;
     }
 
@@ -124,7 +123,7 @@ public class Field implements Drawable {
      *
      * @return a rajta levo kenoanyag
      */
-    public FieldState getSplich() {
+    FieldState getSplich() {
         return splich;
     }
 
@@ -133,7 +132,7 @@ public class Field implements Drawable {
      *
      * @param splich: a kenoaynag, ami rakerult.
      */
-    public void setSplich(FieldState splich) {
+    void setSplich(FieldState splich) {
         this.splich = splich;
     }
 
@@ -149,7 +148,7 @@ public class Field implements Drawable {
         return field.toString();
     }
 
-    protected void DrawSplich(StringBuilder field) {
+    void DrawSplich(StringBuilder field) {
         switch (splich) {
             case Oil:
                 field.append("O");
@@ -178,7 +177,7 @@ public class Field implements Drawable {
 
         private int value;
 
-        private FieldState(int value) {
+        FieldState(int value) {
             this.value = value;
         }
 

@@ -9,21 +9,24 @@ import java.util.HashMap;
 public class Game {
 
     //singleton/////////////////////
-    private static Game game = new Game();
+    private static final Game game = new Game();
+    ///////////////////////////////
+
     /**
      * A jatekban levo Worker-öket tarolja.
      */
     private HashMap<Integer, Worker> workers;
+
     /**
      * A jelenleg mozgo jatekost tarolja.
      */
     private Worker currentWorker;
 
-    ///////////////////////////////
     /**
      * A jelenleg eletben levo jatekosok szama.
      */
     private int livePlayerCount;
+
     /**
      * A jatekteret tarolja.
      */
@@ -36,7 +39,7 @@ public class Game {
         workers = new HashMap<>();
     }
 
-    public static Game getInstance() {
+    static Game getInstance() {
         return game;
     }
 
@@ -48,8 +51,7 @@ public class Game {
      * A jatek inditasaert felel
      */
     private void StartGame() {
-
-        //gameLoop();
+        gameLoop();
         //TODO
 
     }
@@ -65,14 +67,14 @@ public class Game {
     /**
      * A jelenleg mozog jatekos pontszamat megnoveli eggyel.
      */
-    public void SetPoint() {
+    void SetPoint() {
         currentWorker.IncrementPoints();
     }
 
     /**
      * Csokkenti a jelenleg eletben levo jatekosok szamat eggyel.
      */
-    public void PlayerDied() {
+    void PlayerDied() {
         livePlayerCount--;
         if (livePlayerCount == 0) {
             EndGame();
@@ -82,21 +84,21 @@ public class Game {
     /**
      * @return a jatekban levo Worker-ek.
      */
-    public HashMap<Integer, Worker> getWorkers() {
+    HashMap<Integer, Worker> getWorkers() {
         return workers;
     }
 
     /**
      * @return a jatekter
      */
-    public Factory getMap() {
+    Factory getMap() {
         return map;
     }
 
     /**
      * @param currentWorker a jelenleg mozgo jatekos.
      */
-    public void setCurrentWorker(Worker currentWorker) {
+    private void setCurrentWorker(Worker currentWorker) {
         this.currentWorker = currentWorker;
     }
 
@@ -106,7 +108,7 @@ public class Game {
      * @param w:  a Worker, amit hozzaad.
      * @param id: a hozaadott Worker azonositoja
      */
-    public void addWorker(Worker w, int id) {
+    void addWorker(Worker w, int id) {
         workers.put(id, w);
         livePlayerCount++;
     }
@@ -117,7 +119,7 @@ public class Game {
      * @param id:  ezen azonositoju Worker kezdemenyezte a mozgast.
      * @param dir: ebbe az iranyba mozgatja a Worker-t
      */
-    public void moveWorker(int id, String dir) {
+    void moveWorker(int id, String dir) {
         setCurrentWorker(workers.get(id));
         workers.get(id).Control(Direction.valueOf(dir));
     }
@@ -129,12 +131,12 @@ public class Game {
      * @param d:  ebbe az iranyba helyezi el a kenoanyagot
      * @param f:  ilyen tipusu kenoanyagot helyez el
      */
-    public void placeObject(int id, String d, String f) {
+    void placeObject(int id, String d, String f) {
         workers.get(id).placeObject(Direction.valueOf(d), Field.FieldState.valueOf(f));
     }
 
     //This is the game itself, handles the inputs
-    public void gameLoop() {
+    private void gameLoop() {
         //A round:
         /*while(true)
         {

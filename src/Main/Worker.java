@@ -12,7 +12,7 @@ public class Worker extends Movable {
     /**
      * Tárolja a játékos erejet.
      */
-    int strength;
+    private int strength;
     /**
      * Tárolja a játékos pontjait.
      */
@@ -32,7 +32,7 @@ public class Worker extends Movable {
      * @param startField: a Worker kezo mezeje
      * @param id:         a Worker azonosotioja
      */
-    public Worker(Field startField, int id) {
+    Worker(Field startField, int id) {
         field = startField;
         startField.AcceptWorker(this);
         alive = true;
@@ -44,7 +44,7 @@ public class Worker extends Movable {
     /**
      * Megnoveli a Worker pontjait eggyel.
      */
-    public void IncrementPoints() {
+    void IncrementPoints() {
         points++;
     }
 
@@ -147,7 +147,7 @@ public class Worker extends Movable {
      *
      * @param d: ebbe az iranyba szeretne mozgatni a Worker-t a jatekos.
      */
-    public void Control(Direction d) {
+    void Control(Direction d) {
         Field nextField = field.GetNeighbor(d);
         Movable m = nextField.GetMovable();
         if (m != null) {
@@ -164,18 +164,15 @@ public class Worker extends Movable {
      * @param d: ebbe az iranyba helyez el kenoanyagot.
      * @param f: ilyen tipusu kenoanyagot helyez el.
      */
-    public void placeObject(Direction d, Field.FieldState f) {
+    void placeObject(Direction d, Field.FieldState f) {
         field.GetNeighbor(d).setSplich(f);
     }
 
-    public Movement IsThereMovement(Field currentField) {
+    Movement IsThereMovement(Field currentField) {
         //Avoid checking a field multiple times
         if (currentField.getChecked())
             return Stayed;
         currentField.setChecked(true);
-
-        //This will be returned, it is Stayed if all of the recursive functions returned Stayed, else Moved
-        Movement retMov = Stayed;
 
         for (Direction dir : Direction.values()) {
             Field nextField = currentField.GetNeighbor(dir);
@@ -195,26 +192,14 @@ public class Worker extends Movable {
         return Stayed;
     }
 
-    /**
-     * @return igaz, ha meg el a Worker, s hamis, ha nem.
-     */
-    public boolean isAlive() {
-        return alive;
-    }
 
     /**
      * @return az adott Worker pontjai
      */
-    public int getPoints() {
+    int getPoints() {
         return points;
     }
 
-    /**
-     * @return az adott Worker ereje
-     */
-    public int getStrength() {
-        return strength;
-    }
 
     @Override
     public String Draw() {

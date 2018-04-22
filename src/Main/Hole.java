@@ -14,7 +14,7 @@ public class Hole extends Field {
     /**
      * A Hole konstruktora.
      */
-    public Hole() {
+    Hole() {
         super();
         state = HoleState.Open;
     }
@@ -54,7 +54,7 @@ public class Hole extends Field {
     /**
      * Kinyitja a lyukat.
      */
-    public void SetOpen() {
+    void SetOpen() {
         state = HoleState.Open;
         if (movable != null) {
             movable.Fall();
@@ -64,7 +64,7 @@ public class Hole extends Field {
     /**
      * Bezarja a lyukat.
      */
-    public void SetClosed() {
+    void SetClosed() {
         state = HoleState.Closed;
     }
 

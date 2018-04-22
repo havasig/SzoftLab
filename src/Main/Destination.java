@@ -9,7 +9,7 @@ public class Destination extends Field {
     /**
      * A Destination konstruktora.
      */
-    public Destination() {
+    Destination() {
         super();
     }
 

@@ -1,5 +1,5 @@
 package Main;
 
-public interface Drawable {
+interface Drawable {
     String Draw();
 }

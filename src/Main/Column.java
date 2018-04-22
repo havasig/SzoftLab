@@ -8,7 +8,7 @@ public class Column extends Field {
     /**
      * A Column konstruktora.
      */
-    public Column() {
+    Column() {
         super();
     }
 

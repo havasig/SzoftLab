@@ -18,7 +18,7 @@ public class Switch extends Field {
     /**
      * A Switch konstruktora
      */
-    public Switch() {
+    Switch() {
         super();
         box = false;
     }
@@ -54,7 +54,7 @@ public class Switch extends Field {
      *
      * @param h: a hozza tartozo lyuk.
      */
-    public void SetHole(Hole h) {
+    void SetHole(Hole h) {
         hole = h;
     }
 

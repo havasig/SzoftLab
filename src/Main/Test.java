@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Teszteli a jatek porotipusanak mukodeset.
  */
-public class Test {
+class Test {
     private boolean exit;
     private boolean running;
     private BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -317,7 +317,7 @@ public class Test {
 
     }
 
-    void Draw(String output) {
+    private void Draw(String output) {
         System.out.println(output);
         if (save) Save(output);
     }

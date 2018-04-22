@@ -15,13 +15,13 @@ public class Factory implements Drawable {
     private HashMap<Integer, Hole> holes;
     private int width, height;
 
-    public static void addTextToSW(String text) {
+    static void addTextToSW(String text) {
         swCount++;
         switchHole += String.valueOf(swCount) + ", ";
         switchHole += text;
     }
 
-    void Init() {
+    private void Init() {
         fields = new ArrayList<>();
         holes = new HashMap<>();
     }
@@ -30,14 +30,13 @@ public class Factory implements Drawable {
         return fields.get((y * width) + x);
     }
 
-    public String getPos(Field f) {
-        String pos = String.valueOf(fields.indexOf(f) / width) +
+    String getPos(Field f) {
+        return String.valueOf(fields.indexOf(f) / width) +
                 ":" +
                 fields.indexOf(f) % width;
-        return pos;
     }
 
-    public boolean ThisIsTheEnd() {
+    boolean ThisIsTheEnd() {
         //set all field to unchecked
         for (Field field : fields)
             field.setChecked(false);
@@ -51,7 +50,7 @@ public class Factory implements Drawable {
         return true;
     }
 
-    public void GenerateMap(int width, int height) {
+    void GenerateMap(int width, int height) {
         Init();
         this.width = width;
         this.height = height;
@@ -90,7 +89,7 @@ public class Factory implements Drawable {
         }
     }
 
-    public void ReadMap(String file) throws IOException {
+    void ReadMap(String file) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line = br.readLine();
         String[] parts = line.split(" ");
@@ -127,12 +126,12 @@ public class Factory implements Drawable {
                 switchAndHole.add(hy);
             }
         }
-        for (int i = 0; i < map.size(); i++) {
-            if (map.get(i)[0].charAt(0) != 'X' || map.get(i)[0].charAt(1) != '_' || map.get(i)[0].charAt(2) != '_')
+        for (String[] aMap : map) {
+            if (aMap[0].charAt(0) != 'X' || aMap[0].charAt(1) != '_' || aMap[0].charAt(2) != '_')
                 Error("A tesztesetet nem sikerült futtatni.");
         }
-        for (int i = 0; i < map.size(); i++) {
-            if (map.get(i)[width - 1].charAt(0) != 'X' || map.get(i)[width - 1].charAt(1) != '_' || map.get(i)[width - 1].charAt(2) != '_')
+        for (String[] aMap : map) {
+            if (aMap[width - 1].charAt(0) != 'X' || aMap[width - 1].charAt(1) != '_' || aMap[width - 1].charAt(2) != '_')
                 Error("A tesztesetet nem sikerült futtatni.");
         }
         for (int i = 0; i < width; i++) {
@@ -240,6 +239,7 @@ public class Factory implements Drawable {
         }
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void Error(String err) {
         System.out.println(err);
     }
@@ -262,17 +262,17 @@ public class Factory implements Drawable {
         return map.toString();
     }
 
-    public void createColumn(int x, int y) {
+    void createColumn(int x, int y) {
         Column column = new Column();
         replaceField(x, y, column);
     }
 
-    public void createDestination(int x, int y) {
+    void createDestination(int x, int y) {
         Destination destination = new Destination();
         replaceField(x, y, destination);
     }
 
-    public void createHole(int x, int y, HoleState state) {
+    void createHole(int x, int y, HoleState state) {
         Hole hole = new Hole();
         replaceField(x, y, hole);
         switch (state) {
@@ -286,13 +286,13 @@ public class Factory implements Drawable {
         holes.put((y * width) + x, hole);
     }
 
-    public void createSwitch(int x, int y, int hX, int hY) {
+    void createSwitch(int x, int y, int hX, int hY) {
         Switch switcher = new Switch();
         replaceField(x, y, switcher);
         switcher.SetHole(holes.get((hY * width) + hX));
     }
 
-    public void replaceField(int x, int y, Field field) {
+    private void replaceField(int x, int y, Field field) {
         field.SetNeighbor(Direction.Up, getField(x, y).GetNeighbor(Direction.Up));
         field.SetNeighbor(Direction.Down, getField(x, y).GetNeighbor(Direction.Down));
         field.SetNeighbor(Direction.Left, getField(x, y).GetNeighbor(Direction.Left));
@@ -305,7 +305,7 @@ public class Factory implements Drawable {
         fields.set(x + y * width, field);
     }
 
-    public void addWorker(int x, int y, int id) {
+    void addWorker(int x, int y, int id) {
         for (Integer i : Game.getInstance().getWorkers().keySet())
             if (i == id) {
                 System.out.println("Id is not unique!");
@@ -314,15 +314,15 @@ public class Factory implements Drawable {
         Game.getInstance().addWorker(new Worker(getField(x, y), id), id);
     }
 
-    public void addBox(int x, int y) {
+    void addBox(int x, int y) {
         new Box(getField(x, y), 1);
     }
 
-    public int getWidth() {
+    int getWidth() {
         return width;
     }
 
-    public int getHeight() {
+    int getHeight() {
         return height;
     }
 }
