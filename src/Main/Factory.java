@@ -96,15 +96,9 @@ public class Factory implements Drawable {
     }
 
     public void ReadMap(String file) throws IOException {
-        BufferedReader br = null;
-            br = new BufferedReader(new FileReader(file));
-            String line = null;
-            line = br.readLine();
+        BufferedReader br = new BufferedReader(new FileReader(file));
+            String line = br.readLine();
             String[] parts = line.split(" ");
-        for (String part : parts) {
-            if (part.length() != 1)
-                throw new Error("A tesztesetet nem sikerült futtatni.");
-        }
             if(parts.length!=2)
                 throw new Error("A tesztesetet nem sikerült futtatni.");
         int width = Integer.parseInt(parts[0]);
@@ -113,8 +107,8 @@ public class Factory implements Drawable {
         this.height = height;
         GenerateMap(width,height);
         int actLine = 0;
-        ArrayList<String[]> map = new ArrayList<String[]>();
-        ArrayList<Integer> switchAndHole = new ArrayList<Integer>();
+        ArrayList<String[]> map = new ArrayList<>();
+        ArrayList<Integer> switchAndHole = new ArrayList<>();
             while ((line = br.readLine()) != null) {
                 if(actLine<height){
                     String[] fields = line.split(" ");

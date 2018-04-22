@@ -257,10 +257,9 @@ public class Test {
     private void isThisTheEnd() {
         if (Game.getInstance().getMap().ThisIsTheEnd()) {
             System.out.println("Game over.");
-            System.out.println("");
             System.out.println("Points:");
-            HashMap<Integer, Worker> winners = new HashMap<Integer, Worker>();
-            int mostpoints = 0;
+            HashMap<Integer, Worker> winners = new HashMap<>();
+            int mostPoints = 0;
             for (Map.Entry<Integer, Worker> worker : Game.getInstance().getWorkers().entrySet()) {
                 int points = worker.getValue().getPoints();
                 Worker work = worker.getValue();
@@ -269,16 +268,15 @@ public class Test {
                 System.out.println("Worker " + Integer.toString(id) + ": " + Integer.toString(points));
 
                 //Get the winner(s) while we write the points
-                if (points >= mostpoints) {
+                if (points >= mostPoints) {
                     winners.put(id, work);
-                    if (points > mostpoints) {
+                    if (points > mostPoints) {
                         winners.clear();
                         winners.put(id, work);
-                        mostpoints = points;
+                        mostPoints = points;
                     }
                 }
             }
-            System.out.println("");
 
             if (winners.size() == 0) {
                 System.out.println("Something went wrong, there are no winners!");
