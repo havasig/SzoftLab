@@ -9,6 +9,9 @@ public class Factory implements Drawable {
     private ArrayList<Field> fields;
     private int width, height;
 
+    private Field getField(int x, int y) {
+        return fields.get((y * height) + x);
+    }
 
     void Load(String name) {
         fields = new ArrayList<>();
@@ -43,27 +46,27 @@ public class Factory implements Drawable {
                     fields.add(new Field());
             }
         }
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                if (i - 1 > 0)
-                    fields.get(i * width + j).SetNeighbor(Direction.Up, fields.get((i - 1) * width + j));
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (y - 1 >= 0)
+                    getField(x, y).SetNeighbor(Direction.Up, getField(x, y - 1));
                 else
-                    fields.get(i * width + j).SetNeighbor(Direction.Up, null);
+                    getField(x, y).SetNeighbor(Direction.Up, null);
 
-                if (i + 1 < height)
-                    fields.get(i * width + j).SetNeighbor(Direction.Down, fields.get((i + 1) * width + j));
+                if (y + 1 <= height-1 )
+                    getField(x, y).SetNeighbor(Direction.Down, getField(x, y + 1));
                 else
-                    fields.get(i * width + j).SetNeighbor(Direction.Down, null);
+                    getField(x, y).SetNeighbor(Direction.Down, null);
 
-                if (j - 1 > 0)
-                    fields.get(i * width + j).SetNeighbor(Direction.Left, fields.get(i * width + j - 1));
+                if (x - 1 >= 0)
+                    getField(x, y).SetNeighbor(Direction.Left, getField(x - 1, y));
                 else
-                    fields.get(i * width + j).SetNeighbor(Direction.Left, null);
+                    getField(x, y).SetNeighbor(Direction.Left, null);
 
-                if (j + 1 < width)
-                    fields.get(i * width + j).SetNeighbor(Direction.Right, fields.get(i * width + j + 1));
+                if (x + 1 <= width-1 )
+                    getField(x, y).SetNeighbor(Direction.Right, getField(x + 1, y));
                 else
-                    fields.get(i * width + j).SetNeighbor(Direction.Right, null);
+                    getField(x, y).SetNeighbor(Direction.Right, null);
             }
         }
     }
@@ -97,7 +100,7 @@ public class Factory implements Drawable {
     public void createHole(int x, int y, String state) {
         Hole hole = new Hole();
         replaceField(x, y, hole);
-        switch (state){
+        switch (state) {
             case "Open":
                 hole.SetOpen();
                 break;
@@ -115,20 +118,20 @@ public class Factory implements Drawable {
 
 
     public void replaceField(int x, int y, Field field) {
-        field.SetNeighbor(Direction.Up, fields.get(x + y * height).GetNeighbor(Direction.Up));
-        field.SetNeighbor(Direction.Down, fields.get(x + y * height).GetNeighbor(Direction.Down));
-        field.SetNeighbor(Direction.Left, fields.get(x + y * height).GetNeighbor(Direction.Left));
-        field.SetNeighbor(Direction.Right, fields.get(x + y * height).GetNeighbor(Direction.Right));
+        field.SetNeighbor(Direction.Up, getField(x, y).GetNeighbor(Direction.Up));
+        field.SetNeighbor(Direction.Down, getField(x, y).GetNeighbor(Direction.Down));
+        field.SetNeighbor(Direction.Left, getField(x, y).GetNeighbor(Direction.Left));
+        field.SetNeighbor(Direction.Right, getField(x, y).GetNeighbor(Direction.Right));
 
         field.GetNeighbor(Direction.Up).SetNeighbor(Direction.Down, field);
         field.GetNeighbor(Direction.Down).SetNeighbor(Direction.Up, field);
         field.GetNeighbor(Direction.Left).SetNeighbor(Direction.Right, field);
         field.GetNeighbor(Direction.Right).SetNeighbor(Direction.Left, field);
-        fields.set(x + y * height, field);
+        fields.set(x + y * width, field);
     }
 
     public void addWorker(int x, int y, int id) {
-        Game.getInstance().addWorker(new Worker(fields.get(x + y * height), id),  id);
+        Game.getInstance().addWorker(new Worker(fields.get(x + y * height), id), id);
     }
 
     public void addBox(int x, int y) {
