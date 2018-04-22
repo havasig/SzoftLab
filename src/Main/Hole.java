@@ -30,9 +30,9 @@ public class Hole extends Field {
 
     public void SetOpen() {
         state = HoleState.Open;
-       if (movable != null){
-           movable.Fall();
-       }
+        if (movable != null) {
+            movable.Fall();
+        }
     }
 
     public void SetClosed() {
@@ -42,7 +42,7 @@ public class Hole extends Field {
     @Override
     public String Draw() {
         StringBuilder field = new StringBuilder();
-        switch (state){
+        switch (state) {
             case Open:
                 field.append("H");
                 break;

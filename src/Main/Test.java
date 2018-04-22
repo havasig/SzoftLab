@@ -1,9 +1,6 @@
 package Main;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +48,7 @@ public class Test {
         List<String> input;
         try {
             line = br.readLine();
+            if (save) Save(line);
             if (line != null) {
                 input = Arrays.asList(line.split(" "));
                 return input;
@@ -147,8 +145,8 @@ public class Test {
                     Exit();
                     break;
                 case "saveFile":
-                    saveFile = input.get(1); // TODO
-                    System.out.println("Save...");
+                    saveFile(input.get(1));
+                    System.out.println("SaveFile added");
                     break;
                 case "load":
                     Load(input.get(1));
@@ -189,6 +187,9 @@ public class Test {
                 case "autoShow":
                     autoShow(input.get(1));
                     break;
+                case "Show":
+                    Draw(factory.Draw());
+                    break;
                 case "":
                     Error("Ures sor");
                     break;
@@ -199,6 +200,10 @@ public class Test {
         }
     }
 
+    private void saveFile(String path) {
+        saveFile = path;
+    }
+
     private void Load(String string) {
         String line;
         List<String> input;
@@ -206,6 +211,7 @@ public class Test {
         try {
             BufferedReader brIn = new BufferedReader(new FileReader(string));
             while ((line = brIn.readLine()) != null) {
+                System.out.println(string + ": " + line);
                 input = Arrays.asList(line.split(" "));
                 if (running) {
                     GameSimulate(input);
@@ -246,8 +252,6 @@ public class Test {
 
     private void isThisTheEnd() {
         if (Game.getInstance().getMap().ThisIsTheEnd()) {
-            System.out.println("This is the end.");//TODO
-
             System.out.println("Game over.");
             System.out.println("");
             System.out.println("Points:");
@@ -298,8 +302,17 @@ public class Test {
 
     void Draw(String output) {
         System.out.println(output);
-        //TODO save to file
+        if (save) Save(output);
     }
+
+    private void Save(String output) {
+        try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(saveFile, true)))) {
+            out.println(output);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void Error(String err) {
         System.out.println(err);

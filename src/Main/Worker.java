@@ -79,7 +79,7 @@ public class Worker extends Movable {
 
     @Override
     public Movement PseudoCollideWorker(Direction d, int sumFriction) {
-            return Stayed;
+        return Stayed;
     }
 
     @Override
@@ -104,11 +104,11 @@ public class Worker extends Movable {
             Move(nextField);
     }
 
-    public void placeObject(Direction d, Field.FieldState f){
+    public void placeObject(Direction d, Field.FieldState f) {
         field.GetNeighbor(d).setSplich(f);
     }
 
-    public Movement IsThereMovement(Field currentField){
+    public Movement IsThereMovement(Field currentField) {
         //Avoid checking a field multiple times
         if (currentField.getChecked())
             return Stayed;
@@ -117,31 +117,22 @@ public class Worker extends Movable {
         //This will be returned, it is Stayed if all of the recursive functions returned Stayed, else Moved
         Movement retMov = Stayed;
 
-        for(Direction dir: Direction.values())
-        {
+        for (Direction dir : Direction.values()) {
             Field nextField = currentField.GetNeighbor(dir);
 
-            if (nextField != null && nextField.PseudoAccept() && !nextField.getChecked())
-            {
+            if (nextField != null && nextField.PseudoAccept() && !nextField.getChecked()) {
 
                 Movable m = nextField.GetMovable();
-                if (m != null)
-                {
+                if (m != null) {
                     return m.PseudoCollideWorker(dir, strength);
-                }
-                else
-                {
-                    if (IsThereMovement(nextField) == Moved)
-                    {
+                } else {
+                    if (IsThereMovement(nextField) == Moved) {
                         return Moved;
                     }
                 }
             }
         }
-
-
         return Stayed;
-
     }
 
     public boolean isAlive() {

@@ -1,22 +1,27 @@
 package Main;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static Main.Movement.Moved;
 
 public class Factory implements Drawable {
+    private static String switchHole;
+    private static int swCount;
     private ArrayList<Field> fields;
     private HashMap<Integer, Hole> holes;
     private int width, height;
 
-    void Init(){
+    public static void setSwitchHole(String s) {
+        swCount++;
+        switchHole += String.valueOf(swCount) + ", ";
+        switchHole += s;
+    }
+
+    void Init() {
         fields = new ArrayList<>();
         holes = new HashMap<>();
     }
@@ -28,6 +33,13 @@ public class Factory implements Drawable {
     void Load(String name) {
         Init();
         //TODO
+    }
+
+    public String getPos(Field f) {
+        String pos = String.valueOf(fields.indexOf(f) / width) +
+                ":" +
+                fields.indexOf(f) % width;
+        return pos;
     }
 
     public boolean ThisIsTheEnd() {
@@ -222,9 +234,10 @@ public class Factory implements Drawable {
     }
 
 
-
     public String Draw() {
         StringBuilder map = new StringBuilder();
+        switchHole = "";
+        swCount = 0;
         int width = 0;
         for (Field field : fields) {
             map.append(field.Draw());
@@ -235,7 +248,7 @@ public class Factory implements Drawable {
                 width = 0;
             }
         }
-        //TODO Switch hole kapcsolat
+        map.append(switchHole);
         return map.toString();
     }
 
@@ -285,8 +298,7 @@ public class Factory implements Drawable {
 
     public void addWorker(int x, int y, int id) {
         for (Integer i : Game.getInstance().getWorkers().keySet())
-            if (i == id)
-            {
+            if (i == id) {
                 System.out.println("Id is not unique!");
                 return;
             }

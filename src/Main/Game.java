@@ -39,7 +39,6 @@ public class Game {
     }
 
     public void SetPoint() {
-        //TODO
         currentWorker.IncrementPoints();
     }
 

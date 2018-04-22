@@ -31,15 +31,19 @@ public class Switch extends Field {
     @Override
     public String Draw() {
         StringBuilder field = new StringBuilder();
-        if(box){
+        if (box) {
             field.append("S");
-        }else
+        } else
             field.append("s");
         if (movable == null)
             field.append("_");
         else
             field.append(movable.Draw());
         DrawSplich(field);
+        Factory.setSwitchHole(Game.getInstance().getMap().getPos(this)
+                + ";"
+                + Game.getInstance().getMap().getPos(hole)
+                + "\n");
         return field.toString();
     }
 }

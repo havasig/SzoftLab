@@ -1,6 +1,6 @@
 package Main;
 
-public class Column extends Field{
+public class Column extends Field {
     public Column() {
         super();
     }

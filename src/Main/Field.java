@@ -44,8 +44,7 @@ public class Field implements Drawable {
         return true;
     }
 
-    public boolean PseudoAccept()
-    {
+    public boolean PseudoAccept() {
         return true;
     }
 
@@ -77,8 +76,8 @@ public class Field implements Drawable {
         return field.toString();
     }
 
-     protected void DrawSplich(StringBuilder field) {
-        switch (splich){
+    protected void DrawSplich(StringBuilder field) {
+        switch (splich) {
             case Oil:
                 field.append("O");
                 break;

@@ -20,5 +20,4 @@ public abstract class Movable implements Drawable {
     }
 
 
-
 }
