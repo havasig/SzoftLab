@@ -40,7 +40,7 @@ public class Game {
 
     public void SetPoint() {
         //TODO
-        // currentWorker.IncrementPoints();
+        currentWorker.IncrementPoints();
     }
 
     public void PlayerDied() {
@@ -68,8 +68,8 @@ public class Game {
     }
 
     public void moveWorker(int id, String dir) {
-        workers.get(id).Control(Direction.valueOf(dir));
         setCurrentWorker(workers.get(id));
+        workers.get(id).Control(Direction.valueOf(dir));
     }
 
     public void placeObject(int id, String d, String f) {

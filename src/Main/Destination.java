@@ -9,7 +9,6 @@ public class Destination extends Field {
     public boolean AcceptBox(Box b) {
         super.AcceptBox(b);
         b.Lock();
-        Game.getInstance().SetPoint();
         return true;
     }
 

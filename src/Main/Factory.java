@@ -1,5 +1,9 @@
 package Main;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -77,6 +81,8 @@ public class Factory implements Drawable {
         }
     }
 
+
+
     public String Draw() {
         StringBuilder map = new StringBuilder();
         int width = 0;
@@ -138,6 +144,12 @@ public class Factory implements Drawable {
     }
 
     public void addWorker(int x, int y, int id) {
+        for (Integer i : Game.getInstance().getWorkers().keySet())
+            if (i == id)
+            {
+                System.out.println("Id is not unique!");
+                return;
+            }
         Game.getInstance().addWorker(new Worker(getField(x, y), id), id);
     }
 

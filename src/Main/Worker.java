@@ -20,6 +20,7 @@ public class Worker extends Movable {
 
     public void IncrementPoints() {
         points++;
+        System.out.println(Integer.toString(points));
     }
 
     @Override

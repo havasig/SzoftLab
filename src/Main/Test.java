@@ -1,10 +1,10 @@
 package Main;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Test {
     private boolean exit;
@@ -225,15 +225,60 @@ public class Test {
         if (Game.getInstance().getMap().ThisIsTheEnd()) {
             System.out.println("This is the end.");//TODO
             //running = false;
+
+            System.out.println("Game over.");
+            System.out.println("");
+            System.out.println("Points:");
+            HashMap<Integer, Worker> winners = new HashMap<Integer, Worker>();
+            int mostpoints = 0;
+            for(Map.Entry<Integer, Worker> worker : Game.getInstance().getWorkers().entrySet())
+            {
+                int points = worker.getValue().getPoints();
+                Worker work = worker.getValue();
+                int id = worker.getKey();
+
+                System.out.println("Worker " + Integer.toString(id) + ": " + Integer.toString(points));
+
+                //Get the winner(s) while we write the points
+                if (points >= mostpoints)
+                {
+                    winners.put(id, work);
+                    if (points > mostpoints)
+                    {
+                        winners.clear();
+                        winners.put(id, work);
+                        mostpoints = points;
+                    }
+                }
+            }
+            System.out.println("");
+
+            if (winners.size() == 0)
+            {
+                System.out.println("Something went wrong, there are no winners!");
+                return;
+            }
+
+            if (winners.size() > 1)
+                System.out.println("The winners are: ");
+            else
+                System.out.println("The winner is:");
+
+            for(Map.Entry<Integer, Worker> winner : winners.entrySet())
+            {
+                System.out.println("Worker " + winner.getKey().toString());
+            }
+
+            running = false;
         }
     }
 
     private void autoShow(String s) {
         if (s.equals("on")) this.autoShow = true;
         if (s.equals("off")) this.autoShow = false;
+ 
     }
-
-
+    
     private void Error(String err) {
         System.out.println(err);
     }
