@@ -40,7 +40,7 @@ public class Game {
 
     public void SetPoint() {
         //TODO
-       // currentWorker.IncrementPoints();
+        // currentWorker.IncrementPoints();
     }
 
     public void PlayerDied() {
@@ -50,8 +50,7 @@ public class Game {
         }
     }
 
-    public HashMap<Integer, Worker> getWorkers()
-    {
+    public HashMap<Integer, Worker> getWorkers() {
         return workers;
     }
 
@@ -73,8 +72,12 @@ public class Game {
         setCurrentWorker(workers.get(id));
     }
 
+    public void placeObject(int id, String d, String f) {
+        workers.get(id).placeObject(Direction.valueOf(d), Field.FieldState.valueOf(f));
+    }
+
     //This is the game itself, handles the inputs
-    public void gameLoop(){
+    public void gameLoop() {
         //A round:
         /*while(true)
         {

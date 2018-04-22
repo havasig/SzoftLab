@@ -10,12 +10,17 @@ public class Factory implements Drawable {
     private HashMap<Integer, Hole> holes;
     private int width, height;
 
+    void Init(){
+        fields = new ArrayList<>();
+        holes = new HashMap<>();
+    }
+
     private Field getField(int x, int y) {
         return fields.get((y * width) + x);
     }
 
     void Load(String name) {
-        fields = new ArrayList<>();
+        Init();
         //TODO
     }
 
@@ -34,8 +39,7 @@ public class Factory implements Drawable {
     }
 
     public void GenerateMap(int width, int height) {
-        fields = new ArrayList<>();
-        holes = new HashMap<>();
+        Init();
         this.width = width;
         this.height = height;
         for (int i = 0; i < height; i++) {
@@ -102,10 +106,14 @@ public class Factory implements Drawable {
     public void createHole(int x, int y, HoleState state) {
         Hole hole = new Hole();
         replaceField(x, y, hole);
-        if (state == HoleState.Open)
-            hole.SetOpen();
-        else
-            hole.SetClosed();
+        switch (state) {
+            case Closed:
+                hole.SetClosed();
+                break;
+            case Open:
+                hole.SetOpen();
+                break;
+        }
         holes.put((y * width) + x, hole);
     }
 
@@ -137,6 +145,11 @@ public class Factory implements Drawable {
         new Box(getField(x, y), 1);
     }
 
-    public int getWidth(){ return width; }
-    public int getHeight(){ return height; }
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
 }

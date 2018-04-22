@@ -104,6 +104,10 @@ public class Worker extends Movable {
             Move(nextField);
     }
 
+    public void placeObject(Direction d, Field.FieldState f){
+        field.GetNeighbor(d).setSplich(f);
+    }
+
     public Movement IsThereMovement(Field currentField){
         //Avoid checking a field multiple times
         if (currentField.getChecked())

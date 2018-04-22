@@ -57,19 +57,19 @@ public class Test {
         return null;
     }
 
-    private void TestGenerateMap(List<String> input){
+    private void TestGenerateMap(List<String> input) {
         try {
             if (input.size() != 3) {
                 throw new NumberFormatException();
             }
             factory.GenerateMap(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)));
-            if(autoShow) System.out.println(factory.Draw());
-        } catch (NumberFormatException e){
+            if (autoShow) System.out.println(factory.Draw());
+        } catch (NumberFormatException e) {
             Error("Nincs ilyen parancs");
         }
     }
 
-    private void TestCreateColumn(List<String> input){
+    private void TestCreateColumn(List<String> input) {
         try {
             if (input.size() != 3) {
                 throw new NumberFormatException();
@@ -77,19 +77,19 @@ public class Test {
             int x = Integer.parseInt(input.get(1));
             int y = Integer.parseInt(input.get(2));
 
-            if(x > factory.getWidth() || x < 1 || y > factory.getHeight() || y < 1) {
+            if (x > factory.getWidth() || x < 1 || y > factory.getHeight() || y < 1) {
                 throw new Exception();
             }
             factory.createColumn(x, y);
-            if(autoShow) System.out.println(factory.Draw());
-        } catch (NumberFormatException e){
+            if (autoShow) System.out.println(factory.Draw());
+        } catch (NumberFormatException e) {
             Error("Nincs ilyen parancs");
-        } catch (Exception e){
+        } catch (Exception e) {
             Error("Nem a palya resze");
         }
     }
 
-    private void TestCreateDestination(List<String> input){
+    private void TestCreateDestination(List<String> input) {
         try {
             if (input.size() != 3) {
                 throw new NumberFormatException();
@@ -97,17 +97,18 @@ public class Test {
             int x = Integer.parseInt(input.get(1));
             int y = Integer.parseInt(input.get(2));
 
-            if(x > factory.getWidth() || x < 1 || y > factory.getHeight() || y < 1) {
+            if (x > factory.getWidth() || x < 1 || y > factory.getHeight() || y < 1) {
                 throw new Exception();
             }
             factory.createDestination(x, y);
-            if(autoShow) System.out.println(factory.Draw());
-        } catch (NumberFormatException e){
+            if (autoShow) System.out.println(factory.Draw());
+        } catch (NumberFormatException e) {
             Error("Nincs ilyen parancs");
-        } catch (Exception e){
+        } catch (Exception e) {
             Error("Nem a palya resze");
         }
     }
+
     //TODO: Havi Hibakezelés
     private void TestCreateHole(List<String> input) {
         try {
@@ -119,14 +120,14 @@ public class Test {
             HoleState hs = HoleState.valueOf(input.get(3));
 
 
-            if(x > factory.getWidth() || x < 1 || y > factory.getHeight() || y < 1) {
+            if (x > factory.getWidth() || x < 1 || y > factory.getHeight() || y < 1) {
                 throw new Exception();
             }
             factory.createHole(x, y, hs);
-            if(autoShow) System.out.println(factory.Draw());
-        } catch (NumberFormatException e){
+            if (autoShow) System.out.println(factory.Draw());
+        } catch (NumberFormatException e) {
             Error("Nincs ilyen parancs");
-        } catch (Exception e){
+        } catch (Exception e) {
             Error("Nem a palya resze vagy a HoleState szar");
         }
     }
@@ -136,6 +137,7 @@ public class Test {
             switch (input.get(0)) {
                 case "start":
                     running = true;
+                    isThisTheEnd();
                     break;
                 case "exit":
                     Exit();
@@ -150,7 +152,7 @@ public class Test {
                 case "save":
                     //TODO
                     break;
-                case "loadLevel":
+                case "loadLevel": //TODO: Havi
                     factory.Load(input.get(1));
                     if (autoShow) System.out.println(factory.Draw());
                     break;
@@ -200,21 +202,14 @@ public class Test {
                 case "abort":
                     running = false;
                     break;
-                case "moveWorker":
+                case "moveWorker": //TODO: Havi
                     Game.getInstance().moveWorker(Integer.parseInt(input.get(1)), input.get(2));
                     System.out.println(factory.Draw());
+                    isThisTheEnd();
                     break;
-                case "placeObject":
-                    //TODO
-                    break;
-                case "save":
-                    //TODO
-                    break;
-                case "IsThisTheEnd":
-                    if(Game.getInstance().getMap().ThisIsTheEnd())
-                        System.out.println("This is the end.");
-                    else
-                        System.out.println("This is not the end");
+                case "placeObject": //TODO: Havi
+                    Game.getInstance().placeObject(Integer.parseInt(input.get(1)), input.get(2), input.get(2));
+                    System.out.println(factory.Draw());
                     break;
                 case "":
                     Error("Ures sor");
@@ -224,7 +219,13 @@ public class Test {
                     break;
             }
         }
+    }
 
+    private void isThisTheEnd() {
+        if (Game.getInstance().getMap().ThisIsTheEnd()) {
+            System.out.println("This is the end.");//TODO
+            running = false;
+        }
     }
 
     private void autoShow(String s) {
