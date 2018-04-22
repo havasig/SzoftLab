@@ -224,7 +224,6 @@ public class Test {
     private void isThisTheEnd() {
         if (Game.getInstance().getMap().ThisIsTheEnd()) {
             System.out.println("This is the end.");//TODO
-            //running = false;
 
             System.out.println("Game over.");
             System.out.println("");
