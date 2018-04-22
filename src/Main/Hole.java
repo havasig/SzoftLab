@@ -30,6 +30,9 @@ public class Hole extends Field {
 
     public void SetOpen() {
         state = HoleState.Open;
+       if (movable != null){
+           movable.Fall();
+       }
     }
 
     public void SetClosed() {

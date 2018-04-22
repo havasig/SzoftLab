@@ -21,6 +21,7 @@ public class Test {
     }
 
     public static void main(String[] args) {
+        System.out.println("Boldogot Havi! :*");
         Test test = new Test();
         test.Run();
     }
@@ -208,6 +209,12 @@ public class Test {
                     break;
                 case "save":
                     //TODO
+                    break;
+                case "IsThisTheEnd":
+                    if(Game.getInstance().getMap().ThisIsTheEnd())
+                        System.out.println("This is the end.");
+                    else
+                        System.out.println("This is not the end");
                     break;
                 case "":
                     Error("Ures sor");

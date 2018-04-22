@@ -3,9 +3,9 @@ package Main;
 import java.util.HashMap;
 
 public class Field implements Drawable {
-    protected Movable movable;
+    Movable movable;
     private HashMap<Direction, Field> neighbors;
-    protected FieldState splich;
+    private FieldState splich;
     private Boolean checked;
 
     public Field() {
@@ -45,6 +45,11 @@ public class Field implements Drawable {
 
     public boolean AcceptBox(Box b) {
         movable = b;
+        return true;
+    }
+
+    public boolean PseudoAccept()
+    {
         return true;
     }
 

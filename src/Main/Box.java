@@ -75,7 +75,8 @@ public class Box extends Movable {
                         return Moved;
                     }
                 } else {
-                    return Moved;
+                    if(nextField.PseudoAccept())
+                        return Moved;
                 }
             }
         }
@@ -98,9 +99,6 @@ public class Box extends Movable {
         locked = true;
     }
 
-    public int getFriction() {
-        return defFriction;
-    }
 
     @Override
     public String Draw() {
