@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static Main.Movement.Moved;
-import static Main.Movement.Stayed;
 
 public class Factory implements Drawable {
     private ArrayList<Field> fields;
@@ -18,12 +17,12 @@ public class Factory implements Drawable {
 
     public boolean ThisIsTheEnd() {
         //set all field to unchecked
-        for(Field field : fields)
+        for (Field field : fields)
             field.setChecked(false);
 
         //Iterate through workers, if any of them can move something, then it is not over
         HashMap<Integer, Worker> workers = Game.getInstance().getWorkers();
-        for (Worker worker: workers.values()) {
+        for (Worker worker : workers.values()) {
             if (worker.IsThereMovement(worker.field) == Moved)
                 return false;
         }
@@ -50,14 +49,17 @@ public class Factory implements Drawable {
                     fields.get(i * width + j).SetNeighbor(Direction.Up, fields.get((i - 1) * width + j));
                 else
                     fields.get(i * width + j).SetNeighbor(Direction.Up, null);
-                if (j - 1 > 0)
-                    fields.get(i * width + j).SetNeighbor(Direction.Left, fields.get(i * width + j - 1));
-                else
-                    fields.get(i * width + j).SetNeighbor(Direction.Left, null);
+
                 if (i + 1 < height)
                     fields.get(i * width + j).SetNeighbor(Direction.Down, fields.get((i + 1) * width + j));
                 else
                     fields.get(i * width + j).SetNeighbor(Direction.Down, null);
+
+                if (j - 1 > 0)
+                    fields.get(i * width + j).SetNeighbor(Direction.Left, fields.get(i * width + j - 1));
+                else
+                    fields.get(i * width + j).SetNeighbor(Direction.Left, null);
+
                 if (j + 1 < width)
                     fields.get(i * width + j).SetNeighbor(Direction.Right, fields.get(i * width + j + 1));
                 else
@@ -85,9 +87,32 @@ public class Factory implements Drawable {
     public void createColumn(int x, int y) {
         Column column = new Column();
         replaceField(x, y, column);
-        fields.set(x + y * height, column);
-
     }
+
+    public void createDestination(int x, int y) {
+        Destination destination = new Destination();
+        replaceField(x, y, destination);
+    }
+
+    public void createHole(int x, int y, String state) {
+        Hole hole = new Hole();
+        replaceField(x, y, hole);
+        switch (state){
+            case "Open":
+                hole.SetOpen();
+                break;
+            case "Closed":
+                hole.SetClosed();
+                break;
+        }
+    }
+
+    public void createSwitch(int x, int y, int hX, int hY) {
+        Switch switcher = new Switch();
+        replaceField(x, y, switcher);
+        switcher.SetHole((Hole) fields.get(hX + hY * height));
+    }
+
 
     public void replaceField(int x, int y, Field field) {
         field.SetNeighbor(Direction.Up, fields.get(x + y * height).GetNeighbor(Direction.Up));
@@ -99,16 +124,15 @@ public class Factory implements Drawable {
         field.GetNeighbor(Direction.Down).SetNeighbor(Direction.Up, field);
         field.GetNeighbor(Direction.Left).SetNeighbor(Direction.Right, field);
         field.GetNeighbor(Direction.Right).SetNeighbor(Direction.Left, field);
+        fields.set(x + y * height, field);
     }
 
     public void addWorker(int x, int y, int id) {
-        Worker w = new Worker(fields.get(x + y * height), id);
-        fields.get(x + y * height).setMovable(w);
-        Game.getInstance().addWorker(w, id);
+        Game.getInstance().addWorker(new Worker(fields.get(x + y * height), id),  id);
     }
 
     public void addBox(int x, int y) {
-        fields.get(x + y * height).setMovable(new Box(fields.get(x + y * height), 1));
+        new Box(fields.get(x + y * height), 1);
     }
 
 }

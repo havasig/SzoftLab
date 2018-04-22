@@ -30,10 +30,10 @@ public class Test {
             List<String> input = ReadLine();
 
             if (input != null) {
-                if (!running) {
-                    Initial(input);
-                } else {
+                if (running) {
                     GameSimulate(input);
+                } else {
+                    Initial(input);
                 }
             } else {
                 Exit();
@@ -58,7 +58,6 @@ public class Test {
 
     private void Initial(List<String> input) {
         if (!input.isEmpty()) {
-
             switch (input.get(0)) {
                 case "start":
                     running = true;
@@ -89,13 +88,16 @@ public class Test {
                     if(autoShow) System.out.println(factory.Draw());
                     break;
                 case "createDestination":
-                    //TODO
+                    factory.createDestination(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)) );
+                    if(autoShow) System.out.println(factory.Draw());
                     break;
                 case "createHole":
-                    //TODO
+                    factory.createHole(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)), input.get(3));
+                    if(autoShow) System.out.println(factory.Draw());
                     break;
                 case "createSwitch":
-                    //TODO
+                    factory.createSwitch(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)), Integer.parseInt(input.get(3)), Integer.parseInt(input.get(1)));
+                    if(autoShow) System.out.println(factory.Draw());
                     break;
                 case "addWorker":
                     factory.addWorker(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)), Integer.parseInt(input.get(3)));

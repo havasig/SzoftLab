@@ -11,7 +11,7 @@ public class Worker extends Movable {
 
     public Worker(Field startField, int id) {
         field = startField;
-        startField.setMovable(this);
+        startField.AcceptWorker(this);
         alive = true;
         points = 0;
         strength = 5;

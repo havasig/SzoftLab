@@ -9,7 +9,7 @@ public class Box extends Movable {
 
     public Box(Field startField, int friction) {
         field = startField;
-        startField.setMovable(this);
+        startField.AcceptBox(this);
         locked = false;
         this.defFriction = friction;
     }
@@ -93,7 +93,7 @@ public class Box extends Movable {
         }
     }
 
-    public void Lock() {
+    void Lock() {
         Game.getInstance().SetPoint();
         locked = true;
     }

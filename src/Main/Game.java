@@ -36,6 +36,7 @@ public class Game {
 
     private void EndGame() {
         //TODO
+        System.out.println("Game Over");
     }
 
     public void SetPoint() {
@@ -65,6 +66,7 @@ public class Game {
 
     public void addWorker(Worker w, int id) {
         workers.put(id, w);
+        livePlayerCount++;
     }
 
     public void moveWorker(int id, String dir) {
@@ -75,7 +77,7 @@ public class Game {
     //This is the game itself, handles the inputs
     public void gameLoop(){
         //A round:
-        while(true)
+        /*while(true)
         {
             //Loop for each worker
             for (Map.Entry<Integer, Worker> worker : workers.entrySet())
@@ -83,8 +85,8 @@ public class Game {
                 System.out.print(map.Draw());
                 System.out.println("This is worker " + worker.getKey() + "'s turn.");
                 System.out.println("Type Up, Right, Left or Down to move");
-                //TODO - reliable input
-                String input = new String("");
+
+                String input = "";
                 switch(input)
                 {
                     case "Up":
@@ -108,6 +110,6 @@ public class Game {
                 }
             }
 
-        }
+        }*/
     }
 }
