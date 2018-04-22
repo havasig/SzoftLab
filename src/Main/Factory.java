@@ -11,7 +11,7 @@ public class Factory implements Drawable {
     private int width, height;
 
     private Field getField(int x, int y) {
-        return fields.get((y * height) + x);
+        return fields.get((y * width) + x);
     }
 
     void Load(String name) {
@@ -134,11 +134,11 @@ public class Factory implements Drawable {
     }
 
     public void addWorker(int x, int y, int id) {
-        Game.getInstance().addWorker(new Worker(fields.get(x + y * height), id), id);
+        Game.getInstance().addWorker(new Worker(getField(x, y), id), id);
     }
 
     public void addBox(int x, int y) {
-        new Box(fields.get(x + y * height), 1);
+        new Box(getField(x, y), 1);
     }
 
 }

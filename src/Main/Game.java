@@ -1,7 +1,6 @@
 package Main;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class Game {
 
@@ -41,7 +40,7 @@ public class Game {
 
     public void SetPoint() {
         //TODO
-        currentWorker.IncrementPoints();
+       // currentWorker.IncrementPoints();
     }
 
     public void PlayerDied() {

@@ -77,35 +77,38 @@ public class Test {
                     break;
                 case "loadLevel":
                     factory.Load(input.get(1));
-                    if(autoShow) System.out.println(factory.Draw());
+                    if (autoShow) System.out.println(factory.Draw());
                     break;
                 case "generateMap":
                     factory.GenerateMap(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)));
-                    if(autoShow) System.out.println(factory.Draw());
+                    if (autoShow) System.out.println(factory.Draw());
                     break;
                 case "createColumn":
                     factory.createColumn(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)));
-                    if(autoShow) System.out.println(factory.Draw());
+                    if (autoShow) System.out.println(factory.Draw());
                     break;
                 case "createDestination":
-                    factory.createDestination(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)) );
-                    if(autoShow) System.out.println(factory.Draw());
+                    factory.createDestination(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)));
+                    if (autoShow) System.out.println(factory.Draw());
                     break;
                 case "createHole":
-                    factory.createHole(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)), input.get(3));
-                    if(autoShow) System.out.println(factory.Draw());
+                    factory.createHole(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)),
+                            input.get(3));
+                    if (autoShow) System.out.println(factory.Draw());
                     break;
                 case "createSwitch":
-                    factory.createSwitch(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)), Integer.parseInt(input.get(3)), Integer.parseInt(input.get(1)));
-                    if(autoShow) System.out.println(factory.Draw());
+                    factory.createSwitch(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)),
+                            Integer.parseInt(input.get(3)), Integer.parseInt(input.get(4)));
+                    if (autoShow) System.out.println(factory.Draw());
                     break;
                 case "addWorker":
-                    factory.addWorker(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)), Integer.parseInt(input.get(3)));
-                    if(autoShow) System.out.println(factory.Draw());
+                    factory.addWorker(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)),
+                            Integer.parseInt(input.get(3)));
+                    if (autoShow) System.out.println(factory.Draw());
                     break;
                 case "addBox":
                     factory.addBox(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)));
-                    if(autoShow) System.out.println(factory.Draw());
+                    if (autoShow) System.out.println(factory.Draw());
                     break;
                 case "autoShow":
                     autoShow(input.get(1));
@@ -132,8 +135,10 @@ public class Test {
                     System.out.println(factory.Draw());
                     break;
                 case "placeObject":
+                    //TODO
                     break;
                 case "save":
+                    //TODO
                     break;
                 case "":
                     Error("Ures sor");
@@ -147,8 +152,8 @@ public class Test {
     }
 
     private void autoShow(String s) {
-        if (s.equals("on"))this.autoShow=true;
-        if (s.equals("off"))this.autoShow=false;
+        if (s.equals("on")) this.autoShow = true;
+        if (s.equals("off")) this.autoShow = false;
     }
 
 

@@ -20,7 +20,7 @@ public class Destination extends Field {
         if (movable == null)
             field.append("_");
         else
-            field.append(movable.toString());
+            field.append(movable.Draw());
         DrawSplich(field);
         return field.toString();
     }
