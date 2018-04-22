@@ -28,7 +28,7 @@ public class Game {
 
     private void StartGame() {
         map.Load("");
-        gameLoop();
+        //gameLoop();
         //TODO
 
     }

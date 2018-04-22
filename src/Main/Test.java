@@ -140,6 +140,12 @@ public class Test {
                 case "save":
                     //TODO
                     break;
+                case "IsThisTheEnd":
+                    if(Game.getInstance().getMap().ThisIsTheEnd())
+                        System.out.println("This is the end.");
+                    else
+                        System.out.println("This is not the end");
+                    break;
                 case "":
                     Error("Ures sor");
                     break;

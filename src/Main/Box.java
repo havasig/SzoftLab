@@ -75,7 +75,8 @@ public class Box extends Movable {
                         return Moved;
                     }
                 } else {
-                    return Moved;
+                    if(nextField.PseudoAccept())
+                        return Moved;
                 }
             }
         }

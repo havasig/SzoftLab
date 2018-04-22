@@ -48,6 +48,11 @@ public class Field implements Drawable {
         return true;
     }
 
+    public boolean PseudoAccept()
+    {
+        return true;
+    }
+
     public void RemoveWorker(Worker w) {
         movable = null;
     }

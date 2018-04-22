@@ -16,6 +16,11 @@ public class Column extends Field{
     }
 
     @Override
+    public boolean PseudoAccept() {
+        return false;
+    }
+
+    @Override
     public String Draw() {
         return "X__";
     }

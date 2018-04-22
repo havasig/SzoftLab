@@ -79,13 +79,7 @@ public class Worker extends Movable {
 
     @Override
     public Movement PseudoCollideWorker(Direction d, int sumFriction) {
-        Field nextField = field.GetNeighbor(d);
-        Movable m = nextField.GetMovable();
-        if (m != null) {
-            return m.PseudoCollideWorker(d, sumFriction);
-        } else {
-            return Moved;
-        }
+            return Stayed;
     }
 
     @Override
@@ -119,19 +113,30 @@ public class Worker extends Movable {
         //This will be returned, it is Stayed if all of the recursive functions returned Stayed, else Moved
         Movement retMov = Stayed;
 
-        for(Direction dir: Direction.values()){
+        for(Direction dir: Direction.values())
+        {
             Field nextField = currentField.GetNeighbor(dir);
-            Movable m = nextField.GetMovable();
-            if (m != null)
-                return m.PseudoCollideWorker(dir, strength);
-            else
+
+            if (nextField != null && nextField.PseudoAccept() && !nextField.getChecked())
             {
-                if(IsThereMovement(nextField) == Moved)
-                    retMov = Moved;
+
+                Movable m = nextField.GetMovable();
+                if (m != null)
+                {
+                    return m.PseudoCollideWorker(dir, strength);
+                }
+                else
+                {
+                    if (IsThereMovement(nextField) == Moved)
+                    {
+                        return Moved;
+                    }
+                }
             }
         }
 
-        return retMov;
+
+        return Stayed;
 
     }
 
