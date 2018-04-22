@@ -21,6 +21,7 @@ public class Test {
     }
 
     public static void main(String[] args) {
+        System.out.println("Boldogot Havi! :*");
         Test test = new Test();
         test.Run();
     }

@@ -99,9 +99,6 @@ public class Box extends Movable {
         locked = true;
     }
 
-    public int getFriction() {
-        return defFriction;
-    }
 
     @Override
     public String Draw() {
