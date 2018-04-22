@@ -1,6 +1,9 @@
 package Main;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +16,7 @@ public class Test {
     private String saveFile;
     private Factory factory;
     private boolean autoShow = true;
+    private boolean save = false;
 
     private Test() {
         exit = false;
@@ -63,7 +67,7 @@ public class Test {
                 throw new NumberFormatException();
             }
             factory.GenerateMap(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)));
-            if (autoShow) System.out.println(factory.Draw());
+            if (autoShow) Draw(factory.Draw());
         } catch (NumberFormatException e) {
             Error("Nincs ilyen parancs");
         }
@@ -81,7 +85,7 @@ public class Test {
                 throw new Exception();
             }
             factory.createColumn(x, y);
-            if (autoShow) System.out.println(factory.Draw());
+            if (autoShow) Draw(factory.Draw());
         } catch (NumberFormatException e) {
             Error("Nincs ilyen parancs");
         } catch (Exception e) {
@@ -101,7 +105,7 @@ public class Test {
                 throw new Exception();
             }
             factory.createDestination(x, y);
-            if (autoShow) System.out.println(factory.Draw());
+            if (autoShow) Draw(factory.Draw());
         } catch (NumberFormatException e) {
             Error("Nincs ilyen parancs");
         } catch (Exception e) {
@@ -124,7 +128,7 @@ public class Test {
                 throw new Exception();
             }
             factory.createHole(x, y, hs);
-            if (autoShow) System.out.println(factory.Draw());
+            if (autoShow) Draw(factory.Draw());
         } catch (NumberFormatException e) {
             Error("Nincs ilyen parancs");
         } catch (Exception e) {
@@ -143,18 +147,18 @@ public class Test {
                     Exit();
                     break;
                 case "saveFile":
-                    saveFile = input.get(1);
+                    saveFile = input.get(1); // TODO
                     System.out.println("Save...");
                     break;
                 case "load":
-                    //TODO
+                    Load(input.get(1));
                     break;
                 case "save":
-                    //TODO
+                    save = true;
                     break;
                 case "loadLevel": //TODO: Havi
                     factory.Load(input.get(1));
-                    if (autoShow) System.out.println(factory.Draw());
+                    if (autoShow) Draw(factory.Draw());
                     break;
                 case "generateMap":
                     this.TestGenerateMap(input);
@@ -171,16 +175,16 @@ public class Test {
                 case "createSwitch": //TODO: Havi
                     factory.createSwitch(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)),
                             Integer.parseInt(input.get(3)), Integer.parseInt(input.get(4)));
-                    if (autoShow) System.out.println(factory.Draw());
+                    if (autoShow) Draw(factory.Draw());
                     break;
                 case "addWorker": //TODO: Havi
                     factory.addWorker(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)),
                             Integer.parseInt(input.get(3)));
-                    if (autoShow) System.out.println(factory.Draw());
+                    if (autoShow) Draw(factory.Draw());
                     break;
                 case "addBox":
                     factory.addBox(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)));
-                    if (autoShow) System.out.println(factory.Draw());
+                    if (autoShow) Draw(factory.Draw());
                     break;
                 case "autoShow":
                     autoShow(input.get(1));
@@ -195,6 +199,25 @@ public class Test {
         }
     }
 
+    private void Load(String string) {
+        String line;
+        List<String> input;
+
+        try {
+            BufferedReader brIn = new BufferedReader(new FileReader(string));
+            while ((line = brIn.readLine()) != null) {
+                input = Arrays.asList(line.split(" "));
+                if (running) {
+                    GameSimulate(input);
+                } else {
+                    Initial(input);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void GameSimulate(List<String> input) {
         if (!input.isEmpty()) {
@@ -204,12 +227,12 @@ public class Test {
                     break;
                 case "moveWorker": //TODO: Havi
                     Game.getInstance().moveWorker(Integer.parseInt(input.get(1)), input.get(2));
-                    System.out.println(factory.Draw());
+                    Draw(factory.Draw());
                     isThisTheEnd();
                     break;
                 case "placeObject": //TODO: Havi
                     Game.getInstance().placeObject(Integer.parseInt(input.get(1)), input.get(2), input.get(3));
-                    System.out.println(factory.Draw());
+                    Draw(factory.Draw());
                     break;
                 case "":
                     Error("Ures sor");
@@ -230,8 +253,7 @@ public class Test {
             System.out.println("Points:");
             HashMap<Integer, Worker> winners = new HashMap<Integer, Worker>();
             int mostpoints = 0;
-            for(Map.Entry<Integer, Worker> worker : Game.getInstance().getWorkers().entrySet())
-            {
+            for (Map.Entry<Integer, Worker> worker : Game.getInstance().getWorkers().entrySet()) {
                 int points = worker.getValue().getPoints();
                 Worker work = worker.getValue();
                 int id = worker.getKey();
@@ -239,11 +261,9 @@ public class Test {
                 System.out.println("Worker " + Integer.toString(id) + ": " + Integer.toString(points));
 
                 //Get the winner(s) while we write the points
-                if (points >= mostpoints)
-                {
+                if (points >= mostpoints) {
                     winners.put(id, work);
-                    if (points > mostpoints)
-                    {
+                    if (points > mostpoints) {
                         winners.clear();
                         winners.put(id, work);
                         mostpoints = points;
@@ -252,8 +272,7 @@ public class Test {
             }
             System.out.println("");
 
-            if (winners.size() == 0)
-            {
+            if (winners.size() == 0) {
                 System.out.println("Something went wrong, there are no winners!");
                 return;
             }
@@ -263,8 +282,7 @@ public class Test {
             else
                 System.out.println("The winner is:");
 
-            for(Map.Entry<Integer, Worker> winner : winners.entrySet())
-            {
+            for (Map.Entry<Integer, Worker> winner : winners.entrySet()) {
                 System.out.println("Worker " + winner.getKey().toString());
             }
 
@@ -275,9 +293,14 @@ public class Test {
     private void autoShow(String s) {
         if (s.equals("on")) this.autoShow = true;
         if (s.equals("off")) this.autoShow = false;
- 
+
     }
-    
+
+    void Draw(String output) {
+        System.out.println(output);
+        //TODO save to file
+    }
+
     private void Error(String err) {
         System.out.println(err);
     }
