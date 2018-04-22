@@ -2,6 +2,7 @@ package Main;
 
 import static Main.Movement.Moved;
 import static Main.Movement.Stayed;
+
 /**
  * A játékos irányítja. Eltolhatja a dobozokat, ha megfelelo nagysagu az ereje, illetve meghalhat.
  * Ha jó helyre tol egy dobozt, akkor pontot szerez.
@@ -9,13 +10,13 @@ import static Main.Movement.Stayed;
  */
 public class Worker extends Movable {
     /**
-     * Tárolja a játékos pontjait.
-     */
-    private int points;
-    /**
      * Tárolja a játékos erejet.
      */
     int strength;
+    /**
+     * Tárolja a játékos pontjait.
+     */
+    private int points;
     /**
      * Tárolja, hogy a játékos eletben van-e.
      */
@@ -26,9 +27,10 @@ public class Worker extends Movable {
     private int identifier;
 
     /**
-     *Ez a Worker konstruktora.
+     * Ez a Worker konstruktora.
+     *
      * @param startField: a Worker kezo mezeje
-     * @param id: a Worker azonosotioja
+     * @param id:         a Worker azonosotioja
      */
     public Worker(Field startField, int id) {
         field = startField;
@@ -58,7 +60,8 @@ public class Worker extends Movable {
 
     /**
      * A Worker egy Worker-rel valo utkozeset kezeli.
-     * @param d: az irany, amelyre mozog a Worker.
+     *
+     * @param d:           az irany, amelyre mozog a Worker.
      * @param sumFriction: az osszsurlodas, amit el kell tolnia a Worker-nek.
      * @return visszaadja, hogy sikeres volt-e a tolas az adott iranyba.
      */
@@ -87,7 +90,8 @@ public class Worker extends Movable {
 
     /**
      * A Worker egy Box-szal valo utkozeset kezeli.
-     * @param d: az irany, amelyre mozog a Worker.
+     *
+     * @param d:           az irany, amelyre mozog a Worker.
      * @param sumFriction: az osszsurlodas, amit el kell tolnia a Worker-nek.
      * @return visszaadja, hogy sikeres volt-e a tolas az adott iranyba.
      */
@@ -123,6 +127,7 @@ public class Worker extends Movable {
 
     /**
      * A Worker-t mozgatja.
+     *
      * @param f: erre a mezore mozog a Worker.
      * @return Igaz, ha sikeres volt a mozgas, s hamis, ha nem.
      */
@@ -139,6 +144,7 @@ public class Worker extends Movable {
 
     /**
      * A patameteret a jatekostol kapja. Ez altal iranyitott a Worker.
+     *
      * @param d: ebbe az iranyba szeretne mozgatni a Worker-t a jatekos.
      */
     public void Control(Direction d) {
@@ -154,6 +160,7 @@ public class Worker extends Movable {
 
     /**
      * Kenoanyagot helyez el egy mezon a Worker.
+     *
      * @param d: ebbe az iranyba helyez el kenoanyagot.
      * @param f: ilyen tipusu kenoanyagot helyez el.
      */

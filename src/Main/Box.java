@@ -18,9 +18,10 @@ public class Box extends Movable {
     private int defFriction;
 
     /**
-     *Ez a Box konstruktora.
+     * Ez a Box konstruktora.
+     *
      * @param startField: a Worker kezo mezeje
-     * @param friction: a doboz sulya
+     * @param friction:   a doboz sulya
      */
     public Box(Field startField, int friction) {
         field = startField;
@@ -39,7 +40,8 @@ public class Box extends Movable {
 
     /**
      * A Box egy Worker-rel valo utkozeset kezeli.
-     * @param d: az irany, amelyre mozog a Box.
+     *
+     * @param d:           az irany, amelyre mozog a Box.
      * @param sumFriction: az osszsurlodas, amit el kell tolnia a Box-nak.
      * @return visszaadja, hogy sikeres volt-e a tolas az adott iranyba.
      */
@@ -50,7 +52,8 @@ public class Box extends Movable {
 
     /**
      * A Box egy Box-szal valo utkozeset kezeli.
-     * @param d: az irany, amelyre mozog a Box.
+     *
+     * @param d:           az irany, amelyre mozog a Box.
      * @param sumFriction: az osszsurlodas, amit el kell tolnia a Box-nak.
      * @return visszaadja, hogy sikeres volt-e a tolas az adott iranyba.
      */
@@ -61,7 +64,8 @@ public class Box extends Movable {
 
     /**
      * A Box egy Movable-lel valo utkozeset kezeli.
-     * @param d: az irany, amelyre mozog a Box.
+     *
+     * @param d:           az irany, amelyre mozog a Box.
      * @param sumFriction: az osszsurlodas, amit el kell tolnia a Box-nak.
      * @return visszaadja, hogy sikeres volt-e a tolas az adott iranyba.
      */
@@ -121,6 +125,7 @@ public class Box extends Movable {
 
     /**
      * A Box-ot mozgatja.
+     *
      * @param f: erre a mezore mozog a Box.
      * @return Igaz, ha sikeres volt a mozgas, s hamis, ha nem.
      */

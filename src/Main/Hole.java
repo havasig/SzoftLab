@@ -21,6 +21,7 @@ public class Hole extends Field {
 
     /**
      * Beallitja, hogy van rajta egy Worker. Ha nyitva van, akkor a Worker leesik.
+     *
      * @param w: a Worker, ami rakerult.
      * @return igaz, ha rakerult a Worker, hamis, ha nem.
      */
@@ -36,6 +37,7 @@ public class Hole extends Field {
 
     /**
      * Beallitja, hogy van rajta egy Box. Ha nyitva van, akkor a Box leesik.
+     *
      * @param b: a Box, ami rakerult.
      * @return igaz, ha rakerult a Box, hamis, ha nem.
      */

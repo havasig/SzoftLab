@@ -11,16 +11,19 @@ public abstract class Movable implements Drawable {
     /**
      * A Movable egy Worker-rel valo utkozeset kezeli.
      * Absztrakt fuggveny, a leszarmazottak felulirjak.
-     * @param d: az irany, amelyre mozog a Movable.
+     *
+     * @param d:           az irany, amelyre mozog a Movable.
      * @param sumFriction: az osszsurlodas, amit el kell tolnia a Movable-nek.
      * @return visszaadja, hogy sikeres volt-e a tolas az adott iranyba.
      */
 
     public abstract Movement CollideWorker(Direction d, int sumFriction);
+
     /**
      * A Movable egy Box-szal valo utkozeset kezeli.
      * Absztrakt fuggveny, a leszarmazottak felulirjak.
-     * @param d: az irany, amelyre mozog a Movable.
+     *
+     * @param d:           az irany, amelyre mozog a Movable.
      * @param sumFriction: az osszsurlodas, amit el kell tolnia a Movable-nek.
      * @return visszaadja, hogy sikeres volt-e a tolas az adott iranyba.
      */
@@ -34,6 +37,7 @@ public abstract class Movable implements Drawable {
     /**
      * A Movable-t mozgatja.
      * Absztrakt fuggveny, a leszarmazottak felulirjak.
+     *
      * @param f: erre a mezore mozog a Movable.
      * @return Igaz, ha sikeres volt a mozgas, s hamis, ha nem.
      */

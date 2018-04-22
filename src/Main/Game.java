@@ -10,20 +10,6 @@ public class Game {
 
     //singleton/////////////////////
     private static Game game = new Game();
-
-    public static Game getInstance() {
-        return game;
-    }
-
-    /**
-     * A Game konstruktora.
-     */
-    private Game() {
-        map = new Factory();
-        workers = new HashMap<>();
-    }
-
-    ///////////////////////////////
     /**
      * A jatekban levo Worker-öket tarolja.
      */
@@ -32,6 +18,8 @@ public class Game {
      * A jelenleg mozgo jatekost tarolja.
      */
     private Worker currentWorker;
+
+    ///////////////////////////////
     /**
      * A jelenleg eletben levo jatekosok szama.
      */
@@ -40,6 +28,17 @@ public class Game {
      * A jatekteret tarolja.
      */
     private Factory map;
+    /**
+     * A Game konstruktora.
+     */
+    private Game() {
+        map = new Factory();
+        workers = new HashMap<>();
+    }
+
+    public static Game getInstance() {
+        return game;
+    }
 
     public static void main(String[] args) {
         Game.getInstance().StartGame();
@@ -49,7 +48,7 @@ public class Game {
      * A jatek inditasaert felel
      */
     private void StartGame() {
-        map.Load("");
+
         //gameLoop();
         //TODO
 
@@ -103,7 +102,8 @@ public class Game {
 
     /**
      * Hozzaad egy Worker-t a jelenleg a jatekban levo Worker-okhoz.
-     * @param w: a Worker, amit hozzaad.
+     *
+     * @param w:  a Worker, amit hozzaad.
      * @param id: a hozaadott Worker azonositoja
      */
     public void addWorker(Worker w, int id) {
@@ -113,7 +113,8 @@ public class Game {
 
     /**
      * Mozgatja a Worker-t a jatekterben.
-     * @param id: ezen azonositoju Worker kezdemenyezte a mozgast.
+     *
+     * @param id:  ezen azonositoju Worker kezdemenyezte a mozgast.
      * @param dir: ebbe az iranyba mozgatja a Worker-t
      */
     public void moveWorker(int id, String dir) {
@@ -123,9 +124,10 @@ public class Game {
 
     /**
      * Kenoanyagot helyez el a jatekter egy mezejen
+     *
      * @param id: ezen azonositoju Worker kezdemenyezte az elhelyezest.
-     * @param d: ebbe az iranyba helyezi el a kenoanyagot
-     * @param f: ilyen tipusu kenoanyagot helyez el
+     * @param d:  ebbe az iranyba helyezi el a kenoanyagot
+     * @param f:  ilyen tipusu kenoanyagot helyez el
      */
     public void placeObject(int id, String d, String f) {
         workers.get(id).placeObject(Direction.valueOf(d), Field.FieldState.valueOf(f));

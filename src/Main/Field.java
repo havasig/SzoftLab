@@ -41,6 +41,7 @@ public class Field implements Drawable {
 
     /**
      * Beallitja a checked tagvaltozo erteket.
+     *
      * @param checked: erre allitja be a tagvaltozot.
      */
     public void setChecked(Boolean checked) {
@@ -49,6 +50,7 @@ public class Field implements Drawable {
 
     /**
      * Visszaadja a d iranyban levo szomszedjat a mezonek.
+     *
      * @param d: egy irany
      * @return a d iranyban levo mezo
      */
@@ -58,6 +60,7 @@ public class Field implements Drawable {
 
     /**
      * Beallitja a d iranyban levo szomszedjat a mezonek.
+     *
      * @param d: egy irany
      * @return a d iranyba kivant mezo
      */
@@ -74,6 +77,7 @@ public class Field implements Drawable {
 
     /**
      * Beallitja, hogy van rajta egy Worker.
+     *
      * @param w: a Worker, ami rakerult.
      * @return igaz, ha rakerult a Worker, hamis, ha nem.
      */
@@ -84,6 +88,7 @@ public class Field implements Drawable {
 
     /**
      * Beallitja, hogy van rajta egy Box.
+     *
      * @param b: a Box, ami rakerult.
      * @return igaz, ha rakerult a Box, hamis, ha nem.
      */
@@ -98,6 +103,7 @@ public class Field implements Drawable {
 
     /**
      * Eltavolitja magarol a Worker-t
+     *
      * @param w: a Worker, ami lekerult rola.
      */
     public void RemoveWorker(Worker w) {
@@ -106,6 +112,7 @@ public class Field implements Drawable {
 
     /**
      * Eltavolitja magarol a Box-ot
+     *
      * @param b: a Box, ami lekerult rola.
      */
     public void RemoveBox(Box b) {
@@ -114,6 +121,7 @@ public class Field implements Drawable {
 
     /**
      * Visszaadja a rajta levo kenoanyagot
+     *
      * @return a rajta levo kenoanyag
      */
     public FieldState getSplich() {
@@ -122,6 +130,7 @@ public class Field implements Drawable {
 
     /**
      * Beallitja, hogy van rajta kenoanyag
+     *
      * @param splich: a kenoaynag, ami rakerult.
      */
     public void setSplich(FieldState splich) {

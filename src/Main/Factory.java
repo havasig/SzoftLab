@@ -15,10 +15,10 @@ public class Factory implements Drawable {
     private HashMap<Integer, Hole> holes;
     private int width, height;
 
-    public static void setSwitchHole(String s) {
+    public static void addTextToSW(String text) {
         swCount++;
         switchHole += String.valueOf(swCount) + ", ";
-        switchHole += s;
+        switchHole += text;
     }
 
     void Init() {
@@ -28,11 +28,6 @@ public class Factory implements Drawable {
 
     private Field getField(int x, int y) {
         return fields.get((y * width) + x);
-    }
-
-    void Load(String name) {
-        Init();
-        //TODO
     }
 
     public String getPos(Field f) {
@@ -97,154 +92,152 @@ public class Factory implements Drawable {
 
     public void ReadMap(String file) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
-            String line = br.readLine();
-            String[] parts = line.split(" ");
-            if(parts.length!=2)
-                Error("A tesztesetet nem sikerült futtatni.");
+        String line = br.readLine();
+        String[] parts = line.split(" ");
+        if (parts.length != 2)
+            Error("A tesztesetet nem sikerült futtatni.");
         int width = Integer.parseInt(parts[0]);
         int height = Integer.parseInt(parts[1]);
         this.width = width;
         this.height = height;
-        GenerateMap(width,height);
+        GenerateMap(width, height);
         int actLine = 0;
         ArrayList<String[]> map = new ArrayList<>();
         ArrayList<Integer> switchAndHole = new ArrayList<>();
-            while ((line = br.readLine()) != null) {
-                if(actLine<height){
-                    String[] fields = line.split(" ");
-                    if(fields.length!=width)
-                        throw new Error("A tesztesetet nem sikerült futtatni.");
-                    map.add(fields);
-                    actLine++;
-                }
-                    else {
-                    String[] row = line.split(" ");
-                    String[] coords = row[1].split(";");
-                    String[] switchCoords = coords[0].split(":");
-                    String[] holeCoords = coords[1].split(":");
-                    Integer sx = Integer.parseInt(switchCoords[0]);
-                    Integer sy = Integer.parseInt(switchCoords[1]);
-                    Integer hx = Integer.parseInt(holeCoords[0]);
-                    Integer hy = Integer.parseInt(holeCoords[1]);
+        while ((line = br.readLine()) != null) {
+            if (actLine < height) {
+                String[] fields = line.split(" ");
+                if (fields.length != width)
+                    throw new Error("A tesztesetet nem sikerült futtatni.");
+                map.add(fields);
+                actLine++;
+            } else {
+                String[] row = line.split(" ");
+                String[] coords = row[1].split(";");
+                String[] switchCoords = coords[0].split(":");
+                String[] holeCoords = coords[1].split(":");
+                Integer sx = Integer.parseInt(switchCoords[0]);
+                Integer sy = Integer.parseInt(switchCoords[1]);
+                Integer hx = Integer.parseInt(holeCoords[0]);
+                Integer hy = Integer.parseInt(holeCoords[1]);
 
-                    switchAndHole.add(sx);
-                    switchAndHole.add(sy);
-                    switchAndHole.add(hx);
-                    switchAndHole.add(hy);
-                }
+                switchAndHole.add(sx);
+                switchAndHole.add(sy);
+                switchAndHole.add(hx);
+                switchAndHole.add(hy);
             }
-            for(int i = 0; i < map.size(); i++){
-                if(map.get(i)[0].charAt(0)!='X'||map.get(i)[0].charAt(1)!='_'||map.get(i)[0].charAt(2)!='_')
-                    Error("A tesztesetet nem sikerült futtatni.");
-            }
-            for(int i = 0; i < map.size(); i++){
-                if(map.get(i)[width-1].charAt(0)!='X'||map.get(i)[width-1].charAt(1)!='_'||map.get(i)[width-1].charAt(2)!='_')
-                    Error("A tesztesetet nem sikerült futtatni.");
-            }
-            for(int i = 0; i < width; i++){
-                if(map.get(0)[i].charAt(0)!='X'||map.get(0)[i].charAt(1)!='_'||map.get(0)[i].charAt(2)!='_')
-                    Error("A tesztesetet nem sikerült futtatni.");
-            }
-            for(int i = 0; i < width; i++){
-                if(map.get(map.size()-1)[i].charAt(0)!='X'||map.get(map.size()-1)[i].charAt(1)!='_'||map.get(map.size()-1)[i].charAt(2)!='_')
-                    Error("A tesztesetet nem sikerült futtatni.");
-            }
-            for(int i = 1; i < map.size()-1; i++){
-                for(int j = 1; j < width-1; j++){
-                    char x = map.get(i)[j].charAt(0);
-                    switch (x){
-                        case 'X':
-                            createColumn(j, i);
-                            break;
-                        case 'D':
-                            createDestination(j, i);
-                            break;
-                        case 'H':
-                            createHole(j, i, HoleState.Open);
-                            break;
-                        case 'h':
-                            createHole(j, i, HoleState.Closed);
-                            break;
-                        case 's':
-                            int index=-1;
-                            for(int k=0; k < switchAndHole.size(); k++) {
+        }
+        for (int i = 0; i < map.size(); i++) {
+            if (map.get(i)[0].charAt(0) != 'X' || map.get(i)[0].charAt(1) != '_' || map.get(i)[0].charAt(2) != '_')
+                Error("A tesztesetet nem sikerült futtatni.");
+        }
+        for (int i = 0; i < map.size(); i++) {
+            if (map.get(i)[width - 1].charAt(0) != 'X' || map.get(i)[width - 1].charAt(1) != '_' || map.get(i)[width - 1].charAt(2) != '_')
+                Error("A tesztesetet nem sikerült futtatni.");
+        }
+        for (int i = 0; i < width; i++) {
+            if (map.get(0)[i].charAt(0) != 'X' || map.get(0)[i].charAt(1) != '_' || map.get(0)[i].charAt(2) != '_')
+                Error("A tesztesetet nem sikerült futtatni.");
+        }
+        for (int i = 0; i < width; i++) {
+            if (map.get(map.size() - 1)[i].charAt(0) != 'X' || map.get(map.size() - 1)[i].charAt(1) != '_' || map.get(map.size() - 1)[i].charAt(2) != '_')
+                Error("A tesztesetet nem sikerült futtatni.");
+        }
+        for (int i = 1; i < map.size() - 1; i++) {
+            for (int j = 1; j < width - 1; j++) {
+                char x = map.get(i)[j].charAt(0);
+                switch (x) {
+                    case 'X':
+                        createColumn(j, i);
+                        break;
+                    case 'D':
+                        createDestination(j, i);
+                        break;
+                    case 'H':
+                        createHole(j, i, HoleState.Open);
+                        break;
+                    case 'h':
+                        createHole(j, i, HoleState.Closed);
+                        break;
+                    case 's':
+                        int index = -1;
+                        for (int k = 0; k < switchAndHole.size(); k++) {
                             if (switchAndHole.get(k).equals(j))
                                 if (switchAndHole.get(k + 1).equals(i))
-                                    index=k;
-                            }
-                            if(index==-1)
-                                Error("A tesztesetet nem sikerült futtatni.");
-                            createSwitch(j,i,switchAndHole.get(index+2), switchAndHole.get(index+3));
-                            break;
-                        case 'S':
-                            int indexS=-1;
-                            for(int k=0; k < switchAndHole.size(); k++) {
-                                if (switchAndHole.get(k).equals(j))
-                                    if (switchAndHole.get(k + 1).equals(i))
-                                        indexS=k;
-                            }
-                            if(indexS==-1)
-                                Error("A tesztesetet nem sikerült futtatni.");
-                            createSwitch(j,i,switchAndHole.get(indexS+2), switchAndHole.get(indexS+3));
-                            break;
-                        case '_':
-                            break;
-                        default:
+                                    index = k;
+                        }
+                        if (index == -1)
                             Error("A tesztesetet nem sikerült futtatni.");
-                    }
-                    char y = map.get(i)[j].charAt(1);
-                    switch (y){
-                        case 'B':
-                            addBox(j,i);
-                            break;
-                        case '1':
-                            addWorker(j, i,1);
-                            break;
-                        case '2':
-                            addWorker(j, i,2);
-                            break;
-                        case '3':
-                            addWorker(j, i,3);
-                            break;
-                        case '4':
-                            addWorker(j, i,4);
-                            break;
-                        case '5':
-                            addWorker(j, i,5);
-                            break;
-                        case '6':
-                            addWorker(j, i,6);
-                            break;
-                        case '7':
-                            addWorker(j, i,7);
-                            break;
-                        case '8':
-                            addWorker(j, i,8);
-                            break;
-                        case '9':
-                            addWorker(j, i,9);
-                            break;
-                        case '_':
-                            break;
-                        default:
+                        createSwitch(j, i, switchAndHole.get(index + 2), switchAndHole.get(index + 3));
+                        break;
+                    case 'S':
+                        int indexS = -1;
+                        for (int k = 0; k < switchAndHole.size(); k++) {
+                            if (switchAndHole.get(k).equals(j))
+                                if (switchAndHole.get(k + 1).equals(i))
+                                    indexS = k;
+                        }
+                        if (indexS == -1)
                             Error("A tesztesetet nem sikerült futtatni.");
-                    }
-                    char z = map.get(i)[j].charAt(2);
-                    switch (z){
-                        case 'M':
-                            getField(j,i).setSplich(Field.FieldState.Honey);
-                            break;
-                        case 'O':
-                            getField(j,i).setSplich(Field.FieldState.Oil);
-                            break;
-                        case '_':
-                            break;
-                        default:
-                            throw new Error("A tesztesetet nem sikerült futtatni.");
-                    }
+                        createSwitch(j, i, switchAndHole.get(indexS + 2), switchAndHole.get(indexS + 3));
+                        break;
+                    case '_':
+                        break;
+                    default:
+                        Error("A tesztesetet nem sikerült futtatni.");
+                }
+                char y = map.get(i)[j].charAt(1);
+                switch (y) {
+                    case 'B':
+                        addBox(j, i);
+                        break;
+                    case '1':
+                        addWorker(j, i, 1);
+                        break;
+                    case '2':
+                        addWorker(j, i, 2);
+                        break;
+                    case '3':
+                        addWorker(j, i, 3);
+                        break;
+                    case '4':
+                        addWorker(j, i, 4);
+                        break;
+                    case '5':
+                        addWorker(j, i, 5);
+                        break;
+                    case '6':
+                        addWorker(j, i, 6);
+                        break;
+                    case '7':
+                        addWorker(j, i, 7);
+                        break;
+                    case '8':
+                        addWorker(j, i, 8);
+                        break;
+                    case '9':
+                        addWorker(j, i, 9);
+                        break;
+                    case '_':
+                        break;
+                    default:
+                        Error("A tesztesetet nem sikerült futtatni.");
+                }
+                char z = map.get(i)[j].charAt(2);
+                switch (z) {
+                    case 'M':
+                        getField(j, i).setSplich(Field.FieldState.Honey);
+                        break;
+                    case 'O':
+                        getField(j, i).setSplich(Field.FieldState.Oil);
+                        break;
+                    case '_':
+                        break;
+                    default:
+                        throw new Error("A tesztesetet nem sikerült futtatni.");
                 }
             }
-
+        }
     }
 
     private void Error(String err) {
@@ -298,7 +291,6 @@ public class Factory implements Drawable {
         replaceField(x, y, switcher);
         switcher.SetHole(holes.get((hY * width) + hX));
     }
-
 
     public void replaceField(int x, int y, Field field) {
         field.SetNeighbor(Direction.Up, getField(x, y).GetNeighbor(Direction.Up));

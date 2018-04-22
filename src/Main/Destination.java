@@ -15,6 +15,7 @@ public class Destination extends Field {
 
     /**
      * Beallitja, hogy van rajta egy Box. Lock-kolja a dobozt.
+     *
      * @param b: a Box, ami rakerult.
      * @return igaz, hiszen rakerult a Box.
      */

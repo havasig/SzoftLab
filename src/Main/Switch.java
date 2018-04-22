@@ -25,6 +25,7 @@ public class Switch extends Field {
 
     /**
      * Beallitja, hogy van rajta egy Box. Kinyitja a hozza tartozo lyukat.
+     *
      * @param b: a Box, ami rakerult.
      * @return igaz, hiszen rakerult a Box.
      */
@@ -38,6 +39,7 @@ public class Switch extends Field {
 
     /**
      * Eltavolitja magarol a Box-ot
+     *
      * @param b: a Box, ami lekerult rola.
      */
     @Override
@@ -49,6 +51,7 @@ public class Switch extends Field {
 
     /**
      * Beallitja a hozza tartozo lyukat.
+     *
      * @param h: a hozza tartozo lyuk.
      */
     public void SetHole(Hole h) {
@@ -67,7 +70,7 @@ public class Switch extends Field {
         else
             field.append(movable.Draw());
         DrawSplich(field);
-        Factory.setSwitchHole(Game.getInstance().getMap().getPos(this)
+        Factory.addTextToSW(Game.getInstance().getMap().getPos(this)
                 + ";"
                 + Game.getInstance().getMap().getPos(hole)
                 + "\n");

@@ -136,7 +136,7 @@ public class Test {
         }
     }
 
-    private void Initial(List<String> input)  {
+    private void Initial(List<String> input) {
         if (!input.isEmpty()) {
             switch (input.get(0)) {
                 case "start":
@@ -212,6 +212,7 @@ public class Test {
 
     /**
      * Betolti a jatek egy regebbi allapotat.
+     *
      * @param string: ezen nevu file-bol tolti be a jatek egy regebbi allapotat.
      */
     private void Load(String string) {
@@ -237,6 +238,7 @@ public class Test {
 
     /**
      * Szimulalja a jatek mukodeset a bemeneti nyelvnek megfelelo formaban kapott utasiatsok alapjan.
+     *
      * @param input: a lista elemei a bemeneti utasitasok.
      */
     private void GameSimulate(List<String> input) {
@@ -322,6 +324,7 @@ public class Test {
 
     /**
      * Kimenti a jatek adott pillanatban levo allasat
+     *
      * @param output: ilyen nevu file-ba menti ki az aktualis allast.
      */
     private void Save(String output) {
