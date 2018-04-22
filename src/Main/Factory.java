@@ -7,6 +7,7 @@ import static Main.Movement.Moved;
 
 public class Factory implements Drawable {
     private ArrayList<Field> fields;
+    private HashMap<Integer, Hole> holes;
     private int width, height;
 
     private Field getField(int x, int y) {
@@ -34,6 +35,7 @@ public class Factory implements Drawable {
 
     public void GenerateMap(int width, int height) {
         fields = new ArrayList<>();
+        holes = new HashMap<>();
         this.width = width;
         this.height = height;
         for (int i = 0; i < height; i++) {
@@ -53,7 +55,7 @@ public class Factory implements Drawable {
                 else
                     getField(x, y).SetNeighbor(Direction.Up, null);
 
-                if (y + 1 <= height-1 )
+                if (y + 1 <= height - 1)
                     getField(x, y).SetNeighbor(Direction.Down, getField(x, y + 1));
                 else
                     getField(x, y).SetNeighbor(Direction.Down, null);
@@ -63,7 +65,7 @@ public class Factory implements Drawable {
                 else
                     getField(x, y).SetNeighbor(Direction.Left, null);
 
-                if (x + 1 <= width-1 )
+                if (x + 1 <= width - 1)
                     getField(x, y).SetNeighbor(Direction.Right, getField(x + 1, y));
                 else
                     getField(x, y).SetNeighbor(Direction.Right, null);
@@ -108,12 +110,13 @@ public class Factory implements Drawable {
                 hole.SetClosed();
                 break;
         }
+        holes.put((y * width) + x, hole);
     }
 
     public void createSwitch(int x, int y, int hX, int hY) {
         Switch switcher = new Switch();
         replaceField(x, y, switcher);
-        switcher.SetHole((Hole) fields.get(hX + hY * height));
+        switcher.SetHole(holes.get((hY * width) + hX));
     }
 
 
