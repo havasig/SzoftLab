@@ -49,6 +49,7 @@ public class Worker extends Movable {
     @Override
     public void Die() {
         field.RemoveWorker(this);
+        field = null;
         Game.getInstance().PlayerDied();
     }
 

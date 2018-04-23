@@ -194,8 +194,6 @@ public class Game {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
         }
         {
             //A round:
