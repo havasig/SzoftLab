@@ -28,11 +28,6 @@ public class Game {
     private Worker currentWorker;
 
     /**
-     * A jelenleg eletben levo jatekosok szama.
-     */
-    private int livePlayerCount;
-
-    /**
      * A jatekteret tarolja.
      */
     private Factory map;
@@ -112,15 +107,6 @@ public class Game {
         currentWorker.IncrementPoints();
     }
 
-    /**
-     * Csokkenti a jelenleg eletben levo jatekosok szamat eggyel.
-     */
-    void PlayerDied() {
-        livePlayerCount--;
-        if (livePlayerCount == 0) {
-            EndGame();
-        }
-    }
 
     /**
      * @return a jatekban levo Worker-ek.
@@ -151,7 +137,6 @@ public class Game {
      */
     void addWorker(Worker w, int id) {
         workers.put(id, w);
-        livePlayerCount++;
     }
 
     /**
@@ -179,7 +164,7 @@ public class Game {
     //This is the game itself, handles the inputs
     private void gameLoop() {
         char c;
-        while (map.ThisIsTheEnd()){
+        while (!map.ThisIsTheEnd()){
             if (changed) {
                 System.out.println(map.Draw());
                 changed = false;
@@ -195,7 +180,8 @@ public class Game {
                 e.printStackTrace();
             }
         }
-        {
+        System.out.println(map.Draw());
+        EndGame();
             //A round:
         /*while(true)
         {
@@ -231,6 +217,5 @@ public class Game {
             }
 
         }*/
-        }
     }
 }

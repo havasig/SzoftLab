@@ -22,6 +22,8 @@ public class Worker extends Movable {
      */
     private int identifier;
 
+    private Boolean alive;
+
     /**
      * Ez a Worker konstruktora.
      *
@@ -34,6 +36,7 @@ public class Worker extends Movable {
         points = 0;
         strength = 5;
         this.identifier = id;
+        alive = true;
     }
 
     /**
@@ -50,7 +53,7 @@ public class Worker extends Movable {
     public void Die() {
         field.RemoveWorker(this);
         field = null;
-        Game.getInstance().PlayerDied();
+        alive = false;
     }
 
     /**
@@ -129,13 +132,15 @@ public class Worker extends Movable {
     @Override
     public boolean Move(Field f) {
         if (f.AcceptWorker(this)) {
-            field.RemoveWorker(this);
-            field = f;
+            if (alive) {
+                field.RemoveWorker(this);
+                field = f;
+            }
             return true;
         } else {
             return false;
         }
-    }
+}
 
     /**
      * A patameteret a jatekostol kapja. Ez altal iranyitott a Worker.
@@ -195,6 +200,10 @@ public class Worker extends Movable {
         return points;
     }
 
+    public Boolean isAlive()
+    {
+        return alive;
+    }
 
     @Override
     public String Draw() {

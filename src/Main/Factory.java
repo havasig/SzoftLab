@@ -44,6 +44,9 @@ public class Factory implements Drawable {
         //Iterate through workers, if any of them can move something, then it is not over
         HashMap<Integer, Worker> workers = Game.getInstance().getWorkers();
         for (Worker worker : workers.values()) {
+            //Don't test for Workers that died.
+            if (!worker.isAlive())
+                continue;
             if (worker.IsThereMovement(worker.field) == Moved)
                 return false;
         }
