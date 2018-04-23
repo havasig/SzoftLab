@@ -64,7 +64,7 @@ class Test {
     private void TestGenerateMap(List<String> input) {
         try {
             if (input.size() != 3) {
-                throw new NumberFormatException();
+                throw new ArrayIndexOutOfBoundsException();
             }
             if (Integer.parseInt(input.get(1))<=0||Integer.parseInt(input.get(2))<=0)
                 throw new NumberFormatException();
@@ -74,8 +74,9 @@ class Test {
             if (autoShow) Draw(factory.Draw());
         } catch (NumberFormatException e) {
             Error("Nem sikerült az adott konfigurációt elindítani.");
-        }
-        catch (Exception e){
+        } catch (ArrayIndexOutOfBoundsException e){
+            Error("Nincs ilyen parancs");
+        } catch (Exception e){
             Error(" A megadott méret túl kicsi");
         }
     }
@@ -122,7 +123,6 @@ class Test {
         }
     }
 
-    //TODO: Havi Hibakezelés
     private void TestCreateHole(List<String> input) {
         try {
             if (input.size() != 4) {
@@ -130,18 +130,97 @@ class Test {
             }
             int x = Integer.parseInt(input.get(1));
             int y = Integer.parseInt(input.get(2));
-            HoleState hs = HoleState.valueOf(input.get(3));
-
 
             if (x > factory.getWidth() || x < 1 || y > factory.getHeight() || y < 1) {
                 throw new Exception();
             }
+
+            HoleState hs = HoleState.valueOf(input.get(3));
+
             factory.createHole(x, y, hs);
             if (autoShow) Draw(factory.Draw());
         } catch (NumberFormatException e) {
             Error("Nincs ilyen parancs");
-        } catch (Exception e) {
-            Error("Nem a palya resze");
+        } catch (Exception e){
+            Error("Nem lehet letrehozni");
+        }
+    }
+
+    private void TestLoadLevel(List<String> input){
+        try {
+            if (input.size() != 2) {
+                throw new NumberFormatException();
+            }
+            factory.ReadMap(input.get(1));
+            if (autoShow) Draw(factory.Draw());
+        } catch (NumberFormatException e) {
+            Error("Nincs ilyen parancs");
+        }
+    }
+
+    private void TestCreateSwitch(List<String> input){
+        try {
+            if (input.size() != 5) {
+                throw new NumberFormatException();
+            }
+            int switchX = Integer.parseInt(input.get(1));
+            int switchY = Integer.parseInt(input.get(2));
+            int holeX = Integer.parseInt(input.get(3));
+            int holeY = Integer.parseInt(input.get(4));
+
+            if (switchX > factory.getWidth() || switchX < 1 || switchY > factory.getHeight() || switchY < 1 ||
+                    holeX > factory.getWidth() || holeX < 1 || holeY > factory.getHeight() || holeY < 1) {
+                throw new Exception();
+            }
+            //TODO: Havi, akkor is létre lehet hozni ha nincs ott hole
+            //factory.getField(holeX, holeY).
+            factory.createSwitch(switchX, switchY, holeX, holeY);
+            if (autoShow) Draw(factory.Draw());
+        } catch (NumberFormatException e) {
+            Error("Nincs ilyen parancs");
+        } catch (Exception e){
+            Error("Nem lehet letrehozni");
+        }
+    }
+    //TODO: workert lehet Box-ra létrehozni és fordítva
+    private void TestAddWorker(List<String> input){
+        try {
+            if (input.size() != 4) {
+                throw new NumberFormatException();
+            }
+            int x = Integer.parseInt(input.get(1));
+            int y = Integer.parseInt(input.get(2));
+            if (x > factory.getWidth() || x < 1 || y > factory.getHeight() || y < 1){
+                throw new Exception();
+            }
+
+            factory.addWorker(x, y, Integer.parseInt(input.get(3)));
+            if (autoShow) Draw(factory.Draw());
+        } catch (NumberFormatException e) {
+            Error("Nincs ilyen parancs");
+        } catch (Exception e){
+            Error("A megadott helyre nem helyezheto");
+        }
+    }
+
+    //TODO: workert lehet Box-ra létrehozni és fordítva
+    private void TestAddBox(List<String> input){
+        try {
+            if (input.size() != 3) {
+                throw new NumberFormatException();
+            }
+            int x = Integer.parseInt(input.get(1));
+            int y = Integer.parseInt(input.get(2));
+            if (x > factory.getWidth() || x < 1 || y > factory.getHeight() || y < 1){
+                throw new Exception();
+            }
+
+            factory.addBox(x, y);
+            if (autoShow) Draw(factory.Draw());
+        } catch (NumberFormatException e) {
+            Error("Nincs ilyen parancs");
+        } catch (Exception e){
+            Error("A megadott helyre nem helyezheto");
         }
     }
 
@@ -166,13 +245,8 @@ class Test {
                     save = true;
                     System.out.println("A mentés sikerrel lezaljlott.");
                     break;
-                case "loadLevel": //TODO: Havi
-                    try {
-                        if(!factory.ReadMap(input.get(1)))
-                            throw new Exception();
-                    if (autoShow) Draw(factory.Draw());
-                    } catch (Exception e) {
-                    }
+                case "loadLevel":
+                    this.TestLoadLevel(input);
                     break;
                 case "generateMap":
                     this.TestGenerateMap(input);
@@ -186,19 +260,14 @@ class Test {
                 case "createHole":
                     this.TestCreateHole(input);
                     break;
-                case "createSwitch": //TODO: Havi
-                    factory.createSwitch(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)),
-                            Integer.parseInt(input.get(3)), Integer.parseInt(input.get(4)));
-                    if (autoShow) Draw(factory.Draw());
+                case "createSwitch":
+                    this.TestCreateSwitch(input);
                     break;
-                case "addWorker": //TODO: Havi
-                    factory.addWorker(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)),
-                            Integer.parseInt(input.get(3)));
-                    if (autoShow) Draw(factory.Draw());
+                case "addWorker":
+                    this.TestAddWorker(input);
                     break;
                 case "addBox":
-                    factory.addBox(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)));
-                    if (autoShow) Draw(factory.Draw());
+                    this.TestAddBox(input);
                     break;
                 case "autoShow":
                     autoShow(input.get(1));
@@ -246,6 +315,24 @@ class Test {
     }
 
 
+    private void TestMoveWorker(List<String> input){
+        try {
+            if (input.size() != 3) {
+                throw new NumberFormatException();
+            }
+            int _id = Integer.parseInt(input.get(1));
+            Direction dir = Direction.valueOf(input.get(2));
+
+            Game.getInstance().moveWorker(_id, dir);
+            Draw(factory.Draw());
+            isThisTheEnd();
+        } catch (NumberFormatException e) {
+            Error("Nincs ilyen parancs");
+        } catch (Exception e){
+            Error("A megadott irany helytelen.");
+        }
+    }
+
     /**
      * Szimulalja a jatek mukodeset a bemeneti nyelvnek megfelelo formaban kapott utasiatsok alapjan.
      *
@@ -257,10 +344,8 @@ class Test {
                 case "abort":
                     running = false;
                     break;
-                case "moveWorker": //TODO: Havi
-                    Game.getInstance().moveWorker(Integer.parseInt(input.get(1)), input.get(2));
-                    Draw(factory.Draw());
-                    isThisTheEnd();
+                case "moveWorker":
+                    this.TestMoveWorker(input);
                     break;
                 case "placeObject": //TODO: Havi
                     try {

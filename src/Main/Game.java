@@ -119,9 +119,9 @@ public class Game {
      * @param id:  ezen azonositoju Worker kezdemenyezte a mozgast.
      * @param dir: ebbe az iranyba mozgatja a Worker-t
      */
-    void moveWorker(int id, String dir) {
-        setCurrentWorker(workers.get(id));
-        workers.get(id).Control(Direction.valueOf(dir));
+    void moveWorker(int id, Direction dir) {
+            setCurrentWorker(workers.get(id));
+            workers.get(id).Control(dir);
     }
 
     /**
