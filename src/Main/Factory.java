@@ -277,8 +277,15 @@ public class Factory implements Drawable {
     }
 
     void createColumn(int x, int y) {
-        Column column = new Column();
-        replaceField(x, y, column);
+        try {
+            Column column = new Column();
+            String s = this.getField(x, y).Draw();
+            if (s.charAt(0) == 'X')
+                throw new Exception();
+            replaceField(x, y, column);
+        } catch (Exception e) {
+            Error("A megadott helyen már szerepel.");
+        }
     }
 
     void createDestination(int x, int y) {
@@ -301,9 +308,16 @@ public class Factory implements Drawable {
     }
 
     void createSwitch(int x, int y, int hX, int hY) {
-        Switch switcher = new Switch();
-        replaceField(x, y, switcher);
-        switcher.SetHole(holes.get((hY * width) + hX));
+        try {
+            /*String s = this.getField(hX, hY).Draw();
+            if (s.charAt(0) != 'H' || s.charAt(0) != 'h')
+                throw new Exception();*/
+            Switch switcher = new Switch();
+            replaceField(x, y, switcher);
+            switcher.SetHole(holes.get((hY * width) + hX));
+        } catch (Exception e){
+            Error("Nem lehet létrehozni");
+        }
     }
 
     private void replaceField(int x, int y, Field field) {
@@ -321,7 +335,8 @@ public class Factory implements Drawable {
 
     void addWorker(int x, int y, int id) {
         try{
-        if (x > width || x < 1 || y > height || y < 1) {
+            String s = this.getField(x,y).Draw();
+        if (x > width || x < 1 || y > height || y < 1 || s.charAt(0) == 'X' || s.charAt(0) == 'H') {
             throw new Exception();
         }
         for (Integer i : Game.getInstance().getWorkers().keySet())
@@ -337,7 +352,8 @@ public class Factory implements Drawable {
 
     void addBox(int x, int y) {
         try{
-            if (x > width || x < 1 || y > height || y < 1) {
+            String s = this.getField(x,y).Draw();
+            if (x > width || x < 1 || y > height || y < 1 || s.charAt(0) == 'X' || s.charAt(0) == 'H') {
                 throw new Exception();
             }
             new Box(getField(x, y), 1);

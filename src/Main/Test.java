@@ -90,16 +90,14 @@ class Test {
             int y = Integer.parseInt(input.get(2));
 
             if (x > factory.getWidth() || x < 1 || y > factory.getHeight() || y < 1) {
-                throw new Exception("Nem a palya resze");
-            }
-            if (x == 0 || x < 1 || y == 0) {
-                throw new Exception("A megadott helyen már szerepel");
+                throw new Exception();
             }
             factory.createColumn(x, y);
             if (autoShow) Draw(factory.Draw());
         } catch (NumberFormatException e) {
             Error("Nincs ilyen parancs");
         } catch (Exception e) {
+            Error("Nem a palya resze");
         }
     }
 
@@ -151,10 +149,14 @@ class Test {
             if (input.size() != 2) {
                 throw new NumberFormatException();
             }
-            factory.ReadMap(input.get(1));
+            boolean b = factory.ReadMap(input.get(1));
+            if (!b)
+                throw new Exception();
             if (autoShow) Draw(factory.Draw());
         } catch (NumberFormatException e) {
             Error("Nincs ilyen parancs");
+        } catch(Exception e){
+
         }
     }
 
@@ -182,6 +184,7 @@ class Test {
             Error("Nem lehet letrehozni");
         }
     }
+
     //workert lehet Box-ra létrehozni és fordítva
     private void TestAddWorker(List<String> input){
         try {
