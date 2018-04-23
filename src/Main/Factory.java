@@ -50,6 +50,8 @@ public class Factory implements Drawable {
         return true;
     }
 
+
+
     void GenerateMap(int width, int height) {
         Init();
         this.width = width;
@@ -128,12 +130,12 @@ public class Factory implements Drawable {
                     switchAndHole.add(hy);
                 }
             }
-            for(int i = 0; i < map.size(); i++){
-                if(map.get(i)[0].charAt(0)!='X'||map.get(i)[0].charAt(1)!='_'||map.get(i)[0].charAt(2)!='_')
+            for (String[] aMap : map) {
+                if (aMap[0].charAt(0) != 'X' || aMap[0].charAt(1) != '_' || aMap[0].charAt(2) != '_')
                     throw new Exception();
             }
-            for(int i = 0; i < map.size(); i++){
-                if(map.get(i)[width-1].charAt(0)!='X'||map.get(i)[width-1].charAt(1)!='_'||map.get(i)[width-1].charAt(2)!='_')
+            for (String[] aMap : map) {
+                if (aMap[width - 1].charAt(0) != 'X' || aMap[width - 1].charAt(1) != '_' || aMap[width - 1].charAt(2) != '_')
                     throw new Exception();
             }
             for(int i = 0; i < width; i++){

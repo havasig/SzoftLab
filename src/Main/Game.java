@@ -1,6 +1,7 @@
 package Main;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A jatek fo futasaert felel, valamint a pontozast kezeli. A jatek lelke.
@@ -51,17 +52,50 @@ public class Game {
      * A jatek inditasaert felel
      */
     private void StartGame() {
+        map.ReadMap("test2.txt");
         gameLoop();
-        //TODO
 
     }
 
     /**
      * A jatek befejezeseert felel
      */
-    private void EndGame() {
-        //TODO
-        System.out.println("Game Over");
+    void EndGame() {
+        System.out.println("Game over.");
+        System.out.println("Points:");
+        HashMap<Integer, Worker> winners = new HashMap<>();
+        int mostPoints = 0;
+        for (Map.Entry<Integer, Worker> worker : Game.getInstance().getWorkers().entrySet()) {
+            int points = worker.getValue().getPoints();
+            Worker work = worker.getValue();
+            int id = worker.getKey();
+
+            System.out.println("Worker " + Integer.toString(id) + ": " + Integer.toString(points));
+
+            //Get the winner(s) while we write the points
+            if (points >= mostPoints) {
+                winners.put(id, work);
+                if (points > mostPoints) {
+                    winners.clear();
+                    winners.put(id, work);
+                    mostPoints = points;
+                }
+            }
+        }
+
+        if (winners.size() == 0) {
+            System.out.println("Something went wrong, there are no winners!");
+            return;
+        }
+
+        if (winners.size() > 1)
+            System.out.println("The winners are: ");
+        else
+            System.out.println("The winner is:");
+
+        for (Map.Entry<Integer, Worker> winner : winners.entrySet()) {
+            System.out.println("Worker " + winner.getKey().toString());
+        }
     }
 
     /**
@@ -137,6 +171,9 @@ public class Game {
 
     //This is the game itself, handles the inputs
     private void gameLoop() {
+        while (map.ThisIsTheEnd()){
+
+        }
         //A round:
         /*while(true)
         {

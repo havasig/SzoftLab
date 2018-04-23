@@ -18,10 +18,6 @@ public class Worker extends Movable {
      */
     private int points;
     /**
-     * Tárolja, hogy a játékos eletben van-e.
-     */
-    private boolean alive;
-    /**
      * Tárolja a játékos azonositojat.
      */
     private int identifier;
@@ -35,7 +31,6 @@ public class Worker extends Movable {
     Worker(Field startField, int id) {
         field = startField;
         startField.AcceptWorker(this);
-        alive = true;
         points = 0;
         strength = 5;
         this.identifier = id;
@@ -55,7 +50,6 @@ public class Worker extends Movable {
     public void Die() {
         field.RemoveWorker(this);
         Game.getInstance().PlayerDied();
-        alive = false;
     }
 
     /**
