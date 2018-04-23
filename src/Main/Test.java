@@ -66,10 +66,17 @@ class Test {
             if (input.size() != 3) {
                 throw new NumberFormatException();
             }
+            if (Integer.parseInt(input.get(1))<=0||Integer.parseInt(input.get(2))<=0)
+                throw new NumberFormatException();
+            if (Integer.parseInt(input.get(1))<=2||Integer.parseInt(input.get(2))<=2)
+                throw new Exception();
             factory.GenerateMap(Integer.parseInt(input.get(1)), Integer.parseInt(input.get(2)));
             if (autoShow) Draw(factory.Draw());
         } catch (NumberFormatException e) {
-            Error("Nincs ilyen parancs");
+            Error("Nem sikerült az adott konfigurációt elindítani.");
+        }
+        catch (Exception e){
+            Error(" A megadott méret túl kicsi");
         }
     }
 
@@ -82,14 +89,16 @@ class Test {
             int y = Integer.parseInt(input.get(2));
 
             if (x > factory.getWidth() || x < 1 || y > factory.getHeight() || y < 1) {
-                throw new Exception();
+                throw new Exception("Nem a palya resze");
+            }
+            if (x == 0 || x < 1 || y == 0) {
+                throw new Exception("A megadott helyen már szerepel");
             }
             factory.createColumn(x, y);
             if (autoShow) Draw(factory.Draw());
         } catch (NumberFormatException e) {
             Error("Nincs ilyen parancs");
         } catch (Exception e) {
-            Error("Nem a palya resze");
         }
     }
 
@@ -132,7 +141,7 @@ class Test {
         } catch (NumberFormatException e) {
             Error("Nincs ilyen parancs");
         } catch (Exception e) {
-            Error("Nem a palya resze vagy a HoleState szar");
+            Error("Nem a palya resze");
         }
     }
 
@@ -148,21 +157,22 @@ class Test {
                     break;
                 case "saveFile":
                     saveFile(input.get(1));
-                    System.out.println("SaveFile added");
+                    //System.out.println("SaveFile added");
                     break;
                 case "load":
                     Load(input.get(1));
                     break;
                 case "save":
                     save = true;
+                    System.out.println("A mentés sikerrel lezaljlott.");
                     break;
                 case "loadLevel": //TODO: Havi
                     try {
-                        factory.ReadMap(input.get(1));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                        if(!factory.ReadMap(input.get(1)))
+                            throw new Exception();
                     if (autoShow) Draw(factory.Draw());
+                    } catch (Exception e) {
+                    }
                     break;
                 case "generateMap":
                     this.TestGenerateMap(input);
@@ -231,7 +241,7 @@ class Test {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Error("A tesztesetet nem sikerült futtatni.");
         }
     }
 
@@ -253,8 +263,24 @@ class Test {
                     isThisTheEnd();
                     break;
                 case "placeObject": //TODO: Havi
-                    Game.getInstance().placeObject(Integer.parseInt(input.get(1)), input.get(2), input.get(3));
-                    Draw(factory.Draw());
+                    try {
+                        if(input.get(3)!="Honey" || input.get(3) != "Oil")
+                            throw new Exception();
+                        Game.getInstance().placeObject(Integer.parseInt(input.get(1)), input.get(2), input.get(3));
+                        Draw(factory.Draw());
+                    }
+                    catch (Exception e){
+                        Error("A megadott folyadék nem létezik.");
+                    }
+                    try {
+                        if(input.get(2)!="Right" || input.get(2) != "Left"||input.get(2) != "Up"||input.get(2) != "Down")
+                            throw new Exception();
+                        Game.getInstance().placeObject(Integer.parseInt(input.get(1)), input.get(2), input.get(3));
+                        Draw(factory.Draw());
+                    }
+                    catch (Exception e){
+                        Error("A megadott irány nem létezik.");
+                    }
                     break;
                 case "":
                     Error("Ures sor");
