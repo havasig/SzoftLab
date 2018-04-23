@@ -1,7 +1,11 @@
 package Main;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * A jatek fo futasaert felel, valamint a pontozast kezeli. A jatek lelke.
@@ -32,12 +36,15 @@ public class Game {
      * A jatekteret tarolja.
      */
     private Factory map;
+
+    private boolean changed;
     /**
      * A Game konstruktora.
      */
     private Game() {
         map = new Factory();
         workers = new HashMap<>();
+        changed = true;
     }
 
     static Game getInstance() {
@@ -171,10 +178,27 @@ public class Game {
 
     //This is the game itself, handles the inputs
     private void gameLoop() {
+        char c;
         while (map.ThisIsTheEnd()){
+            if (changed) {
+                System.out.println(map.Draw());
+                changed = false;
+            }
+            try {
+                c = (char) System.in.read();
+                if(c == 'w') moveWorker(1, Direction.Up );
+                if(c == 's') moveWorker(1, Direction.Down );
+                if(c == 'd') moveWorker(1, Direction.Right );
+                if(c == 'a') moveWorker(1, Direction.Left );
+                if(c != '\n')changed = true;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
 
         }
-        //A round:
+        {
+            //A round:
         /*while(true)
         {
             //Loop for each worker
@@ -209,5 +233,6 @@ public class Game {
             }
 
         }*/
+        }
     }
 }
