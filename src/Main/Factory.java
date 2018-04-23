@@ -323,8 +323,7 @@ public class Factory implements Drawable {
         }
         for (Integer i : Game.getInstance().getWorkers().keySet())
             if (i == id) {
-                System.out.println("A megadott azonosítóval nem létrehozható");
-                return;
+                throw new Exception();
             }
         Game.getInstance().addWorker(new Worker(getField(x, y), id), id);
         }

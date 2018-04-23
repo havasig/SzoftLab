@@ -172,8 +172,8 @@ class Test {
                     holeX > factory.getWidth() || holeX < 1 || holeY > factory.getHeight() || holeY < 1) {
                 throw new Exception();
             }
-            //TODO: Havi, akkor is létre lehet hozni ha nincs ott hole
-            //factory.getField(holeX, holeY).
+
+            /*nem ellenőrzi h van e hole*/
             factory.createSwitch(switchX, switchY, holeX, holeY);
             if (autoShow) Draw(factory.Draw());
         } catch (NumberFormatException e) {
@@ -182,7 +182,7 @@ class Test {
             Error("Nem lehet letrehozni");
         }
     }
-    //TODO: workert lehet Box-ra létrehozni és fordítva
+    //workert lehet Box-ra létrehozni és fordítva
     private void TestAddWorker(List<String> input){
         try {
             if (input.size() != 4) {
@@ -203,7 +203,7 @@ class Test {
         }
     }
 
-    //TODO: workert lehet Box-ra létrehozni és fordítva
+    //workert lehet Box-ra létrehozni és fordítva
     private void TestAddBox(List<String> input){
         try {
             if (input.size() != 3) {
@@ -314,7 +314,6 @@ class Test {
         }
     }
 
-
     private void TestMoveWorker(List<String> input){
         try {
             if (input.size() != 3) {
@@ -333,6 +332,25 @@ class Test {
         }
     }
 
+    // ezt nem így kell megcsinálni :( nem stringet kell átadni (szerintem) hanem már itt kell konvertálni az adatot (Object-et kell átadni)
+    private void TestPlaceObject(List<String> input){
+        try {
+            if(input.size() != 3 || input.get(3)!="Honey" || input.get(3) != "Oil")
+                throw new NumberFormatException();
+            Game.getInstance().placeObject(Integer.parseInt(input.get(1)), input.get(2), input.get(3));
+            Draw(factory.Draw());
+
+            if(input.get(2)!="Right" || input.get(2) != "Left"||input.get(2) != "Up"||input.get(2) != "Down")
+                throw new Exception();
+            Game.getInstance().placeObject(Integer.parseInt(input.get(1)), input.get(2), input.get(3));
+            Draw(factory.Draw());
+        } catch (NumberFormatException e){
+            Error("A megadott folyadék nem létezik.");
+        } catch (Exception e){
+            Error("A megadott irány nem létezik.");
+            }
+        }
+
     /**
      * Szimulalja a jatek mukodeset a bemeneti nyelvnek megfelelo formaban kapott utasiatsok alapjan.
      *
@@ -347,25 +365,8 @@ class Test {
                 case "moveWorker":
                     this.TestMoveWorker(input);
                     break;
-                case "placeObject": //TODO: Havi
-                    try {
-                        if(input.get(3)!="Honey" || input.get(3) != "Oil")
-                            throw new Exception();
-                        Game.getInstance().placeObject(Integer.parseInt(input.get(1)), input.get(2), input.get(3));
-                        Draw(factory.Draw());
-                    }
-                    catch (Exception e){
-                        Error("A megadott folyadék nem létezik.");
-                    }
-                    try {
-                        if(input.get(2)!="Right" || input.get(2) != "Left"||input.get(2) != "Up"||input.get(2) != "Down")
-                            throw new Exception();
-                        Game.getInstance().placeObject(Integer.parseInt(input.get(1)), input.get(2), input.get(3));
-                        Draw(factory.Draw());
-                    }
-                    catch (Exception e){
-                        Error("A megadott irány nem létezik.");
-                    }
+                case "placeObject":
+                    this.TestPlaceObject(input);
                     break;
                 case "":
                     Error("Ures sor");
