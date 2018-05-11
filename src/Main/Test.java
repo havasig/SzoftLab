@@ -18,7 +18,7 @@ class Test {
     private boolean autoShow = true;
     private boolean save = false;
 
-    private Test() {
+    public Test() {
         exit = false;
         running = false;
         factory = Game.getInstance().getMap();

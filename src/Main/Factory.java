@@ -24,6 +24,14 @@ public class Factory implements Drawable {
     private HashMap<Integer, Hole> holes;
     private int width, height;
 
+    public void setWidth(int _width){
+        width = _width;
+    }
+
+    public void setHeight(int _height){
+        width = _height;
+    }
+
     static void addTextToSW(String text) {
         swCount++;
         switchHole += String.valueOf(swCount) + ", ";
@@ -35,7 +43,7 @@ public class Factory implements Drawable {
         holes = new HashMap<>();
     }
 
-    private Field getField(int x, int y) {
+    public Field getField(int x, int y) {
         return fields.get((y * width) + x);
     }
 
@@ -44,6 +52,7 @@ public class Factory implements Drawable {
                 ":" +
                 fields.indexOf(f) % width;
     }
+
     public int getWidth()
     {
         return width;
@@ -71,7 +80,9 @@ public class Factory implements Drawable {
         return true;
     }
 
-
+    private void Error(String message){
+        System.out.println(message);
+    }
 
     void GenerateMap(int width, int height) {
         Init();
@@ -130,8 +141,9 @@ public class Factory implements Drawable {
             while ((line = br.readLine()) != null) {
                 if(actLine<height){
                     String[] fields = line.split(" ");
-                    if(fields.length!=width)
+                    if(fields.length!=width) {
                         throw new Exception();
+                    }
                     map.add(fields);
                     actLine++;
                 }
@@ -271,11 +283,6 @@ public class Factory implements Drawable {
         return true;
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private void Error(String err) {
-        System.out.println(err);
-    }
-
     public String Draw() {
         StringBuilder map = new StringBuilder();
         switchHole = "";
@@ -294,7 +301,7 @@ public class Factory implements Drawable {
         return map.toString();
     }
 
-    void createColumn(int x, int y) {
+    public void createColumn(int x, int y) {
         try {
             Column column = new Column();
             String s = this.getField(x, y).Draw();
@@ -306,12 +313,12 @@ public class Factory implements Drawable {
         }
     }
 
-    void createDestination(int x, int y) {
+    public void createDestination(int x, int y) {
         Destination destination = new Destination();
         replaceField(x, y, destination);
     }
 
-    void createHole(int x, int y, HoleState state) {
+    public void createHole(int x, int y, HoleState state) {
         Hole hole = new Hole();
         replaceField(x, y, hole);
         switch (state) {
@@ -325,7 +332,7 @@ public class Factory implements Drawable {
         holes.put((y * width) + x, hole);
     }
 
-    void createSwitch(int x, int y, int hX, int hY) {
+    public void createSwitch(int x, int y, int hX, int hY) {
         try {
             /*String s = this.getField(hX, hY).Draw();
             if (s.charAt(0) != 'H' || s.charAt(0) != 'h')
