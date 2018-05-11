@@ -11,6 +11,15 @@ import static Main.Movement.Moved;
 public class Factory implements Drawable {
     private static String switchHole;
     private static int swCount;
+
+    public ArrayList<Field> getFields() {
+        return fields;
+    }
+
+    public HashMap<Integer, Hole> getHoles() {
+        return holes;
+    }
+
     private ArrayList<Field> fields;
     private HashMap<Integer, Hole> holes;
     private int width, height;
@@ -30,10 +39,19 @@ public class Factory implements Drawable {
         return fields.get((y * width) + x);
     }
 
-    String getPos(Field f) {
+    public String getPos(Field f) {
         return String.valueOf(fields.indexOf(f) / width) +
                 ":" +
                 fields.indexOf(f) % width;
+    }
+    public int getWidth()
+    {
+        return width;
+    }
+
+    public int getHeight()
+    {
+        return height;
     }
 
     boolean ThisIsTheEnd() {
@@ -361,13 +379,5 @@ public class Factory implements Drawable {
         catch (Exception e){
             Error("A megadott helyre nem helyezhető");
         }
-    }
-
-    int getWidth() {
-        return width;
-    }
-
-    int getHeight() {
-        return height;
     }
 }

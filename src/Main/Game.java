@@ -118,7 +118,7 @@ public class Game {
     /**
      * @return a jatekter
      */
-    Factory getMap() {
+    public Factory getMap() {
         return map;
     }
 
