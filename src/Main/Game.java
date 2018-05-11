@@ -32,7 +32,7 @@ public class Game {
      */
     private Factory map;
 
-    private boolean changed;
+    private boolean changed = false;
     /**
      * A Game konstruktora.
      */

@@ -123,6 +123,7 @@ public class Factory implements Drawable {
         }
     }
 
+    //Már csak a Test class használja
     public boolean ReadMap(String file){
         try{
         BufferedReader br = new BufferedReader(new FileReader(file));
