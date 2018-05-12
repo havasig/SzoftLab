@@ -1,5 +1,6 @@
 package Main;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -24,11 +25,9 @@ public class Factory  {
         return fields.get((y * width) + x);
     }
 
-    //TODO megváltoztatni a működését
-    public String getPos(Field f) {
-        return String.valueOf(fields.indexOf(f) / width) +
-                ":" +
-                fields.indexOf(f) % width;
+
+    public Point getPos(Field f) {
+        return new Point((fields.indexOf(f) / width),fields.indexOf(f) % width);
     }
 
     public int getWidth()
@@ -72,7 +71,10 @@ public class Factory  {
                     fields.add(new Field());
             }
         }
-        //TODO kirendezni pl.: linking()
+        linkMap();
+    }
+
+    private void linkMap() {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 if (y - 1 >= 0)
