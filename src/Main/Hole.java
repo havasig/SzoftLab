@@ -14,8 +14,8 @@ public class Hole extends Field {
     /**
      * A Hole konstruktora.
      */
-    Hole() {
-        super();
+    Hole(Factory _factory) {
+        super(_factory);
         state = HoleState.Open;
     }
 

@@ -1,5 +1,6 @@
 package Main;
 
+import java.awt.*;
 import java.util.HashMap;
 
 /**
@@ -10,6 +11,8 @@ public class Field {
      * Rajta levo Movable.
      */
     Movable movable;
+
+    Factory factory;
     /**
      * A mezo szomszedsagaban levo mezok
      */
@@ -26,7 +29,8 @@ public class Field {
     /**
      * A Field kontruktora.
      */
-    public Field() {
+    public Field(Factory _factory) {
+        factory=_factory;
         neighbors = new HashMap<>();
         splich = FieldState.None;
         checked = false;
@@ -110,7 +114,7 @@ public class Field {
      *
      * @param b: a Box, ami lekerult rola.
      */
-    public void RemoveBox(Box b) {
+    void RemoveBox(Box b) {
         movable = null;
     }
 
@@ -157,7 +161,11 @@ public class Field {
 
     }
 
-    public boolean PseudoAccept() {
+    boolean PseudoAccept() {
         return true;
+    }
+
+    public Point getPos(){
+        return factory.getPos(this);
     }
 }

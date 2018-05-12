@@ -36,19 +36,15 @@ public class GraphicsHole implements Drawable{
     public void Draw(Graphics g)
     {
         int size = view.getGridsize();
-
-        //TODO: Is this too much indirection or just OOP? Gfield -> View -> Game -> Factory
-        String[] pos = view.getCoords(hole).split(":");
-        int x = Integer.parseInt(pos[0]);
-        int y = Integer.parseInt(pos[1]);
+        Point pos = hole.getPos();
 
         if(hole.getState()==HoleState.Open)
         {
-            g.drawImage(imageOpen, x, y - imageOpen.getHeight(), size, size, null);
+            g.drawImage(imageOpen, pos.x, pos.y - imageOpen.getHeight(), size, size, null);
         }
         else
         {
-            g.drawImage(imageClosed, x, y - imageClosed.getHeight(), size, size, null);
+            g.drawImage(imageClosed, pos.x, pos.y - imageClosed.getHeight(), size, size, null);
         }
     }
 }

@@ -39,11 +39,6 @@ public class View {
         movables.add(mov);
     }
 
-    public void AddSplitch(Drawable splich)
-    {
-        spliches.add(splich);
-    }
-
     public void calcGrid(){
 
         int h = height / game.getMap().getHeight();
@@ -57,16 +52,6 @@ public class View {
         return gridsize;
     }
 
-    public String getCoords(Field f)
-    {
-        return game.getMap().getPos(f);
-    }
-
-    public String getCoords(Movable m)
-    {
-        return game.getMap().getPos(m.getField());
-    }
-
     //TODO
     public void paintComponent(Graphics g)
     {
@@ -77,6 +62,19 @@ public class View {
     public void clear(){}
 
     //TODO
-    public void validate(){}
+    public void validate(){
+        valid = false;
+    }
+
+    public void Draw(){
+        if(!valid){
+            //TODO
+            for (Drawable field : fields) /*field.Draw(g)*/;
+            for (Drawable movable: movables) /*movable.Draw(g)*/;
+            valid=true;
+        }
+    }
+
+
 
 }

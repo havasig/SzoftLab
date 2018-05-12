@@ -8,8 +8,8 @@ public class Destination extends Field {
     /**
      * A Destination konstruktora.
      */
-    Destination() {
-        super();
+    Destination(Factory _factory) {
+        super(_factory);
     }
 
     /**

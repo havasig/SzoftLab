@@ -8,8 +8,8 @@ public class Column extends Field {
     /**
      * A Column konstruktora.
      */
-    Column() {
-        super();
+    Column(Factory _factory) {
+        super(_factory);
     }
 
     /**

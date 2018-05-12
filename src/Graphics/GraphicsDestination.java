@@ -32,13 +32,9 @@ public class GraphicsDestination implements Drawable{
     @Override
     public void Draw(Graphics g)
     {
+        //TODO splich
         int size = view.getGridsize();
-
-        //TODO: Is this too much indirection or just OOP? Gfield -> View -> Game -> Factory
-        String[] pos = view.getCoords(destination).split(":");
-        int x = Integer.parseInt(pos[0]);
-        int y = Integer.parseInt(pos[1]);
-
-        g.drawImage(imageDestination, x, y - imageDestination.getHeight(), size, size, null);
+        Point pos = destination.getPos();
+        g.drawImage(imageDestination, pos.x, pos.y - imageDestination.getHeight(), size, size, null);
     }
 }

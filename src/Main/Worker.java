@@ -1,5 +1,7 @@
 package Main;
 
+import java.awt.*;
+
 import static Main.Movement.Moved;
 import static Main.Movement.Stayed;
 
@@ -168,6 +170,10 @@ public class Worker extends Movable {
     public Boolean isAlive()
     {
         return alive;
+    }
+
+    Point getPos(){
+        return field.getPos();
     }
 
     Movement IsThereMovement(Field currentField) {

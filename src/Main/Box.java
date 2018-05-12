@@ -1,5 +1,7 @@
 package Main;
 
+import java.awt.*;
+
 import static Main.Movement.Moved;
 import static Main.Movement.Stayed;
 
@@ -151,5 +153,9 @@ public class Box extends Movable {
     public boolean getLocked()
     {
         return locked;
+    }
+
+    Point getPos(){
+        return field.getPos();
     }
 }

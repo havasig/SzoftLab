@@ -1,14 +1,13 @@
 package Graphics;
 
-import Main.Factory;
 import Main.Switch;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 
-public class GraphicsSwitch implements Drawable{
+public class GraphicsSwitch implements Drawable {
 
     private BufferedImage imageSwitchOff;
     private BufferedImage imageSwitchOn;
@@ -16,38 +15,27 @@ public class GraphicsSwitch implements Drawable{
 
     private View view;
 
-    GraphicsSwitch(Switch _switch, View _view)
-    {
+    GraphicsSwitch(Switch _switch, View _view) {
         switch_ = _switch;
         view = _view;
 
-        try
-        {
+        try {
             imageSwitchOff = ImageIO.read(getClass().getResourceAsStream("/switch_off.png"));
             imageSwitchOn = ImageIO.read(getClass().getResourceAsStream("/switch_on.png"));
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void Draw(Graphics g)
-    {
+    public void Draw(Graphics g) {
         int size = view.getGridsize();
+        Point pos = switch_.getPos();
 
-        //TODO: Is this too much indirection or just OOP? Gfield -> View -> Game -> Factory
-        String[] pos = view.getCoords(switch_).split(":");
-        int x = Integer.parseInt(pos[0]);
-        int y = Integer.parseInt(pos[1]);
-
-        if (!switch_.getBox())
-        {
-            g.drawImage(imageSwitchOff, x, y - imageSwitchOff.getHeight(), size, size, null);
-        }
-        else
-        {
-            g.drawImage(imageSwitchOn, x, y - imageSwitchOn.getHeight(), size, size, null);
+        if (!switch_.getBox()) {
+            g.drawImage(imageSwitchOff, pos.x, pos.y - imageSwitchOff.getHeight(), size, size, null);
+        } else {
+            g.drawImage(imageSwitchOn, pos.x, pos.y - imageSwitchOn.getHeight(), size, size, null);
         }
     }
 }

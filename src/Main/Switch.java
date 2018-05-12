@@ -18,8 +18,8 @@ public class Switch extends Field {
     /**
      * A Switch konstruktora
      */
-    Switch() {
-        super();
+    Switch(Factory _factory) {
+        super(_factory);
         box = false;
     }
 
