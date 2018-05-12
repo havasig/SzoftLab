@@ -12,27 +12,8 @@ import java.util.Scanner;
  * Egy futas alatt csak egy lehet belole.
  */
 public class Game {
-
     //singleton/////////////////////
     private static final Game game = new Game();
-    ///////////////////////////////
-
-    /**
-     * A jatekban levo Worker-öket tarolja.
-     */
-    private HashMap<Integer, Worker> workers;
-
-    /**
-     * A jelenleg mozgo jatekost tarolja.
-     */
-    private Worker currentWorker;
-
-    /**
-     * A jatekteret tarolja.
-     */
-    private Factory map;
-
-    private boolean changed;
     /**
      * A Game konstruktora.
      */
@@ -45,8 +26,38 @@ public class Game {
     static Game getInstance() {
         return game;
     }
+    ///////////////////////////////
+
+    /**
+     * A jelenleg mozgo jatekost tarolja.
+     */
+    private Worker currentWorker;
+    /**
+     * A jatekban levo Worker-öket tarolja.
+     */
+    private HashMap<Integer, Worker> workers;
+    /**
+     * A jatekteret tarolja.
+     */
+    private Factory map;
+    private boolean changed;
+
+    /**
+     * @return a jatekban levo Worker-ek.
+     */
+    HashMap<Integer, Worker> getWorkers() {
+        return workers;
+    }
+
+    /**
+     * @return a jatekter
+     */
+    public Factory getMap() {
+        return map;
+    }
 
     public static void main(String[] args) {
+        //TODO menu
         Game.getInstance().StartGame();
     }
 
@@ -63,6 +74,7 @@ public class Game {
      * A jatek befejezeseert felel
      */
     void EndGame() {
+        //TODO grfikus
         System.out.println("Game over.");
         System.out.println("Points:");
         HashMap<Integer, Worker> winners = new HashMap<>();
@@ -107,21 +119,6 @@ public class Game {
         currentWorker.IncrementPoints();
     }
 
-
-    /**
-     * @return a jatekban levo Worker-ek.
-     */
-    HashMap<Integer, Worker> getWorkers() {
-        return workers;
-    }
-
-    /**
-     * @return a jatekter
-     */
-    public Factory getMap() {
-        return map;
-    }
-
     /**
      * @param currentWorker a jelenleg mozgo jatekos.
      */
@@ -162,11 +159,11 @@ public class Game {
     }
 
     //This is the game itself, handles the inputs
+    //TODO
     private void gameLoop() {
         char c;
         while (!map.ThisIsTheEnd()){
             if (changed) {
-                System.out.println(map.Draw());
                 changed = false;
             }
             try {
@@ -180,42 +177,6 @@ public class Game {
                 e.printStackTrace();
             }
         }
-        System.out.println(map.Draw());
         EndGame();
-            //A round:
-        /*while(true)
-        {
-            //Loop for each worker
-            for (Map.Entry<Integer, Worker> worker : workers.entrySet())
-            {
-                System.out.print(map.Draw());
-                System.out.println("This is worker " + worker.getKey() + "'s turn.");
-                System.out.println("Type Up, Right, Left or Down to move");
-
-                String input = "";
-                switch(input)
-                {
-                    case "Up":
-                        worker.getValue().Control(Direction.Up);
-                        break;
-                    case "Left":
-                        worker.getValue().Control(Direction.Left);
-                        break;
-                    case "Right":
-                        worker.getValue().Control(Direction.Right);
-                        break;
-                    case "Down":
-                        worker.getValue().Control(Direction.Down);
-                        break;
-                }
-                //Must we check every worker step, or is it enough to check every round outside the foreach?
-                if(map.ThisIsTheEnd())
-                {
-                    EndGame();
-                    return;
-                }
-            }
-
-        }*/
     }
 }

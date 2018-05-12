@@ -35,8 +35,4 @@ public class Column extends Field {
         return false;
     }
 
-    @Override
-    public String Draw() {
-        return "X__";
-    }
 }

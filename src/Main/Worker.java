@@ -113,16 +113,6 @@ public class Worker extends Movable {
         return Moved;
     }
 
-    @Override
-    public Movement PseudoCollideBox(Direction d, int sumFriction) {
-        return Moved;
-    }
-
-    @Override
-    public Movement PseudoCollideWorker(Direction d, int sumFriction) {
-        return Stayed;
-    }
-
     /**
      * A Worker-t mozgatja.
      *
@@ -168,6 +158,18 @@ public class Worker extends Movable {
         field.GetNeighbor(d).setSplich(f);
     }
 
+    /**
+     * @return az adott Worker pontjai
+     */
+    int getPoints() {
+        return points;
+    }
+
+    public Boolean isAlive()
+    {
+        return alive;
+    }
+
     Movement IsThereMovement(Field currentField) {
         //Avoid checking a field multiple times
         if (currentField.getChecked())
@@ -192,21 +194,13 @@ public class Worker extends Movable {
         return Stayed;
     }
 
-
-    /**
-     * @return az adott Worker pontjai
-     */
-    int getPoints() {
-        return points;
-    }
-
-    public Boolean isAlive()
-    {
-        return alive;
+    @Override
+    public Movement PseudoCollideBox(Direction d, int sumFriction) {
+        return Moved;
     }
 
     @Override
-    public String Draw() {
-        return String.valueOf(identifier);
+    public Movement PseudoCollideWorker(Direction d, int sumFriction) {
+        return Stayed;
     }
 }
