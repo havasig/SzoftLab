@@ -1,6 +1,6 @@
 package Main;
 
-public abstract class Movable implements Drawable {
+public abstract class Movable{
     Field field;
 
     /**

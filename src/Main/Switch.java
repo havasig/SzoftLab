@@ -58,25 +58,6 @@ public class Switch extends Field {
         hole = h;
     }
 
-    @Override
-    public String Draw() {
-        StringBuilder field = new StringBuilder();
-        if (box) {
-            field.append("S");
-        } else
-            field.append("s");
-        if (movable == null)
-            field.append("_");
-        else
-            field.append(movable.Draw());
-        DrawSplich(field);
-        Factory.addTextToSW(Game.getInstance().getMap().getPos(this)
-                + ";"
-                + Game.getInstance().getMap().getPos(hole)
-                + "\n");
-        return field.toString();
-    }
-
     public boolean getBox(){
         return box;
     }

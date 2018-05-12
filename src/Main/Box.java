@@ -148,15 +148,6 @@ public class Box extends Movable {
         locked = true;
     }
 
-
-    @Override
-    public String Draw() {
-        if (locked)
-            return "b";
-        else
-            return "B";
-    }
-
     public boolean getLocked()
     {
         return locked;
