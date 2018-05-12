@@ -8,27 +8,12 @@ import java.util.HashMap;
 
 import static Main.Movement.Moved;
 
-public class Factory implements Drawable {
+public class Factory  {
     private static String switchHole;
     private static int swCount;
-
-    public ArrayList<Field> getFields() {
-        return fields;
-    }
-
-    public HashMap<Integer, Hole> getHoles() {
-        return holes;
-    }
-
     private ArrayList<Field> fields;
     private HashMap<Integer, Hole> holes;
     private int width, height;
-
-    static void addTextToSW(String text) {
-        swCount++;
-        switchHole += String.valueOf(swCount) + ", ";
-        switchHole += text;
-    }
 
     private void Init() {
         fields = new ArrayList<>();
@@ -39,11 +24,13 @@ public class Factory implements Drawable {
         return fields.get((y * width) + x);
     }
 
+    //TODO megváltoztatni a működését
     public String getPos(Field f) {
         return String.valueOf(fields.indexOf(f) / width) +
                 ":" +
                 fields.indexOf(f) % width;
     }
+
     public int getWidth()
     {
         return width;
@@ -71,8 +58,6 @@ public class Factory implements Drawable {
         return true;
     }
 
-
-
     void GenerateMap(int width, int height) {
         Init();
         this.width = width;
@@ -87,6 +72,7 @@ public class Factory implements Drawable {
                     fields.add(new Field());
             }
         }
+        //TODO kirendezni pl.: linking()
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 if (y - 1 >= 0)
@@ -112,7 +98,9 @@ public class Factory implements Drawable {
         }
     }
 
+    //TODO
     public boolean ReadMap(String file){
+/*
         try{
         BufferedReader br = new BufferedReader(new FileReader(file));
             String line = br.readLine();
@@ -268,74 +256,8 @@ public class Factory implements Drawable {
             Error("Nem sikerült beolvasni.");
             return false;
         }
+*/
         return true;
-    }
-
-    @SuppressWarnings("SameParameterValue")
-    private void Error(String err) {
-        System.out.println(err);
-    }
-
-    public String Draw() {
-        StringBuilder map = new StringBuilder();
-        switchHole = "";
-        swCount = 0;
-        int width = 0;
-        for (Field field : fields) {
-            map.append(field.Draw());
-            map.append(" ");
-            width++;
-            if (width == this.width) {
-                map.append("\n");
-                width = 0;
-            }
-        }
-        map.append(switchHole);
-        return map.toString();
-    }
-
-    void createColumn(int x, int y) {
-        try {
-            Column column = new Column();
-            String s = this.getField(x, y).Draw();
-            if (s.charAt(0) == 'X')
-                throw new Exception();
-            replaceField(x, y, column);
-        } catch (Exception e) {
-            Error("A megadott helyen már szerepel.");
-        }
-    }
-
-    void createDestination(int x, int y) {
-        Destination destination = new Destination();
-        replaceField(x, y, destination);
-    }
-
-    void createHole(int x, int y, HoleState state) {
-        Hole hole = new Hole();
-        replaceField(x, y, hole);
-        switch (state) {
-            case Closed:
-                hole.SetClosed();
-                break;
-            case Open:
-                hole.SetOpen();
-                break;
-        }
-        holes.put((y * width) + x, hole);
-    }
-
-    void createSwitch(int x, int y, int hX, int hY) {
-        try {
-            /*String s = this.getField(hX, hY).Draw();
-            if (s.charAt(0) != 'H' || s.charAt(0) != 'h')
-                throw new Exception();*/
-            Switch switcher = new Switch();
-            replaceField(x, y, switcher);
-            switcher.SetHole(holes.get((hY * width) + hX));
-        } catch (Exception e){
-            Error("Nem lehet létrehozni");
-        }
     }
 
     private void replaceField(int x, int y, Field field) {
@@ -351,33 +273,7 @@ public class Factory implements Drawable {
         fields.set(x + y * width, field);
     }
 
-    void addWorker(int x, int y, int id) {
-        try{
-            String s = this.getField(x,y).Draw();
-        if (x > width || x < 1 || y > height || y < 1 || s.charAt(0) == 'X' || s.charAt(0) == 'H') {
-            throw new Exception();
-        }
-        for (Integer i : Game.getInstance().getWorkers().keySet())
-            if (i == id) {
-                throw new Exception();
-            }
-        Game.getInstance().addWorker(new Worker(getField(x, y), id), id);
-        }
-        catch (Exception e){
-            Error("A megadott helyre nem helyezhető");
-        }
-    }
-
-    void addBox(int x, int y) {
-        try{
-            String s = this.getField(x,y).Draw();
-            if (x > width || x < 1 || y > height || y < 1 || s.charAt(0) == 'X' || s.charAt(0) == 'H') {
-                throw new Exception();
-            }
-            new Box(getField(x, y), 1);
-        }
-        catch (Exception e){
-            Error("A megadott helyre nem helyezhető");
-        }
+    private void Error(String err) {
+        System.out.println(err);
     }
 }

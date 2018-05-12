@@ -1,6 +1,6 @@
 package Main;
 
-public abstract class Movable implements Drawable {
+public abstract class Movable {
     Field field;
 
     /**
@@ -16,7 +16,6 @@ public abstract class Movable implements Drawable {
      * @param sumFriction: az osszsurlodas, amit el kell tolnia a Movable-nek.
      * @return visszaadja, hogy sikeres volt-e a tolas az adott iranyba.
      */
-
     protected abstract Movement CollideWorker(Direction d, int sumFriction);
 
     /**
@@ -27,7 +26,6 @@ public abstract class Movable implements Drawable {
      * @param sumFriction: az osszsurlodas, amit el kell tolnia a Movable-nek.
      * @return visszaadja, hogy sikeres volt-e a tolas az adott iranyba.
      */
-
     protected abstract Movement CollideBox(Direction d, int sumFriction);
 
     protected abstract Movement PseudoCollideWorker(Direction d, int sumFriction);
@@ -49,6 +47,4 @@ public abstract class Movable implements Drawable {
     void Fall() {
         Die();
     }
-
-
 }

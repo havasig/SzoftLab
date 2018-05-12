@@ -93,6 +93,31 @@ public class Box extends Movable {
         return Stayed;
     }
 
+    /**
+     * A Box-ot mozgatja.
+     *
+     * @param f: erre a mezore mozog a Box.
+     * @return Igaz, ha sikeres volt a mozgas, s hamis, ha nem.
+     */
+    @Override
+    public boolean Move(Field f) {
+        if (f.AcceptBox(this)) {
+            field.RemoveBox(this);
+            field = f;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Lock-olja a Box-ot.
+     */
+    void Lock() {
+        Game.getInstance().SetPoint();
+        locked = true;
+    }
+
     @Override
     public Movement PseudoCollideWorker(Direction d, int sumFriction) {
         return PseudoCollideMovable(d, sumFriction);
@@ -123,37 +148,4 @@ public class Box extends Movable {
         return Stayed;
     }
 
-    /**
-     * A Box-ot mozgatja.
-     *
-     * @param f: erre a mezore mozog a Box.
-     * @return Igaz, ha sikeres volt a mozgas, s hamis, ha nem.
-     */
-    @Override
-    public boolean Move(Field f) {
-        if (f.AcceptBox(this)) {
-            field.RemoveBox(this);
-            field = f;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Lock-olja a Box-ot.
-     */
-    void Lock() {
-        Game.getInstance().SetPoint();
-        locked = true;
-    }
-
-
-    @Override
-    public String Draw() {
-        if (locked)
-            return "b";
-        else
-            return "B";
-    }
 }

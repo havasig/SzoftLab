@@ -16,7 +16,7 @@ public class View {
     Boolean valid;
     Game game;
 
-    //windowheigth and width
+    //window heigth and width
     private int heigth;
     private int width;
 
