@@ -86,4 +86,9 @@ public class Hole extends Field {
         DrawSplich(field);
         return field.toString();
     }
+
+    public HoleState getState()
+    {
+        return state;
+    }
 }

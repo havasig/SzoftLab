@@ -1,5 +1,6 @@
 package Graphics;
 
+import Main.Movable;
 import Main.Field;
 import Main.Game;
 
@@ -16,8 +17,8 @@ public class View {
     Boolean valid;
     Game game;
 
-    //windowheigth and width
-    private int heigth;
+    //windowheight and width
+    private int height;
     private int width;
 
     //width and height of a cell in the grid
@@ -45,7 +46,7 @@ public class View {
 
     public void calcGrid(){
 
-        int h = heigth / game.getMap().getHeight();
+        int h = height / game.getMap().getHeight();
         int w = width / game.getMap().getWidth();
 
         //Always use the smaller size for the grid
@@ -59,6 +60,11 @@ public class View {
     public String getCoords(Field f)
     {
         return game.getMap().getPos(f);
+    }
+
+    public String getCoords(Movable m)
+    {
+        return game.getMap().getPos(m.getField());
     }
 
     //TODO

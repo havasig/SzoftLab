@@ -76,4 +76,8 @@ public class Switch extends Field {
                 + "\n");
         return field.toString();
     }
+
+    public boolean getBox(){
+        return box;
+    }
 }

@@ -156,4 +156,9 @@ public class Box extends Movable {
         else
             return "B";
     }
+
+    public boolean getLocked()
+    {
+        return locked;
+    }
 }
