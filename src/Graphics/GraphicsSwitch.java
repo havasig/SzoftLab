@@ -12,12 +12,10 @@ public class GraphicsSwitch implements Drawable {
     private BufferedImage imageSwitchOff;
     private BufferedImage imageSwitchOn;
     private Switch switch_;
-
     private View view;
 
-    GraphicsSwitch(Switch _switch, View _view) {
+    public GraphicsSwitch(Switch _switch) {
         switch_ = _switch;
-        view = _view;
 
         try {
             imageSwitchOff = ImageIO.read(getClass().getResourceAsStream("/switch_off.png"));
@@ -29,6 +27,7 @@ public class GraphicsSwitch implements Drawable {
 
     @Override
     public void Draw(Graphics g) {
+        //TODO splich
         int size = view.getGridsize();
         Point pos = switch_.getPos();
 
@@ -37,5 +36,10 @@ public class GraphicsSwitch implements Drawable {
         } else {
             g.drawImage(imageSwitchOn, pos.x, pos.y - imageSwitchOn.getHeight(), size, size, null);
         }
+    }
+
+    @Override
+    public void setView(View view) {
+        this.view = view;
     }
 }

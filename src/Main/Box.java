@@ -155,7 +155,7 @@ public class Box extends Movable {
         return locked;
     }
 
-    Point getPos(){
+    public Point getPos(){
         return field.getPos();
     }
 }

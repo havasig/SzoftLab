@@ -1,5 +1,8 @@
 package Main;
 
+import Graphics.View;
+
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,7 +14,7 @@ import java.util.Scanner;
  * A jatek fo futasaert felel, valamint a pontozast kezeli. A jatek lelke.
  * Egy futas alatt csak egy lehet belole.
  */
-public class Game {
+public class Game{
     //singleton/////////////////////
     private static final Game game = new Game();
     /**
@@ -19,6 +22,7 @@ public class Game {
      */
     private Game() {
         map = new Factory();
+        view = new View(this);
         workers = new HashMap<>();
         changed = true;
     }
@@ -40,6 +44,7 @@ public class Game {
      * A jatekteret tarolja.
      */
     private Factory map;
+    private View view;
     private boolean changed;
 
     /**
@@ -54,6 +59,10 @@ public class Game {
      */
     public Factory getMap() {
         return map;
+    }
+
+    public View getView() {
+        return view;
     }
 
     public static void main(String[] args) {
@@ -130,10 +139,9 @@ public class Game {
      * Hozzaad egy Worker-t a jelenleg a jatekban levo Worker-okhoz.
      *
      * @param w:  a Worker, amit hozzaad.
-     * @param id: a hozaadott Worker azonositoja
      */
-    void addWorker(Worker w, int id) {
-        workers.put(id, w);
+    void addWorker(Worker w) {
+        workers.put(w.getIdentifier(), w);
     }
 
     /**

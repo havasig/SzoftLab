@@ -1,37 +1,35 @@
 package Graphics;
 
-import Main.Factory;
 import Main.Destination;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 
-public class GraphicsDestination implements Drawable{
+public class GraphicsDestination implements Drawable {
 
     private BufferedImage imageDestination;
     private Destination destination;
-
     private View view;
 
-    GraphicsDestination(Destination _destination, View _view)
-    {
+    public GraphicsDestination(Destination _destination) {
         destination = _destination;
-        view = _view;
 
-        try
-        {
+        try {
             imageDestination = ImageIO.read(getClass().getResourceAsStream("/destination.png"));
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void Draw(Graphics g)
-    {
+    public void setView(View view) {
+        this.view = view;
+    }
+
+    @Override
+    public void Draw(Graphics g) {
         //TODO splich
         int size = view.getGridsize();
         Point pos = destination.getPos();

@@ -48,6 +48,10 @@ public class Worker extends Movable {
         points++;
     }
 
+    public int getIdentifier() {
+        return identifier;
+    }
+
     /**
      * A Worker meghal. Eltavolitja a mezorol a Workert, es ertesiti a halalesetrol a Game-et.
      */
@@ -172,7 +176,7 @@ public class Worker extends Movable {
         return alive;
     }
 
-    Point getPos(){
+    public Point getPos(){
         return field.getPos();
     }
 

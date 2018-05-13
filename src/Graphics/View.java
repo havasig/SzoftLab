@@ -1,7 +1,5 @@
 package Graphics;
 
-import Main.Movable;
-import Main.Field;
 import Main.Game;
 
 import java.awt.*;
@@ -12,7 +10,6 @@ public class View {
 
     private ArrayList<Drawable> fields;
     private ArrayList<Drawable> movables;
-    private ArrayList<Drawable> spliches;
     BufferedImage buffer;
     Boolean valid;
     Game game;
@@ -24,22 +21,24 @@ public class View {
     //width and height of a cell in the grid
     private int gridsize;
 
-    public View(Game _game)
-    {
+    public View(Game _game) {
         game = _game;
         valid = false;
+        fields = new ArrayList<Drawable>();
+        movables = new ArrayList<Drawable>();
     }
-    public void AddField(Drawable field)
-    {
+
+    public void AddField(Drawable field) {
+        field.setView(this);
         fields.add(field);
     }
 
-    public void AddMovable(Drawable mov)
-    {
+    public void AddMovable(Drawable mov) {
+        mov.setView(this);
         movables.add(mov);
     }
 
-    public void calcGrid(){
+    public void calcGrid() {
 
         int h = height / game.getMap().getHeight();
         int w = width / game.getMap().getWidth();
@@ -53,28 +52,27 @@ public class View {
     }
 
     //TODO
-    public void paintComponent(Graphics g)
-    {
+    public void paintComponent(Graphics g) {
 
     }
 
     //TODO
-    public void clear(){}
+    public void clear() {
+    }
 
     //TODO
-    public void validate(){
+    public void validate() {
         valid = false;
     }
 
-    public void Draw(){
-        if(!valid){
+    public void Draw() {
+        if (!valid) {
             //TODO
-            for (Drawable field : fields) /*field.Draw(g)*/;
-            for (Drawable movable: movables) /*movable.Draw(g)*/;
-            valid=true;
+            for (Drawable field : fields) /*field.Draw(g)*/ ;
+            for (Drawable movable : movables) /*movable.Draw(g)*/ ;
+            valid = true;
         }
     }
-
 
 
 }

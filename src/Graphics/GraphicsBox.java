@@ -1,14 +1,13 @@
 package Graphics;
 
-import Main.Factory;
 import Main.Box;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 
-public class GraphicsBox implements Drawable{
+public class GraphicsBox implements Drawable {
 
     private BufferedImage imageFree;
     private BufferedImage imageLocked;
@@ -16,38 +15,31 @@ public class GraphicsBox implements Drawable{
 
     private View view;
 
-    GraphicsBox(Box _box, View _view)
-    {
+    public GraphicsBox(Box _box) {
         box = _box;
-        view = _view;
 
-        try
-        {
+        try {
             imageFree = ImageIO.read(getClass().getResourceAsStream("/box.png"));
             imageLocked = ImageIO.read(getClass().getResourceAsStream("/box_locked.png"));
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void Draw(Graphics g)
-    {
+    public void setView(View view) {
+        this.view = view;
+    }
+
+    @Override
+    public void Draw(Graphics g) {
         int size = view.getGridsize();
+        Point pos = box.getPos();
 
-        //TODO: Is this too much indirection or just OOP? Gfield -> View -> Game -> Factory
-        String[] pos = view.getCoords(box).split(":");
-        int x = Integer.parseInt(pos[0]);
-        int y = Integer.parseInt(pos[1]);
-
-        if(!box.getLocked())
-        {
-            g.drawImage(imageFree, x, y - imageFree.getHeight(), size, size, null);
-        }
-        else
-        {
-            g.drawImage(imageLocked, x, y - imageLocked.getHeight(), size, size, null);
+        if (!box.getLocked()) {
+            g.drawImage(imageFree, pos.x, pos.y - imageFree.getHeight(), size, size, null);
+        } else {
+            g.drawImage(imageLocked, pos.x, pos.y - imageLocked.getHeight(), size, size, null);
         }
     }
 }

@@ -14,15 +14,19 @@ public class GraphicsColumn implements Drawable {
 
     private View view;
 
-    GraphicsColumn(Column _column, View _view) {
+    public GraphicsColumn(Column _column) {
         column = _column;
-        view = _view;
 
         try {
             imageColumn = ImageIO.read(getClass().getResourceAsStream("/column.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void setView(View view) {
+        this.view = view;
     }
 
     @Override
