@@ -25,6 +25,7 @@ public class Game{
         map = new Factory();
         workers = new HashMap<>();
         changed = true;
+        controller = new Controller();
     }
 
     /**
@@ -56,6 +57,7 @@ public class Game{
      */
     private View view;
     private boolean changed;
+    public Controller controller;  //Havi írta ide, le kéne dokumentálni
 
     /**
      * @return a jatekban levo Worker-ek.
@@ -91,8 +93,10 @@ public class Game{
     public void StartGame() {
         createAndShowGUI(this);
         map.ReadMap("test2.txt");
+        view.addKeyListener(new KeyEventHandler());
         view.validate();
         window.setVisible(true);
+        controller.fillChars();
         gameLoop();
     }
 
@@ -181,34 +185,22 @@ public class Game{
      * @param id: ezen azonositoju Worker kezdemenyezte az elhelyezest.
      * @param f:  ilyen tipusu kenoanyagot helyez el
      */
-    void placeObject(int id, String f) {
-        workers.get(id).placeObject(Field.FieldState.valueOf(f));
+    public void placeObject(int id, Field.FieldState f) {
+        workers.get(id).placeObject(f);
         view.validate();
     }
 
     //This is the game itself, handles the inputs
-    //TODO
     private void gameLoop() {
-        char c;
         while (!map.ThisIsTheEnd()){
             if (changed) {
                 changed = false;
             }
-            try {
-                c = (char) System.in.read();
-                if(c == 'w') moveWorker(1, Direction.Up );
-                if(c == 's') moveWorker(1, Direction.Down );
-                if(c == 'd') moveWorker(1, Direction.Right );
-                if(c == 'a') moveWorker(1, Direction.Left );
-                if(c == 'q') placeObject(1, "Oil");
-                if(c == 'e') placeObject(1, "Honey");
-                if(c != '\n')changed = true;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            changed = controller.Run();
         }
         EndGame();
     }
+
     private void createAndShowGUI(Game game) {
         //Create and set up the window.
         window = new JFrame("Sokoban");
