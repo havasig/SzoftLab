@@ -37,6 +37,8 @@ public class Game{
     }
     ///////////////////////////////
 
+    private static JFrame menu;
+
     /**
      * A jelenleg mozgo jatekost tarolja.
      */
@@ -49,6 +51,9 @@ public class Game{
      * A jatekteret tarolja.
      */
     private Factory map;
+    /**
+     * A jatek nézetét reprezentálja
+     */
     private View view;
     private boolean changed;
 
@@ -66,19 +71,24 @@ public class Game{
         return map;
     }
 
+    /**
+     * @return a nézet
+     */
+
     public View getView() {
         return view;
     }
 
     public static void main(String[] args) {
+        menu = Menu.getInstance();
+        ((Menu) menu).menuLoop();
         //TODO menu
-        Game.getInstance().StartGame();
     }
 
     /**
      * A jatek inditasaert felel
      */
-    private void StartGame() {
+    public void StartGame() {
         createAndShowGUI(this);
         map.ReadMap("test2.txt");
         view.validate();
@@ -129,7 +139,7 @@ public class Game{
     }
 
     /**
-     * A jelenleg mozog jatekos pontszamat megnoveli eggyel.
+     * A jelenleg mozgo jatekos pontszamat megnoveli eggyel.
      */
     void SetPoint() {
         if (currentWorker != null) {
