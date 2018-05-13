@@ -5,6 +5,7 @@ import Main.Worker;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class GraphicsWorker implements Drawable {
@@ -19,7 +20,7 @@ public class GraphicsWorker implements Drawable {
             int i = worker.getIdentifier();
             if (i > 5 || i < 0)
                 throw new IllegalArgumentException("Worker id fault");
-            workerImage = ImageIO.read(getClass().getResourceAsStream("/worker" + Integer.toString(i) + ".png"));
+            workerImage = ImageIO.read(new File("resources/worker" + Integer.toString(i) + ".png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

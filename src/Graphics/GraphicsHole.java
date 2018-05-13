@@ -6,6 +6,7 @@ import Main.HoleState;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class GraphicsHole implements Drawable {
@@ -19,8 +20,8 @@ public class GraphicsHole implements Drawable {
         hole = _hole;
 
         try {
-            imageOpen = ImageIO.read(getClass().getResourceAsStream("/hole_open.png"));
-            imageClosed = ImageIO.read(getClass().getResourceAsStream("/hole_closed.png"));
+            imageOpen = ImageIO.read(new File("resources/hole_open.png"));
+            imageClosed = ImageIO.read(new File("resources/hole_closed.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -36,7 +37,9 @@ public class GraphicsHole implements Drawable {
             g.drawImage(imageOpen, pos.x*size, pos.y*size , size, size, null);
         } else {
             g.drawImage(imageClosed, pos.x*size, pos.y*size , size, size, null);
+            GraphicsSplich.Draw(hole, g, pos,size );
         }
+
     }
 
     @Override

@@ -29,6 +29,7 @@ public class GraphicsField implements Drawable {
         int size = view.getGridsize();
         Point pos = field.getPos();
         g.drawImage(imageField, pos.x*size, pos.y*size , size, size, null);
+        GraphicsSplich.Draw(field, g, pos,size );
     }
 
     @Override

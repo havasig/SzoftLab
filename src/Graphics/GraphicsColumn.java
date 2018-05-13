@@ -5,6 +5,7 @@ import Main.Column;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class GraphicsColumn implements Drawable {
@@ -18,7 +19,7 @@ public class GraphicsColumn implements Drawable {
         column = _column;
 
         try {
-            imageColumn = ImageIO.read(getClass().getResourceAsStream("/column.png"));
+            imageColumn = ImageIO.read(new File("resources/column.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,5 +35,6 @@ public class GraphicsColumn implements Drawable {
         int size = view.getGridsize();
         Point pos = column.getPos();
         g.drawImage(imageColumn, pos.x*size, pos.y*size , size, size, null);
+        GraphicsSplich.Draw(column, g, pos,size );
     }
 }

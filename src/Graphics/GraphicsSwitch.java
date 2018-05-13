@@ -5,6 +5,7 @@ import Main.Switch;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class GraphicsSwitch implements Drawable {
@@ -18,8 +19,8 @@ public class GraphicsSwitch implements Drawable {
         switch_ = _switch;
 
         try {
-            imageSwitchOff = ImageIO.read(getClass().getResourceAsStream("/switch_off.png"));
-            imageSwitchOn = ImageIO.read(getClass().getResourceAsStream("/switch_on.png"));
+            imageSwitchOff = ImageIO.read(new File("resources/switch_off.png"));
+            imageSwitchOn = ImageIO.read(new File("resources/switch_on.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -36,6 +37,7 @@ public class GraphicsSwitch implements Drawable {
         } else {
             g.drawImage(imageSwitchOn, pos.x*size, pos.y*size, size, size, null);
         }
+        GraphicsSplich.Draw(switch_, g, pos,size );
     }
 
     @Override
