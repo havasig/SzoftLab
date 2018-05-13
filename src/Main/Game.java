@@ -25,6 +25,7 @@ public class Game{
         map = new Factory();
         workers = new HashMap<>();
         changed = true;
+        menu = Menu.getInstance();
     }
 
     /**
@@ -80,9 +81,7 @@ public class Game{
     }
 
     public static void main(String[] args) {
-        menu = Menu.getInstance();
-        ((Menu) menu).menuLoop();
-        //TODO menu
+        ((Menu) menu).Run();
     }
 
     /**
@@ -100,17 +99,16 @@ public class Game{
      * A jatek befejezeseert felel
      */
     void EndGame() {
-        //TODO grfikus
-        System.out.println("Game over.");
-        System.out.println("Points:");
+        String out;
+        out = "Game over.\nPoints:\n";
         HashMap<Integer, Worker> winners = new HashMap<>();
         int mostPoints = 0;
         for (Map.Entry<Integer, Worker> worker : Game.getInstance().getWorkers().entrySet()) {
             int points = worker.getValue().getPoints();
             Worker work = worker.getValue();
             int id = worker.getKey();
-
-            System.out.println("Worker " + Integer.toString(id) + ": " + Integer.toString(points));
+            out = out + "Worker " + Integer.toString(id) + ": " + Integer.toString(points)+"\n";
+            //System.out.println("Worker " + Integer.toString(id) + ": " + Integer.toString(points));
 
             //Get the winner(s) while we write the points
             if (points >= mostPoints) {
@@ -121,20 +119,30 @@ public class Game{
                     mostPoints = points;
                 }
             }
+
         }
 
         if (winners.size() == 0) {
-            System.out.println("Something went wrong, there are no winners!");
+            out = out + out + "Something went wrong, there are no winners!\n";
+            //System.out.println("Something went wrong, there are no winners!");
             return;
         }
 
         if (winners.size() > 1)
-            System.out.println("The winners are: ");
+            //System.out.println("The winners are: ");
+            out = out + "The winners are: ";
         else
-            System.out.println("The winner is:");
-
+            //System.out.println("The winner is: ");
+            out = out + "The winner is: ";
         for (Map.Entry<Integer, Worker> winner : winners.entrySet()) {
-            System.out.println("Worker " + winner.getKey().toString());
+            //System.out.println("Worker " + winner.getKey().toString());
+            out = out + "Worker " + winner.getKey().toString()+" ";
+        }
+        JOptionPane.showMessageDialog(null, out);
+        int input = JOptionPane.showOptionDialog(null, out, "Results", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+        if(input == JOptionPane.OK_OPTION)
+        {
+            ((Menu) menu).Run();
         }
     }
 
@@ -209,6 +217,7 @@ public class Game{
         }
         EndGame();
     }
+
     private void createAndShowGUI(Game game) {
         //Create and set up the window.
         window = new JFrame("Sokoban");
