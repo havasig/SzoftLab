@@ -157,11 +157,10 @@ public class Worker extends Movable {
     /**
      * Kenoanyagot helyez el egy mezon a Worker.
      *
-     * @param d: ebbe az iranyba helyez el kenoanyagot.
      * @param f: ilyen tipusu kenoanyagot helyez el.
      */
-    void placeObject(Direction d, Field.FieldState f) {
-        field.GetNeighbor(d).setSplich(f);
+    void placeObject( Field.FieldState f) {
+        field.setSplich(f);
     }
 
     /**

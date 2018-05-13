@@ -84,7 +84,7 @@ public class Field {
      * @param w: a Worker, ami rakerult.
      * @return igaz, ha rakerult a Worker, hamis, ha nem.
      */
-    public boolean AcceptWorker(Worker w) {
+    boolean AcceptWorker(Worker w) {
         movable = w;
         return true;
     }
@@ -95,7 +95,7 @@ public class Field {
      * @param b: a Box, ami rakerult.
      * @return igaz, ha rakerult a Box, hamis, ha nem.
      */
-    public boolean AcceptBox(Box b) {
+    boolean AcceptBox(Box b) {
         movable = b;
         return true;
     }
@@ -132,7 +132,7 @@ public class Field {
      *
      * @return a rajta levo kenoanyag
      */
-    FieldState getSplich() {
+    public FieldState getSplich() {
         return splich;
     }
 
@@ -168,4 +168,6 @@ public class Field {
     public Point getPos(){
         return factory.getPos(this);
     }
+
+
 }

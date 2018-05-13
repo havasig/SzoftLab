@@ -5,6 +5,7 @@ import Main.Box;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class GraphicsBox implements Drawable {
@@ -18,8 +19,8 @@ public class GraphicsBox implements Drawable {
     public GraphicsBox(Box _box) {
         box = _box;
         try {
-            imageFree = ImageIO.read(getClass().getResourceAsStream("/box.png"));
-            imageLocked = ImageIO.read(getClass().getResourceAsStream("/box_locked.png"));
+            imageFree = ImageIO.read(new File("resources/box.png"));
+            imageLocked = ImageIO.read(new File("resources/box_locked.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

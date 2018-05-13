@@ -27,8 +27,8 @@ public class Box extends Movable {
      */
     Box(Field startField, int friction) {
         field = startField;
-        startField.AcceptBox(this);
         locked = false;
+        startField.AcceptBox(this);
         this.defFriction = friction;
     }
 

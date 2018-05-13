@@ -5,6 +5,7 @@ import Main.Destination;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class GraphicsDestination implements Drawable {
@@ -17,7 +18,7 @@ public class GraphicsDestination implements Drawable {
         destination = _destination;
 
         try {
-            imageDestination = ImageIO.read(getClass().getResourceAsStream("/destination.png"));
+            imageDestination = ImageIO.read(new File("resources/destination.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,5 +35,6 @@ public class GraphicsDestination implements Drawable {
         int size = view.getGridsize();
         Point pos = destination.getPos();
         g.drawImage(imageDestination, pos.x*size, pos.y*size, size, size, null);
+        GraphicsSplich.Draw(destination, g, pos,size );
     }
 }
