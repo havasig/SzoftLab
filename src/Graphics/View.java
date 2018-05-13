@@ -13,7 +13,7 @@ public class View extends JPanel {
     private ArrayList<Drawable> fields;
     private ArrayList<Drawable> movables;
     BufferedImage buffer;
-    Boolean valid;
+    Boolean valid = false;
     Game game;
 
     private JFrame window;

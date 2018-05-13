@@ -182,14 +182,15 @@ public class Factory {
                     case 'B':
                     case 'b':
                         Box box = new Box(this.fields.get(count), 1);
-                        //TODO  Game.getInstance().getView().AddMovable(new GraphicsBox(boxfree);
+                        Game.getInstance().getView().AddMovable(new GraphicsBox(box));
                         break;
                     case '_':
                         break;
                     default:
                         int num = Character.getNumericValue(f.charAt(1));
-                        Game.getInstance().addWorker(new Worker(this.fields.get(count), num));
-                        //TODO
+                        Worker w = new Worker(this.fields.get(count), num);
+                        Game.getInstance().addWorker(w);
+                        Game.getInstance().getView().AddMovable(new GraphicsWorker(w));
                 }
                 count++;
             }

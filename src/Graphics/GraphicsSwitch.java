@@ -32,9 +32,9 @@ public class GraphicsSwitch implements Drawable {
         Point pos = switch_.getPos();
 
         if (!switch_.getBox()) {
-            g.drawImage(imageSwitchOff, pos.x*size, pos.y*size - imageSwitchOff.getHeight(), size, size, null);
+            g.drawImage(imageSwitchOff, pos.x*size, pos.y*size - size, size, size, null);
         } else {
-            g.drawImage(imageSwitchOn, pos.x*size, pos.y*size - imageSwitchOn.getHeight(), size, size, null);
+            g.drawImage(imageSwitchOn, pos.x*size, pos.y*size - size, size, size, null);
         }
     }
 
