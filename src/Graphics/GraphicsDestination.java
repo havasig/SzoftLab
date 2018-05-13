@@ -33,6 +33,6 @@ public class GraphicsDestination implements Drawable {
         //TODO splich
         int size = view.getGridsize();
         Point pos = destination.getPos();
-        g.drawImage(imageDestination, pos.x*size, pos.y*size - size, size, size, null);
+        g.drawImage(imageDestination, pos.x*size, pos.y*size, size, size, null);
     }
 }

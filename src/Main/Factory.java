@@ -27,8 +27,7 @@ public class Factory {
     }
 
     public Point getPos(Field f) {
-        //TODO Why (fields.indexOf(f) / width) ? +1 ?
-        return new Point((fields.indexOf(f) % width), (fields.indexOf(f) / width)+1);
+        return new Point((fields.indexOf(f) % width), (fields.indexOf(f) / width));
     }
 
     int index(int x, int y) {

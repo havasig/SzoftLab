@@ -13,7 +13,8 @@ public class View extends JPanel {
     private ArrayList<Drawable> fields;
     private ArrayList<Drawable> movables;
     BufferedImage buffer;
-    Boolean valid = false;
+    boolean valid = false;
+    boolean gridSizeCalced = false;
     Game game;
 
     private JFrame window;
@@ -63,7 +64,10 @@ public class View extends JPanel {
     }
 
     public int getGridsize() {
-        calcGrid();
+        if (!gridSizeCalced) {
+            calcGrid();
+            gridSizeCalced =true;
+        }
         return gridsize;
     }
 

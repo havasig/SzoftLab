@@ -17,7 +17,6 @@ public class GraphicsBox implements Drawable {
 
     public GraphicsBox(Box _box) {
         box = _box;
-
         try {
             imageFree = ImageIO.read(getClass().getResourceAsStream("/box.png"));
             imageLocked = ImageIO.read(getClass().getResourceAsStream("/box_locked.png"));
@@ -37,9 +36,9 @@ public class GraphicsBox implements Drawable {
         Point pos = box.getPos();
 
         if (!box.getLocked()) {
-            g.drawImage(imageFree, pos.x*size + (int)(size*0.1), pos.y*size - size + (int)(size*0.1), (int)(size*0.8), (int)(size*0.8), null);
+            g.drawImage(imageFree, pos.x*size + (int)(size*0.1), pos.y*size  + (int)(size*0.1), (int)(size*0.8), (int)(size*0.8), null);
         } else {
-            g.drawImage(imageLocked, pos.x*size + (int)(size*0.1), pos.y*size - size + (int)(size*0.1), (int)(size*0.8), (int)(size*0.8), null);
+            g.drawImage(imageLocked, pos.x*size + (int)(size*0.1), pos.y*size  + (int)(size*0.1), (int)(size*0.8), (int)(size*0.8), null);
         }
     }
 }

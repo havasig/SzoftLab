@@ -33,9 +33,9 @@ public class GraphicsHole implements Drawable {
         Point pos = hole.getPos();
 
         if (hole.getState() == HoleState.Open) {
-            g.drawImage(imageOpen, pos.x*size, pos.y*size - size, size, size, null);
+            g.drawImage(imageOpen, pos.x*size, pos.y*size , size, size, null);
         } else {
-            g.drawImage(imageClosed, pos.x*size, pos.y*size - size, size, size, null);
+            g.drawImage(imageClosed, pos.x*size, pos.y*size , size, size, null);
         }
     }
 
