@@ -29,9 +29,10 @@ public class GraphicsWorker implements Drawable {
     @Override
     public void Draw(Graphics g) {
         int size = view.getGridsize();
-        Point pos = worker.getPos();
-        System.out.println(pos);
-        g.drawImage(workerImage, pos.x*size + (int)(size*0.1), pos.y*size  + (int)(size*0.1), (int)(size*0.8), (int)(size*0.8), null);
+        if (worker.isAlive()) {
+            Point pos = worker.getPos();
+            g.drawImage(workerImage, pos.x*size + (int)(size*0.1), pos.y*size  + (int)(size*0.1), (int)(size*0.8), (int)(size*0.8), null);
+        }
     }
 
     @Override
