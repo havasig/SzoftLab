@@ -103,7 +103,7 @@ public class Menu extends JFrame{
         exit.addActionListener(new ExitButtonListener());
     }
 
-    public void menuLoop() {
+    public void Run() {
         while (true) { }
     }
 
@@ -120,5 +120,4 @@ public class Menu extends JFrame{
             frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         }
     }
-
 }

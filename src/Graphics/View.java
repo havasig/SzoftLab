@@ -79,7 +79,7 @@ public class View extends JPanel {
                 field.Draw(g);
             for (Drawable movable : movables)
                 movable.Draw(g);
-            //TODO valid = true; <-- ezzel vmi szar van
+             //valid = true; //<-- ezzel vmi szar van
         }
         g.drawString("BLAH", 20, 20);
     }
