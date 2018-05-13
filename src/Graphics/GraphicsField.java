@@ -1,44 +1,39 @@
 package Graphics;
 
-import Main.Factory;
 import Main.Field;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import javax.imageio.ImageIO;
 
-public class GraphicsField implements Drawable{
+public class GraphicsField implements Drawable {
 
-    private BufferedImage imageField;
+    private BufferedImage imageField;//TODO splich
     private Field field;
-
     private View view;
 
-    GraphicsField(Field _field, View _view)
-    {
+    public GraphicsField(Field _field) {
         field = _field;
-        view = _view;
 
-        try
-        {
+        try {
             imageField = ImageIO.read(getClass().getResourceAsStream("/floor.png"));
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void Draw(Graphics g)
-    {
+    public void Draw(Graphics g) {
+        //TODO splich
         int size = view.getGridsize();
+        Point pos = field.getPos();
+        g.drawImage(imageField, pos.x*size, pos.y*size , size, size, null);
+        GraphicsSplich.Draw(field, g, pos,size );
+    }
 
-        //TODO: Is this too much indirection or just OOP? Gfield -> View -> Game -> Factory
-        String[] pos = view.getCoords(field).split(":");
-        int x = Integer.parseInt(pos[0]);
-        int y = Integer.parseInt(pos[1]);
-
-        g.drawImage(imageField, x, y - imageField.getHeight(), size, size, null);
+    @Override
+    public void setView(View view) {
+        this.view = view;
     }
 }

@@ -8,8 +8,8 @@ public class Column extends Field {
     /**
      * A Column konstruktora.
      */
-    Column() {
-        super();
+    Column(Factory _factory) {
+        super(_factory);
     }
 
     /**
@@ -35,8 +35,4 @@ public class Column extends Field {
         return false;
     }
 
-    @Override
-    public String Draw() {
-        return "X__";
-    }
 }

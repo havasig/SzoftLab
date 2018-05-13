@@ -1,15 +1,18 @@
 package Main;
 
+import java.awt.*;
 import java.util.HashMap;
 
 /**
  * Egyszeru mezo. Lehet rajta Movable, valamint kenoanyag.
  */
-public class Field implements Drawable {
+public class Field {
     /**
      * Rajta levo Movable.
      */
     Movable movable;
+
+    Factory factory;
     /**
      * A mezo szomszedsagaban levo mezok
      */
@@ -26,7 +29,8 @@ public class Field implements Drawable {
     /**
      * A Field kontruktora.
      */
-    public Field() {
+    public Field(Factory _factory) {
+        factory=_factory;
         neighbors = new HashMap<>();
         splich = FieldState.None;
         checked = false;
@@ -80,7 +84,7 @@ public class Field implements Drawable {
      * @param w: a Worker, ami rakerult.
      * @return igaz, ha rakerult a Worker, hamis, ha nem.
      */
-    public boolean AcceptWorker(Worker w) {
+    boolean AcceptWorker(Worker w) {
         movable = w;
         return true;
     }
@@ -91,12 +95,8 @@ public class Field implements Drawable {
      * @param b: a Box, ami rakerult.
      * @return igaz, ha rakerult a Box, hamis, ha nem.
      */
-    public boolean AcceptBox(Box b) {
+    boolean AcceptBox(Box b) {
         movable = b;
-        return true;
-    }
-
-    public boolean PseudoAccept() {
         return true;
     }
 
@@ -114,17 +114,8 @@ public class Field implements Drawable {
      *
      * @param b: a Box, ami lekerult rola.
      */
-    public void RemoveBox(Box b) {
+    void RemoveBox(Box b) {
         movable = null;
-    }
-
-    /**
-     * Visszaadja a rajta levo kenoanyagot
-     *
-     * @return a rajta levo kenoanyag
-     */
-    FieldState getSplich() {
-        return splich;
     }
 
     /**
@@ -136,30 +127,13 @@ public class Field implements Drawable {
         this.splich = splich;
     }
 
-    @Override
-    public String Draw() {
-        StringBuilder field = new StringBuilder();
-        field.append("_");
-        if (movable == null)
-            field.append("_");
-        else
-            field.append(movable.Draw());
-        DrawSplich(field);
-        return field.toString();
-    }
-
-    void DrawSplich(StringBuilder field) {
-        switch (splich) {
-            case Oil:
-                field.append("O");
-                break;
-            case None:
-                field.append("_");
-                break;
-            case Honey:
-                field.append("M");
-                break;
-        }
+    /**
+     * Visszaadja a rajta levo kenoanyagot
+     *
+     * @return a rajta levo kenoanyag
+     */
+    public FieldState getSplich() {
+        return splich;
     }
 
     /**
@@ -184,5 +158,16 @@ public class Field implements Drawable {
         public int getValue() {
             return value;
         }
+
     }
+
+    boolean PseudoAccept() {
+        return true;
+    }
+
+    public Point getPos(){
+        return factory.getPos(this);
+    }
+
+
 }

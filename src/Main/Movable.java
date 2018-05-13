@@ -1,6 +1,6 @@
 package Main;
 
-public abstract class Movable implements Drawable {
+public abstract class Movable{
     Field field;
 
     /**
@@ -48,6 +48,13 @@ public abstract class Movable implements Drawable {
      */
     void Fall() {
         Die();
+    }
+
+    /**
+     * Visszaadja a mezot melyen az objektum all.
+     */
+    public Field getField(){
+        return field;
     }
 
 

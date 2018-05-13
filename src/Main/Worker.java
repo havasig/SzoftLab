@@ -1,5 +1,7 @@
 package Main;
 
+import java.awt.*;
+
 import static Main.Movement.Moved;
 import static Main.Movement.Stayed;
 
@@ -44,6 +46,10 @@ public class Worker extends Movable {
      */
     void IncrementPoints() {
         points++;
+    }
+
+    public int getIdentifier() {
+        return identifier;
     }
 
     /**
@@ -113,16 +119,6 @@ public class Worker extends Movable {
         return Moved;
     }
 
-    @Override
-    public Movement PseudoCollideBox(Direction d, int sumFriction) {
-        return Moved;
-    }
-
-    @Override
-    public Movement PseudoCollideWorker(Direction d, int sumFriction) {
-        return Stayed;
-    }
-
     /**
      * A Worker-t mozgatja.
      *
@@ -161,11 +157,26 @@ public class Worker extends Movable {
     /**
      * Kenoanyagot helyez el egy mezon a Worker.
      *
-     * @param d: ebbe az iranyba helyez el kenoanyagot.
      * @param f: ilyen tipusu kenoanyagot helyez el.
      */
-    void placeObject(Direction d, Field.FieldState f) {
-        field.GetNeighbor(d).setSplich(f);
+    void placeObject( Field.FieldState f) {
+        field.setSplich(f);
+    }
+
+    /**
+     * @return az adott Worker pontjai
+     */
+    int getPoints() {
+        return points;
+    }
+
+    public Boolean isAlive()
+    {
+        return alive;
+    }
+
+    public Point getPos(){
+        return field.getPos();
     }
 
     Movement IsThereMovement(Field currentField) {
@@ -192,21 +203,13 @@ public class Worker extends Movable {
         return Stayed;
     }
 
-
-    /**
-     * @return az adott Worker pontjai
-     */
-    int getPoints() {
-        return points;
-    }
-
-    public Boolean isAlive()
-    {
-        return alive;
+    @Override
+    public Movement PseudoCollideBox(Direction d, int sumFriction) {
+        return Moved;
     }
 
     @Override
-    public String Draw() {
-        return String.valueOf(identifier);
+    public Movement PseudoCollideWorker(Direction d, int sumFriction) {
+        return Stayed;
     }
 }

@@ -1,65 +1,45 @@
 package Main;
 
+import Graphics.*;
+
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static Main.Movement.Moved;
 
-public class Factory implements Drawable {
-    private static String switchHole;
-    private static int swCount;
-
-    public ArrayList<Field> getFields() {
-        return fields;
-    }
-
-    public HashMap<Integer, Hole> getHoles() {
-        return holes;
-    }
-
+public class Factory {
     private ArrayList<Field> fields;
     private HashMap<Integer, Hole> holes;
+    private HashMap<Integer, Switch> switches;
     private int width, height;
 
-    public void setWidth(int _width){
-        width = _width;
-    }
-
-    public void setHeight(int _height){
-        width = _height;
-    }
-
-    static void addTextToSW(String text) {
-        swCount++;
-        switchHole += String.valueOf(swCount) + ", ";
-        switchHole += text;
-    }
-
-    private void Init() {
+    Factory() {
         fields = new ArrayList<>();
+        switches = new HashMap<>();
         holes = new HashMap<>();
     }
 
-    public Field getField(int x, int y) {
+    private Field getField(int x, int y) {
         return fields.get((y * width) + x);
     }
 
-    public String getPos(Field f) {
-        return String.valueOf(fields.indexOf(f) / width) +
-                ":" +
-                fields.indexOf(f) % width;
+    public Point getPos(Field f) {
+        return new Point((fields.indexOf(f) % width), (fields.indexOf(f) / width));
     }
 
-    public int getWidth()
-    {
+    int index(int x, int y) {
+        int num = (y * width) + x;
+        return num;
+    }
+
+    public int getWidth() {
         return width;
     }
 
-    public int getHeight()
-    {
+    public int getHeight() {
         return height;
     }
 
@@ -80,24 +60,7 @@ public class Factory implements Drawable {
         return true;
     }
 
-    private void Error(String message){
-        System.out.println(message);
-    }
-
-    void GenerateMap(int width, int height) {
-        Init();
-        this.width = width;
-        this.height = height;
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                if (i == 0 || (i + 1) == height)
-                    fields.add(new Column());
-                else if (j == 0 || (j + 1) == width)
-                    fields.add(new Column());
-                else
-                    fields.add(new Field());
-            }
-        }
+    private void linkMap() {
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 if (y - 1 >= 0)
@@ -123,269 +86,120 @@ public class Factory implements Drawable {
         }
     }
 
-    //Már csak a Test class használja
-    public boolean ReadMap(String file){
-        try{
-        BufferedReader br = new BufferedReader(new FileReader(file));
+    //TODO
+    void ReadMap(String fileName) {
+        try {
+            int count = 0;
+            ArrayList<String> chunks = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new FileReader(fileName));
             String line = br.readLine();
             String[] parts = line.split(" ");
-            if(parts.length!=2)
+            if (parts.length != 2)
                 throw new Exception();
-        int width = Integer.parseInt(parts[0]);
-        int height = Integer.parseInt(parts[1]);
-        this.width = width;
-        this.height = height;
-        GenerateMap(width, height);
-        int actLine = 0;
-        ArrayList<String[]> map = new ArrayList<>();
-        ArrayList<Integer> switchAndHole = new ArrayList<>();
-            while ((line = br.readLine()) != null) {
-                if(actLine<height){
-                    String[] fields = line.split(" ");
-                    if(fields.length!=width) {
-                        throw new Exception();
-                    }
-                    map.add(fields);
-                    actLine++;
-                }
-                    else {
-                    String[] row = line.split(" ");
-                    String[] coords = row[1].split(";");
-                    String[] switchCoords = coords[0].split(":");
-                    String[] holeCoords = coords[1].split(":");
-                    Integer sx = Integer.parseInt(switchCoords[0]);
-                    Integer sy = Integer.parseInt(switchCoords[1]);
-                    Integer hx = Integer.parseInt(holeCoords[0]);
-                    Integer hy = Integer.parseInt(holeCoords[1]);
+            this.width = Integer.parseInt(parts[0]);
+            this.height = Integer.parseInt(parts[1]);
 
-                    switchAndHole.add(sx);
-                    switchAndHole.add(sy);
-                    switchAndHole.add(hx);
-                    switchAndHole.add(hy);
-                }
-            }
-            for (String[] aMap : map) {
-                if (aMap[0].charAt(0) != 'X' || aMap[0].charAt(1) != '_' || aMap[0].charAt(2) != '_')
-                    throw new Exception();
-            }
-            for (String[] aMap : map) {
-                if (aMap[width - 1].charAt(0) != 'X' || aMap[width - 1].charAt(1) != '_' || aMap[width - 1].charAt(2) != '_')
-                    throw new Exception();
-            }
-            for(int i = 0; i < width; i++){
-                if(map.get(0)[i].charAt(0)!='X'||map.get(0)[i].charAt(1)!='_'||map.get(0)[i].charAt(2)!='_')
-                    throw new Exception();
-            }
-            for(int i = 0; i < width; i++){
-                if(map.get(map.size()-1)[i].charAt(0)!='X'||map.get(map.size()-1)[i].charAt(1)!='_'||map.get(map.size()-1)[i].charAt(2)!='_')
-                    throw new Exception();
-            }
-            for(int i = 1; i < map.size()-1; i++){
-                for(int j = 1; j < width-1; j++){
-                    char x = map.get(i)[j].charAt(0);
-                    switch (x){
+            for (int actual = 0; actual < height; actual++) {
+                line = br.readLine();
+                String[] fields = line.split(" ");
+                for (String field : fields) {
+                    chunks.add(field);
+
+                    switch (field.charAt(0)) {
                         case 'X':
-                            createColumn(j, i);
+                            Column column = new Column(this);
+                            Game.getInstance().getView().AddField(new GraphicsColumn(column));
+                            this.fields.add(column);
                             break;
                         case 'D':
-                            createDestination(j, i);
+                            Destination destination = new Destination(this);
+                            Game.getInstance().getView().AddField(new GraphicsDestination(destination));
+                            this.fields.add(destination);
                             break;
                         case 'H':
-                            createHole(j, i, HoleState.Open);
+                            Hole holeO = new Hole(this);
+                            holeO.SetOpen();
+                            Game.getInstance().getView().AddField(new GraphicsHole(holeO));
+                            this.fields.add(holeO);
+                            holes.put(this.fields.indexOf(holeO), holeO);
                             break;
                         case 'h':
-                            createHole(j, i, HoleState.Closed);
+                            Hole holeC = new Hole(this);
+                            holeC.SetClosed();
+                            Game.getInstance().getView().AddField(new GraphicsHole(holeC));
+                            this.fields.add(holeC);
+                            holes.put(this.fields.indexOf(holeC), holeC);
                             break;
                         case 's':
-                            int index=-1;
-                            for(int k=0; k < switchAndHole.size(); k++) {
-                            if (switchAndHole.get(k).equals(j))
-                                if (switchAndHole.get(k + 1).equals(i))
-                                    index=k;
-                            }
-                            if(index==-1)
-                                throw new Exception();
-                            createSwitch(j,i,switchAndHole.get(index+2), switchAndHole.get(index+3));
-                            break;
                         case 'S':
-                            int indexS=-1;
-                            for(int k=0; k < switchAndHole.size(); k++) {
-                                if (switchAndHole.get(k).equals(j))
-                                    if (switchAndHole.get(k + 1).equals(i))
-                                        indexS=k;
-                            }
-                            if(indexS==-1)
-                                throw new Exception();
-                            createSwitch(j,i,switchAndHole.get(indexS+2), switchAndHole.get(indexS+3));
+                            Switch switch_ = new Switch(this);
+                            Game.getInstance().getView().AddField(new GraphicsSwitch(switch_));
+                            this.fields.add(switch_);
+                            switches.put(this.fields.indexOf(switch_), switch_);
                             break;
                         case '_':
+                            Field field_ = new Field(this);
+                            Game.getInstance().getView().AddField(new GraphicsField(field_));
+                            this.fields.add(field_);
                             break;
                         default:
                             throw new Exception();
                     }
-                    char y = map.get(i)[j].charAt(1);
-                    switch (y){
-                        case 'B':
-                            addBox(j,i);
-                            break;
-                        case '1':
-                            addWorker(j, i,1);
-                            break;
-                        case '2':
-                            addWorker(j, i,2);
-                            break;
-                        case '3':
-                            addWorker(j, i,3);
-                            break;
-                        case '4':
-                            addWorker(j, i,4);
-                            break;
-                        case '5':
-                            addWorker(j, i,5);
-                            break;
-                        case '6':
-                            addWorker(j, i,6);
-                            break;
-                        case '7':
-                            addWorker(j, i,7);
-                            break;
-                        case '8':
-                            addWorker(j, i,8);
-                            break;
-                        case '9':
-                            addWorker(j, i,9);
-                            break;
-                        case '_':
-                            break;
-                        default:
-                            throw new Exception();
-                    }
-                    char z = map.get(i)[j].charAt(2);
-                    switch (z){
+
+                    switch (field.charAt(2)) {
                         case 'M':
-                            getField(j,i).setSplich(Field.FieldState.Honey);
+                            this.fields.get(count).setSplich(Field.FieldState.Honey);
                             break;
                         case 'O':
-                            getField(j,i).setSplich(Field.FieldState.Oil);
+                            this.fields.get(count).setSplich(Field.FieldState.Oil);
                             break;
                         case '_':
                             break;
                         default:
                             throw new Exception();
+
                     }
+                    count++;
                 }
             }
-            System.out.println("A beolvasás sikerrel lezajlott.");
-        }
-        catch(Exception e){
-            Error("Nem sikerült beolvasni.");
-            return false;
-        }
-        return true;
-    }
+            while ((line = br.readLine()) != null) {
+                parts = line.split(" ");
+                String[] coords = parts[1].split(";");
+                String[] switchCoords = coords[0].split(":");
+                String[] holeCoords = coords[1].split(":");
+                int sx = Integer.parseInt(switchCoords[0]);
+                int sy = Integer.parseInt(switchCoords[1]);
+                int hx = Integer.parseInt(holeCoords[0]);
+                int hy = Integer.parseInt(holeCoords[1]);
 
-    public String Draw() {
-        StringBuilder map = new StringBuilder();
-        switchHole = "";
-        swCount = 0;
-        int width = 0;
-        for (Field field : fields) {
-            map.append(field.Draw());
-            map.append(" ");
-            width++;
-            if (width == this.width) {
-                map.append("\n");
-                width = 0;
+                switches.get(index(sx, sy)).SetHole(holes.get(index(hx, hy)));
             }
-        }
-        map.append(switchHole);
-        return map.toString();
-    }
 
-    public void createColumn(int x, int y) {
-        try {
-            Column column = new Column();
-            String s = this.getField(x, y).Draw();
-            if (s.charAt(0) == 'X')
-                throw new Exception();
-            replaceField(x, y, column);
+            count = 0;
+            for (String f : chunks) {
+                switch (f.charAt(1)) {
+                    case 'B':
+                    case 'b':
+                        Box box = new Box(this.fields.get(count), 1);
+                        Game.getInstance().getView().AddMovable(new GraphicsBox(box));
+                        break;
+                    case '_':
+                        break;
+                    default:
+                        int num = Character.getNumericValue(f.charAt(1));
+                        Worker worker = new Worker(this.fields.get(count), num);
+                        Game.getInstance().addWorker(worker);
+                        Game.getInstance().getView().AddMovable(new GraphicsWorker(worker));
+                }
+                count++;
+            }
+            linkMap();
         } catch (Exception e) {
-            Error("A megadott helyen már szerepel.");
+            Error("Nem sikerült beolvasni.");
         }
     }
 
-    public void createDestination(int x, int y) {
-        Destination destination = new Destination();
-        replaceField(x, y, destination);
-    }
-
-    public void createHole(int x, int y, HoleState state) {
-        Hole hole = new Hole();
-        replaceField(x, y, hole);
-        switch (state) {
-            case Closed:
-                hole.SetClosed();
-                break;
-            case Open:
-                hole.SetOpen();
-                break;
-        }
-        holes.put((y * width) + x, hole);
-    }
-
-    public void createSwitch(int x, int y, int hX, int hY) {
-        try {
-            /*String s = this.getField(hX, hY).Draw();
-            if (s.charAt(0) != 'H' || s.charAt(0) != 'h')
-                throw new Exception();*/
-            Switch switcher = new Switch();
-            replaceField(x, y, switcher);
-            switcher.SetHole(holes.get((hY * width) + hX));
-        } catch (Exception e){
-            Error("Nem lehet létrehozni");
-        }
-    }
-
-    private void replaceField(int x, int y, Field field) {
-        field.SetNeighbor(Direction.Up, getField(x, y).GetNeighbor(Direction.Up));
-        field.SetNeighbor(Direction.Down, getField(x, y).GetNeighbor(Direction.Down));
-        field.SetNeighbor(Direction.Left, getField(x, y).GetNeighbor(Direction.Left));
-        field.SetNeighbor(Direction.Right, getField(x, y).GetNeighbor(Direction.Right));
-
-        field.GetNeighbor(Direction.Up).SetNeighbor(Direction.Down, field);
-        field.GetNeighbor(Direction.Down).SetNeighbor(Direction.Up, field);
-        field.GetNeighbor(Direction.Left).SetNeighbor(Direction.Right, field);
-        field.GetNeighbor(Direction.Right).SetNeighbor(Direction.Left, field);
-        fields.set(x + y * width, field);
-    }
-
-    void addWorker(int x, int y, int id) {
-        try{
-            String s = this.getField(x,y).Draw();
-        if (x > width || x < 1 || y > height || y < 1 || s.charAt(0) == 'X' || s.charAt(0) == 'H') {
-            throw new Exception();
-        }
-        for (Integer i : Game.getInstance().getWorkers().keySet())
-            if (i == id) {
-                throw new Exception();
-            }
-        Game.getInstance().addWorker(new Worker(getField(x, y), id), id);
-        }
-        catch (Exception e){
-            Error("A megadott helyre nem helyezhető");
-        }
-    }
-
-    void addBox(int x, int y) {
-        try{
-            String s = this.getField(x,y).Draw();
-            if (x > width || x < 1 || y > height || y < 1 || s.charAt(0) == 'X' || s.charAt(0) == 'H') {
-                throw new Exception();
-            }
-            new Box(getField(x, y), 1);
-        }
-        catch (Exception e){
-            Error("A megadott helyre nem helyezhető");
-        }
+    private void Error(String err) {
+        System.out.println(err);
     }
 }

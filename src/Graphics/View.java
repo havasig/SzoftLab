@@ -1,51 +1,62 @@
 package Graphics;
 
-import Main.Field;
 import Main.Game;
 
+import javax.swing.*;
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class View {
+public class View extends JPanel {
 
     private ArrayList<Drawable> fields;
     private ArrayList<Drawable> movables;
-    private ArrayList<Drawable> spliches;
     BufferedImage buffer;
-    Boolean valid;
+    boolean valid = false;
+    boolean gridSizeCalced = false;
     Game game;
 
-    //windowheigth and width
-    private int heigth;
-    private int width;
+    private JFrame window;
+
+    //windowheight and width
+    private int height = 600;
+    private int width = 600;
 
     //width and height of a cell in the grid
     private int gridsize;
 
-    public View(Game _game)
-    {
+    public View(Game _game, JFrame _window) {
         game = _game;
         valid = false;
+        fields = new ArrayList<Drawable>();
+        movables = new ArrayList<Drawable>();
+        window = _window;
+        init();
     }
-    public void AddField(Drawable field)
-    {
+
+    private void init(){
+        setPreferredSize(new Dimension(width, height));
+        setVisible(true);
+        window.add(this);
+        setFocusable(true);
+        requestFocus();
+        window.pack();
+    }
+
+    public void AddField(Drawable field) {
+        field.setView(this);
         fields.add(field);
     }
 
-    public void AddMovable(Drawable mov)
-    {
+    public void AddMovable(Drawable mov) {
+        mov.setView(this);
         movables.add(mov);
     }
 
-    public void AddSplitch(Drawable splich)
-    {
-        spliches.add(splich);
-    }
+    public void calcGrid() {
 
-    public void calcGrid(){
-
-        int h = heigth / game.getMap().getHeight();
+        int h = height / game.getMap().getHeight();
         int w = width / game.getMap().getWidth();
 
         //Always use the smaller size for the grid
@@ -53,24 +64,34 @@ public class View {
     }
 
     public int getGridsize() {
+        if (!gridSizeCalced) {
+            calcGrid();
+            gridSizeCalced =true;
+        }
         return gridsize;
     }
 
-    public String getCoords(Field f)
-    {
-        return game.getMap().getPos(f);
+    //TODO
+    public void paintComponent(Graphics g) {
+        if (!valid) {
+            super.paintComponent(g);
+            for (Drawable field : fields)
+                field.Draw(g);
+            for (Drawable movable : movables)
+                movable.Draw(g);
+            //TODO valid = true; <-- ezzel vmi szar van
+        }
+        g.drawString("BLAH", 20, 20);
     }
 
-    //TODO
-    public void paintComponent(Graphics g)
-    {
+    //TODO ?Unnecessary? - This is done by super.paint(g) in paintComponent
+    public void clear() {}
 
+    public void validate() {
+        valid = false;
+        window.repaint();
     }
 
-    //TODO
-    public void clear(){}
-
-    //TODO
-    public void validate(){}
-
+    //TODO ?Unnecessary?
+    public void Draw() { }
 }

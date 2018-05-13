@@ -1,5 +1,7 @@
 package Main;
 
+import java.awt.*;
+
 import static Main.Movement.Moved;
 import static Main.Movement.Stayed;
 
@@ -25,8 +27,8 @@ public class Box extends Movable {
      */
     Box(Field startField, int friction) {
         field = startField;
-        startField.AcceptBox(this);
         locked = false;
+        startField.AcceptBox(this);
         this.defFriction = friction;
     }
 
@@ -148,12 +150,12 @@ public class Box extends Movable {
         locked = true;
     }
 
+    public boolean getLocked()
+    {
+        return locked;
+    }
 
-    @Override
-    public String Draw() {
-        if (locked)
-            return "b";
-        else
-            return "B";
+    public Point getPos(){
+        return field.getPos();
     }
 }
