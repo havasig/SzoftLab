@@ -31,7 +31,8 @@ public class Factory {
     }
 
     int index(int x, int y) {
-        return y * width + height;
+        int num = (y * width) + x;
+        return num;
     }
 
     public int getWidth() {
@@ -149,6 +150,7 @@ public class Factory {
                         case 'b':
                             Box box = new Box(this.fields.get(count), 1);
                             //TODO  Game.getInstance().getView().AddMovable(new GraphicsBox(boxfree);
+                            //TODO holtalan lyuk esetén mivan
                             break;
                         case '_':
                             break;
