@@ -88,7 +88,7 @@ public class Factory {
     }
 
     //TODO
-    public void ReadMap(String fileName) {
+    void ReadMap(String fileName) {
         try {
             int count = 0;
             ArrayList<String> chunks = new ArrayList<>();
@@ -126,7 +126,7 @@ public class Factory {
                             break;
                         case 'h':
                             Hole holeC = new Hole(this);
-                            holeC.SetOpen();
+                            holeC.SetClosed();
                             Game.getInstance().getView().AddField(new GraphicsHole(holeC));
                             this.fields.add(holeC);
                             holes.put(this.fields.indexOf(holeC), holeC);
@@ -188,9 +188,9 @@ public class Factory {
                         break;
                     default:
                         int num = Character.getNumericValue(f.charAt(1));
-                        Worker w = new Worker(this.fields.get(count), num);
-                        Game.getInstance().addWorker(w);
-                        Game.getInstance().getView().AddMovable(new GraphicsWorker(w));
+                        Worker worker = new Worker(this.fields.get(count), num);
+                        Game.getInstance().addWorker(worker);
+                        Game.getInstance().getView().AddMovable(new GraphicsWorker(worker));
                 }
                 count++;
             }

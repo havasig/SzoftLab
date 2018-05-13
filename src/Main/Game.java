@@ -83,7 +83,7 @@ public class Game{
         map.ReadMap("test2.txt");
         view.validate();
         window.setVisible(true);
-        //gameLoop();
+        gameLoop();
     }
 
     /**
@@ -132,7 +132,9 @@ public class Game{
      * A jelenleg mozog jatekos pontszamat megnoveli eggyel.
      */
     void SetPoint() {
-        currentWorker.IncrementPoints();
+        if (currentWorker != null) {
+            currentWorker.IncrementPoints();
+        }
     }
 
     /**
@@ -176,23 +178,23 @@ public class Game{
     //This is the game itself, handles the inputs
     //TODO
     private void gameLoop() {
-//        char c;
-//        while (!map.ThisIsTheEnd()){
-//            if (changed) {
-//                changed = false;
-//            }
-//            try {
-//                c = (char) System.in.read();
-//                if(c == 'w') moveWorker(1, Direction.Up );
-//                if(c == 's') moveWorker(1, Direction.Down );
-//                if(c == 'd') moveWorker(1, Direction.Right );
-//                if(c == 'a') moveWorker(1, Direction.Left );
-//                if(c != '\n')changed = true;
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        EndGame();
+        char c;
+        while (!map.ThisIsTheEnd()){
+            if (changed) {
+                changed = false;
+            }
+            try {
+                c = (char) System.in.read();
+                if(c == 'w') moveWorker(1, Direction.Up );
+                if(c == 's') moveWorker(1, Direction.Down );
+                if(c == 'd') moveWorker(1, Direction.Right );
+                if(c == 'a') moveWorker(1, Direction.Left );
+                if(c != '\n')changed = true;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        EndGame();
     }
     private void createAndShowGUI(Game game) {
         //Create and set up the window.
