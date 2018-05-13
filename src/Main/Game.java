@@ -162,6 +162,7 @@ public class Game{
     void moveWorker(int id, Direction dir) {
             setCurrentWorker(workers.get(id));
             workers.get(id).Control(dir);
+            view.validate();
     }
 
     /**
