@@ -27,7 +27,8 @@ public class Factory {
     }
 
     public Point getPos(Field f) {
-        return new Point((fields.indexOf(f) / width), fields.indexOf(f) % width);
+        //TODO Why (fields.indexOf(f) / width) ? +1 ?
+        return new Point((fields.indexOf(f) % width), (fields.indexOf(f) / width)+1);
     }
 
     int index(int x, int y) {
@@ -104,6 +105,7 @@ public class Factory {
                 String[] fields = line.split(" ");
                 for (String field : fields) {
                     chunks.add(field);
+
                     switch (field.charAt(0)) {
                         case 'X':
                             Column column = new Column(this);
@@ -161,7 +163,6 @@ public class Factory {
                     count++;
                 }
             }
-
             while ((line = br.readLine()) != null) {
                 parts = line.split(" ");
                 String[] coords = parts[1].split(";");

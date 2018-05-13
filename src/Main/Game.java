@@ -3,6 +3,7 @@ package Main;
 import Graphics.View;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,10 +23,14 @@ public class Game{
      */
     private Game() {
         map = new Factory();
-        view = new View(this);
         workers = new HashMap<>();
         changed = true;
     }
+
+    /**
+     * A játék ablaka
+     */
+    private static JFrame window;
 
     static Game getInstance() {
         return game;
@@ -74,9 +79,11 @@ public class Game{
      * A jatek inditasaert felel
      */
     private void StartGame() {
+        createAndShowGUI(this);
         map.ReadMap("test2.txt");
-        gameLoop();
-
+        view.validate();
+        window.setVisible(true);
+        //gameLoop();
     }
 
     /**
@@ -169,22 +176,30 @@ public class Game{
     //This is the game itself, handles the inputs
     //TODO
     private void gameLoop() {
-        char c;
-        while (!map.ThisIsTheEnd()){
-            if (changed) {
-                changed = false;
-            }
-            try {
-                c = (char) System.in.read();
-                if(c == 'w') moveWorker(1, Direction.Up );
-                if(c == 's') moveWorker(1, Direction.Down );
-                if(c == 'd') moveWorker(1, Direction.Right );
-                if(c == 'a') moveWorker(1, Direction.Left );
-                if(c != '\n')changed = true;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        EndGame();
+//        char c;
+//        while (!map.ThisIsTheEnd()){
+//            if (changed) {
+//                changed = false;
+//            }
+//            try {
+//                c = (char) System.in.read();
+//                if(c == 'w') moveWorker(1, Direction.Up );
+//                if(c == 's') moveWorker(1, Direction.Down );
+//                if(c == 'd') moveWorker(1, Direction.Right );
+//                if(c == 'a') moveWorker(1, Direction.Left );
+//                if(c != '\n')changed = true;
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        EndGame();
+    }
+    private void createAndShowGUI(Game game) {
+        //Create and set up the window.
+        window = new JFrame("Sokoban");
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setResizable(false);
+
+        view = new View(game, window);
     }
 }

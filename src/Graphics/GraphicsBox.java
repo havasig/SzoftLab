@@ -37,9 +37,9 @@ public class GraphicsBox implements Drawable {
         Point pos = box.getPos();
 
         if (!box.getLocked()) {
-            g.drawImage(imageFree, pos.x, pos.y - imageFree.getHeight(), size, size, null);
+            g.drawImage(imageFree, pos.x*size, pos.y*size - imageFree.getHeight(), size, size, null);
         } else {
-            g.drawImage(imageLocked, pos.x, pos.y - imageLocked.getHeight(), size, size, null);
+            g.drawImage(imageLocked, pos.x*size, pos.y*size - imageLocked.getHeight(), size, size, null);
         }
     }
 }

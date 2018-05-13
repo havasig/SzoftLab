@@ -33,6 +33,6 @@ public class GraphicsColumn implements Drawable {
     public void Draw(Graphics g) {
         int size = view.getGridsize();
         Point pos = column.getPos();
-        g.drawImage(imageColumn, pos.x, pos.y - imageColumn.getHeight(), size, size, null);
+        g.drawImage(imageColumn, pos.x*size, pos.y*size - imageColumn.getHeight(), size, size, null);
     }
 }
