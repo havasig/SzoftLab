@@ -102,7 +102,6 @@ public class Factory {
                 String[] fields = line.split(" ");
                 for (String field : fields) {
 
-
                     switch (field.charAt(0)) {
                         case 'X':
                             Column column = new Column(this);
@@ -144,6 +143,7 @@ public class Factory {
                             throw new Exception();
                     }
 
+
                     switch (field.charAt(1)) {
                         case 'B':
                         case 'b':
@@ -171,8 +171,8 @@ public class Factory {
                             throw new Exception();
 
                     }
+                    count++;
                 }
-                count++;
             }
 
             while ((line = br.readLine()) != null) {
@@ -192,11 +192,6 @@ public class Factory {
             Error("Nem sikerült beolvasni.");
         }
     }
-
-    void addWorker(int x, int y, int id) {
-        Game.getInstance().addWorker(new Worker(getField(x, y), id));
-    }
-
 
     private void Error(String err) {
         System.out.println(err);
