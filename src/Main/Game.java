@@ -169,11 +169,11 @@ public class Game{
      * Kenoanyagot helyez el a jatekter egy mezejen
      *
      * @param id: ezen azonositoju Worker kezdemenyezte az elhelyezest.
-     * @param d:  ebbe az iranyba helyezi el a kenoanyagot
      * @param f:  ilyen tipusu kenoanyagot helyez el
      */
-    void placeObject(int id, String d, String f) {
-        workers.get(id).placeObject(Direction.valueOf(d), Field.FieldState.valueOf(f));
+    void placeObject(int id, String f) {
+        workers.get(id).placeObject(Field.FieldState.valueOf(f));
+        view.validate();
     }
 
     //This is the game itself, handles the inputs
@@ -190,6 +190,8 @@ public class Game{
                 if(c == 's') moveWorker(1, Direction.Down );
                 if(c == 'd') moveWorker(1, Direction.Right );
                 if(c == 'a') moveWorker(1, Direction.Left );
+                if(c == 'q') placeObject(1, "Oil");
+                if(c == 'e') placeObject(1, "Honey");
                 if(c != '\n')changed = true;
             } catch (IOException e) {
                 e.printStackTrace();
