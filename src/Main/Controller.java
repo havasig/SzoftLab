@@ -47,11 +47,11 @@ public class Controller {
         }
     }
 
-    public void workerAction(int id, Field.FieldState f){
+    private void workerAction(int id, Field.FieldState f){
         Game.getInstance().placeObject(id, f);
     }
 
-    public void workerMove(int id,Direction d){
+    private void workerMove(int id,Direction d){
         Game.getInstance().moveWorker(id, d);
     }
 

@@ -86,7 +86,7 @@ public class Factory {
         }
     }
 
-    //TODO
+    //TODO ez itt miért todo?
     void ReadMap(String fileName) {
         try {
             int count = 0;
