@@ -90,6 +90,7 @@ public class Factory {
     public void ReadMap(String fileName) {
         try {
             int count = 0;
+            ArrayList<String> chunks = new ArrayList<>();
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             String line = br.readLine();
             String[] parts = line.split(" ");
@@ -102,7 +103,7 @@ public class Factory {
                 line = br.readLine();
                 String[] fields = line.split(" ");
                 for (String field : fields) {
-
+                    chunks.add(field);
                     switch (field.charAt(0)) {
                         case 'X':
                             Column column = new Column(this);
@@ -144,22 +145,6 @@ public class Factory {
                             throw new Exception();
                     }
 
-
-                    switch (field.charAt(1)) {
-                        case 'B':
-                        case 'b':
-                            Box box = new Box(this.fields.get(count), 1);
-                            //TODO  Game.getInstance().getView().AddMovable(new GraphicsBox(boxfree);
-                            //TODO holtalan lyuk esetén mivan
-                            break;
-                        case '_':
-                            break;
-                        default:
-                            int num = Character.getNumericValue(field.charAt(1));
-                            Game.getInstance().addWorker(new Worker(this.fields.get(count), num));
-                            //TODO
-                    }
-
                     switch (field.charAt(2)) {
                         case 'M':
                             this.fields.get(count).setSplich(Field.FieldState.Honey);
@@ -188,6 +173,24 @@ public class Factory {
                 int hy = Integer.parseInt(holeCoords[1]);
 
                 switches.get(index(sx, sy)).SetHole(holes.get(index(hx, hy)));
+            }
+
+            count = 0;
+            for (String f : chunks) {
+                switch (f.charAt(1)) {
+                    case 'B':
+                    case 'b':
+                        Box box = new Box(this.fields.get(count), 1);
+                        //TODO  Game.getInstance().getView().AddMovable(new GraphicsBox(boxfree);
+                        break;
+                    case '_':
+                        break;
+                    default:
+                        int num = Character.getNumericValue(f.charAt(1));
+                        Game.getInstance().addWorker(new Worker(this.fields.get(count), num));
+                        //TODO
+                }
+                count++;
             }
             linkMap();
         } catch (Exception e) {

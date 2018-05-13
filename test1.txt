@@ -1,6 +1,0 @@
-generateMap 11 11
-addWorker 1 1 1
-addBox 2 1
-addBox 5 1
-start
-moveWorker 1 Right
