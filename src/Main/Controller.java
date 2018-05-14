@@ -56,11 +56,10 @@ public class Controller {
         Game.getInstance().moveWorker(id, d);
     }
 
-    public boolean Run() {
+    public void Run() {
         boolean stHappened = false;
         for(int i = 0; i < events.size(); i++){
-            char step = events.get(i).getKeyChar();
-            System.out.print("asd");
+            char step = events.get(i).getKeyChar();;
             switch (step){
                 case '8': if(Game.getInstance().getWorkers().get(1).isAlive()) workerMove(1,Direction.Up); break;
                 case '4': if(Game.getInstance().getWorkers().get(1).isAlive()) workerMove(1,Direction.Left); break;
@@ -88,6 +87,8 @@ public class Controller {
             stHappened = true;
         }
         events.clear();
-        return stHappened;
+        if(Game.getInstance().getMap().ThisIsTheEnd())
+            Game.getInstance().EndGame();
+
     }
 }

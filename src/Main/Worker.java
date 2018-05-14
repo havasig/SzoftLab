@@ -187,12 +187,14 @@ public class Worker extends Movable {
 
         for (Direction dir : Direction.values()) {
             Field nextField = currentField.GetNeighbor(dir);
+            System.out.println(dir);
 
             if (nextField != null && nextField.PseudoAccept() && !nextField.getChecked()) {
 
                 Movable m = nextField.GetMovable();
                 if (m != null) {
-                    return m.PseudoCollideWorker(dir, strength);
+                    if (m.PseudoCollideWorker(dir, strength) == Moved)
+                        return Moved;
                 } else {
                     if (IsThereMovement(nextField) == Moved) {
                         return Moved;

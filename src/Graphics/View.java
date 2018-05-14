@@ -73,21 +73,17 @@ public class View extends JPanel {
 
     //TODO
     public void paintComponent(Graphics g) {
-        if (!valid) {
-            super.paintComponent(g);
-            for (Drawable field : fields)
-                field.Draw(g);
-            for (Drawable movable : movables)
-                movable.Draw(g);
-             //valid = true; //<-- ezzel vmi szar van
-        }
+        super.paintComponent(g);
+        for (Drawable field : fields)
+            field.Draw(g);
+        for (Drawable movable : movables)
+            movable.Draw(g);
     }
 
     //TODO ?Unnecessary? - This is done by super.paint(g) in paintComponent
     public void clear() {}
 
     public void validate() {
-        valid = false;
         window.repaint();
     }
 

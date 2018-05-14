@@ -22,9 +22,6 @@ public class Game{
      * A Game konstruktora.
      */
     private Game() {
-        map = new Factory();
-        workers = new HashMap<>();
-        changed = true;
         controller = new Controller();
     }
 
@@ -90,6 +87,9 @@ public class Game{
      * A jatek inditasaert felel
      */
     public void StartGame() {
+        map = new Factory();
+        workers = new HashMap<>();
+        changed = true;
         view = new View(this, window);
         window.remove(menu);
         window.add(view);
@@ -113,7 +113,6 @@ public class Game{
             Worker work = worker.getValue();
             int id = worker.getKey();
             out = out + "Worker " + Integer.toString(id) + ": " + Integer.toString(points)+"\n";
-            //System.out.println("Worker " + Integer.toString(id) + ": " + Integer.toString(points));
 
             //Get the winner(s) while we write the points
             if (points >= mostPoints) {
@@ -146,7 +145,9 @@ public class Game{
         int input = JOptionPane.showOptionDialog(null, out, "Results", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
         if(input == JOptionPane.OK_OPTION)
         {
-            System.out.print("endgame");
+            window.remove(view);
+            menu = new Menu(window);
+            menu.Run();
         }
     }
 
@@ -198,16 +199,6 @@ public class Game{
         view.validate();
     }
 
-    //This is the game itself, handles the inputs
-    private void gameLoop() {
-        while (!map.ThisIsTheEnd()){
-           if (changed) {
-               changed = false;
-            }
-            changed = controller.Run();
-        }
-        EndGame();
-    }
 
     private void createAndShowGUI(Game game) {
         //Create and set up the window.

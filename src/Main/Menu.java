@@ -18,13 +18,6 @@ public class Menu extends JPanel{
     public Menu(JFrame window) {
         this.window = window;
         menuInit();
-        this.addComponentListener(new ComponentAdapter( ) {
-            public void componentResized(ComponentEvent ev) {
-                start.setBounds((window.getWidth()/2)-(startImageWidth/2), 300, startImageWidth, startImageHeight );
-                exit.setBounds((window.getWidth()/2)-(exitImageWidth/2), 400, exitImageWidth, exitImageHeight );
-                title.setBounds((window.getWidth()/2)-(titleImageWidth/2), 50, titleImageWidth, titleImageHeight );
-            }
-        });
     }
 
 
@@ -42,7 +35,6 @@ public class Menu extends JPanel{
     private int titleImageHeight = 0;
 
     private void menuInit() {
-
         setPreferredSize(new Dimension(width, height));
         setVisible(true);
         setFocusable(true);
@@ -85,6 +77,13 @@ public class Menu extends JPanel{
 
         start.addActionListener(new StartButtonListener());
         exit.addActionListener(new ExitButtonListener());
+        this.addComponentListener(new ComponentAdapter( ) {
+            public void componentResized(ComponentEvent ev) {
+                start.setBounds((window.getWidth()/2)-(startImageWidth/2), 300, startImageWidth, startImageHeight );
+                exit.setBounds((window.getWidth()/2)-(exitImageWidth/2), 400, exitImageWidth, exitImageHeight );
+                title.setBounds((window.getWidth()/2)-(titleImageWidth/2), 50, titleImageWidth, titleImageHeight );
+            }
+        });
     }
 
     boolean pushed = false;

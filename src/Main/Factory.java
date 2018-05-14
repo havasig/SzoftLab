@@ -44,18 +44,24 @@ public class Factory {
     }
 
     boolean ThisIsTheEnd() {
-        //set all field to unchecked
-        for (Field field : fields)
-            field.setChecked(false);
-
         //Iterate through workers, if any of them can move something, then it is not over
         HashMap<Integer, Worker> workers = Game.getInstance().getWorkers();
         for (Worker worker : workers.values()) {
+            System.out.println(worker.getIdentifier());
+            //set all field to unchecked
+            for (Field field : fields)
+                field.setChecked(false);
             //Don't test for Workers that died.
-            if (!worker.isAlive())
+            if (!worker.isAlive()) {
+                System.out.println("cont");
                 continue;
+            }
             if (worker.IsThereMovement(worker.field) == Moved)
+            {
+                System.out.println("asd");
+
                 return false;
+            }
         }
         return true;
     }
