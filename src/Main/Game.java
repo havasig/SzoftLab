@@ -91,13 +91,13 @@ public class Game{
      */
     public void StartGame() {
         view = new View(this, window);
+        window.remove(menu);
+        window.add(view);
         view.addKeyListener(new KeyEventHandler());
         map.ReadMap("test2.txt");
         window.setVisible(true);
         controller.fillChars();
         view.validate();
-        window.remove(menu);
-        window.add(view);
     }
 
     /**
@@ -202,8 +202,8 @@ public class Game{
     //This is the game itself, handles the inputs
     private void gameLoop() {
         while (!map.ThisIsTheEnd()){
-            if (changed) {
-                changed = false;
+           if (changed) {
+               changed = false;
             }
             changed = controller.Run();
         }

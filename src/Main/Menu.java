@@ -87,6 +87,8 @@ public class Menu extends JPanel{
         exit.addActionListener(new ExitButtonListener());
     }
 
+    boolean pushed = false;
+
     public void Run() {
         window.add(this);
         window.pack();
@@ -95,7 +97,8 @@ public class Menu extends JPanel{
     public class StartButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-        Game.getInstance().StartGame();
+            pushed = true;
+            Game.getInstance().StartGame();
         }
     }
 
