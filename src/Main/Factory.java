@@ -98,13 +98,11 @@ public class Factory {
                 throw new Exception();
             this.width = Integer.parseInt(parts[0]);
             this.height = Integer.parseInt(parts[1]);
-
             for (int actual = 0; actual < height; actual++) {
                 line = br.readLine();
                 String[] fields = line.split(" ");
                 for (String field : fields) {
                     chunks.add(field);
-
                     switch (field.charAt(0)) {
                         case 'X':
                             Column column = new Column(this);
@@ -145,7 +143,6 @@ public class Factory {
                         default:
                             throw new Exception();
                     }
-
                     switch (field.charAt(2)) {
                         case 'M':
                             this.fields.get(count).setSplich(Field.FieldState.Honey);

@@ -81,7 +81,6 @@ public class View extends JPanel {
                 movable.Draw(g);
              //valid = true; //<-- ezzel vmi szar van
         }
-        g.drawString("BLAH", 20, 20);
     }
 
     //TODO ?Unnecessary? - This is done by super.paint(g) in paintComponent

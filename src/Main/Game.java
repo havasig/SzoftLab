@@ -26,7 +26,6 @@ public class Game{
         workers = new HashMap<>();
         changed = true;
         controller = new Controller();
-        menu = Menu.getInstance();
     }
 
     /**
@@ -39,7 +38,7 @@ public class Game{
     }
     ///////////////////////////////
 
-    private static JFrame menu;
+    private static Menu menu;
 
     /**
      * A jelenleg mozgo jatekost tarolja.
@@ -82,21 +81,23 @@ public class Game{
         return view;
     }
 
-    public static void main(String[] args) {
-        ((Menu) menu).Run();
+    public static void main(String[] args)
+    {
+        game.createAndShowGUI(getInstance());
     }
 
     /**
      * A jatek inditasaert felel
      */
     public void StartGame() {
-        createAndShowGUI(this);
-        map.ReadMap("test2.txt");
+        view = new View(this, window);
         view.addKeyListener(new KeyEventHandler());
-        view.validate();
+        map.ReadMap("test2.txt");
         window.setVisible(true);
         controller.fillChars();
-        gameLoop();
+        view.validate();
+        window.remove(menu);
+        window.add(view);
     }
 
     /**
@@ -146,7 +147,7 @@ public class Game{
         int input = JOptionPane.showOptionDialog(null, out, "Results", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
         if(input == JOptionPane.OK_OPTION)
         {
-            ((Menu) menu).Run();
+            System.out.print("endgame");
         }
     }
 
@@ -214,7 +215,8 @@ public class Game{
         window = new JFrame("Sokoban");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-
-        view = new View(game, window);
+        window.setVisible(true);
+        menu = new Menu(window);
+        menu.Run();
     }
 }

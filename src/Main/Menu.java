@@ -9,51 +9,30 @@ import java.io.IOException;
 import java.awt.*;
 
 
-public class Menu extends JFrame{
+public class Menu extends JPanel{
 
-    //singleton/////////////////////
-    private static final Menu menu = new Menu();
-    /**
-     * A Menu konstruktora.
-     */
-    private Menu() {
-        frame = new JFrame("Killer Sokoban a'la rajahalegr");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(new Dimension(600, 600));
-        frame.getContentPane().setBackground( Color.DARK_GRAY );
-        frame.setLayout(null);
-        frame.addComponentListener(new ComponentAdapter( ) {
+    //windowheight and width
+    private int height = 600;
+    private int width = 600;
+
+    public Menu(JFrame window) {
+        this.window = window;
+        menuInit();
+        this.addComponentListener(new ComponentAdapter( ) {
             public void componentResized(ComponentEvent ev) {
-                start.setBounds((frame.getWidth()/2)-(startImageWidth/2), 300, startImageWidth, startImageHeight );
-                exit.setBounds((frame.getWidth()/2)-(exitImageWidth/2), 400, exitImageWidth, exitImageHeight );
-                title.setBounds((frame.getWidth()/2)-(titleImageWidth/2), 50, titleImageWidth, titleImageHeight );
+                start.setBounds((window.getWidth()/2)-(startImageWidth/2), 300, startImageWidth, startImageHeight );
+                exit.setBounds((window.getWidth()/2)-(exitImageWidth/2), 400, exitImageWidth, exitImageHeight );
+                title.setBounds((window.getWidth()/2)-(titleImageWidth/2), 50, titleImageWidth, titleImageHeight );
             }
         });
-
-        contentPaneStart = frame.getContentPane();
-        contentPaneExit  = frame.getContentPane();
-        contentPaneTitle = frame.getContentPane();
-
-        menuInit();
-
-        frame.setVisible(true);
-
-    }
-    ////////////////////////////////
-
-    static Menu getInstance() {
-        return menu;
     }
 
-    private JFrame frame;
+
+    private JFrame window;
 
     private JButton start;
     private JButton exit;
     private JLabel title;
-
-    private Container contentPaneStart;
-    private Container contentPaneExit;
-    private Container contentPaneTitle;
 
     private int startImageWidth = 0;
     private int startImageHeight = 0;
@@ -64,13 +43,18 @@ public class Menu extends JFrame{
 
     private void menuInit() {
 
+        setPreferredSize(new Dimension(width, height));
+        setVisible(true);
+        setFocusable(true);
+        requestFocus();
+
         try {
             BufferedImage myPicture = ImageIO.read(new File("resources/start.png"));
             start = new JButton(new ImageIcon(myPicture));
             startImageWidth = myPicture.getWidth();
             startImageHeight = myPicture.getHeight();
-            start.setBounds((frame.getWidth()/2)-(startImageWidth/2), 300, startImageWidth, startImageHeight );
-            contentPaneStart.add(start);
+            start.setBounds((window.getWidth()/2)-(startImageWidth/2), 300, startImageWidth, startImageHeight );
+            this.add(start);
 
         } catch (Exception ex) {
             System.out.println(ex);
@@ -81,8 +65,8 @@ public class Menu extends JFrame{
             exit = new JButton(new ImageIcon(myPicture));
             exitImageWidth = myPicture.getWidth();
             exitImageHeight = myPicture.getHeight();
-            exit.setBounds((frame.getWidth()/2)-(exitImageWidth/2), 400, exitImageWidth, exitImageHeight );
-            contentPaneExit.add(exit);
+            exit.setBounds((window.getWidth()/2)-(exitImageWidth/2), 400, exitImageWidth, exitImageHeight );
+            this.add(exit);
         } catch (Exception ex) {
             System.out.println(ex);
         }
@@ -92,8 +76,8 @@ public class Menu extends JFrame{
             title = new JLabel(new ImageIcon(myPicture));
             titleImageWidth = myPicture.getWidth();
             titleImageHeight = myPicture.getHeight();
-            title.setBounds((frame.getWidth()/2)-(titleImageWidth/2), 50, titleImageWidth, titleImageHeight );
-            contentPaneTitle.add(title);
+            title.setBounds((window.getWidth()/2)-(titleImageWidth/2), 50, titleImageWidth, titleImageHeight );
+            this.add(title);
 
         } catch (Exception ex) {
             System.out.println(ex);
@@ -104,7 +88,8 @@ public class Menu extends JFrame{
     }
 
     public void Run() {
-        while (true) { }
+        window.add(this);
+        window.pack();
     }
 
     public class StartButtonListener implements ActionListener {
@@ -117,7 +102,7 @@ public class Menu extends JFrame{
     public class ExitButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            window.dispatchEvent(new WindowEvent(window, WindowEvent.WINDOW_CLOSING));
         }
     }
 }
