@@ -136,7 +136,7 @@ public class Worker extends Movable {
         } else {
             return false;
         }
-}
+    }
 
     /**
      * A patameteret a jatekostol kapja. Ez altal iranyitott a Worker.
@@ -159,7 +159,7 @@ public class Worker extends Movable {
      *
      * @param f: ilyen tipusu kenoanyagot helyez el.
      */
-    void placeObject( Field.FieldState f) {
+    void placeObject(Field.FieldState f) {
         field.setSplich(f);
     }
 
@@ -170,12 +170,11 @@ public class Worker extends Movable {
         return points;
     }
 
-    public Boolean isAlive()
-    {
+    public Boolean isAlive() {
         return alive;
     }
 
-    public Point getPos(){
+    public Point getPos() {
         return field.getPos();
     }
 
@@ -187,7 +186,6 @@ public class Worker extends Movable {
 
         for (Direction dir : Direction.values()) {
             Field nextField = currentField.GetNeighbor(dir);
-            System.out.println(dir);
 
             if (nextField != null && nextField.PseudoAccept() && !nextField.getChecked()) {
 

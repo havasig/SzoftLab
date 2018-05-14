@@ -58,7 +58,7 @@ public class Switch extends Field {
         hole = h;
     }
 
-    public boolean getBox(){
+    public boolean getBox() {
         return box;
     }
 }

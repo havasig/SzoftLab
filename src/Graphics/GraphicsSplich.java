@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class GraphicsSplich {
+class GraphicsSplich {
     private static BufferedImage imageHoney;
     private static BufferedImage imageOil;
 
@@ -25,10 +25,10 @@ public class GraphicsSplich {
         Field.FieldState state = field.getSplich();
         switch (state) {
             case Honey:
-                g.drawImage(imageHoney, pos.x*size, pos.y*size , size, size, null);
+                g.drawImage(imageHoney, pos.x * size, pos.y * size, size, size, null);
                 break;
             case Oil:
-                g.drawImage(imageOil, pos.x*size, pos.y*size , size, size, null);
+                g.drawImage(imageOil, pos.x * size, pos.y * size, size, size, null);
                 break;
             case None:
                 break;

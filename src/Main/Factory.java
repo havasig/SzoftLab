@@ -30,9 +30,8 @@ public class Factory {
         return new Point((fields.indexOf(f) % width), (fields.indexOf(f) / width));
     }
 
-    int index(int x, int y) {
-        int num = (y * width) + x;
-        return num;
+    private int index(int x, int y) {
+        return (y * width) + x;
     }
 
     public int getWidth() {
@@ -47,19 +46,14 @@ public class Factory {
         //Iterate through workers, if any of them can move something, then it is not over
         HashMap<Integer, Worker> workers = Game.getInstance().getWorkers();
         for (Worker worker : workers.values()) {
-            System.out.println(worker.getIdentifier());
             //set all field to unchecked
             for (Field field : fields)
                 field.setChecked(false);
             //Don't test for Workers that died.
             if (!worker.isAlive()) {
-                System.out.println("cont");
                 continue;
             }
-            if (worker.IsThereMovement(worker.field) == Moved)
-            {
-                System.out.println("asd");
-
+            if (worker.IsThereMovement(worker.field) == Moved) {
                 return false;
             }
         }
@@ -92,7 +86,6 @@ public class Factory {
         }
     }
 
-    //TODO ez itt miért todo?
     void ReadMap(String fileName) {
         try {
             int count = 0;

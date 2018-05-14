@@ -3,20 +3,15 @@ package Graphics;
 import Main.Game;
 
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class View extends JPanel {
 
+    private boolean gridSizeCalced = false;
+    private Game game;
     private ArrayList<Drawable> fields;
     private ArrayList<Drawable> movables;
-    BufferedImage buffer;
-    boolean valid = false;
-    boolean gridSizeCalced = false;
-    Game game;
-
     private JFrame window;
 
     //windowheight and width
@@ -27,15 +22,14 @@ public class View extends JPanel {
     private int gridsize;
 
     public View(Game _game, JFrame _window) {
-        game = _game;
-        valid = false;
+        this.game = _game;
         fields = new ArrayList<Drawable>();
         movables = new ArrayList<Drawable>();
         window = _window;
         init();
     }
 
-    private void init(){
+    private void init() {
         setPreferredSize(new Dimension(width, height));
         setVisible(true);
         window.add(this);
@@ -54,7 +48,7 @@ public class View extends JPanel {
         movables.add(mov);
     }
 
-    public void calcGrid() {
+    private void calcGrid() {
 
         int h = height / game.getMap().getHeight();
         int w = width / game.getMap().getWidth();
@@ -63,15 +57,15 @@ public class View extends JPanel {
         gridsize = h > w ? w : h;
     }
 
-    public int getGridsize() {
+    int getGridsize() {
         if (!gridSizeCalced) {
             calcGrid();
-            gridSizeCalced =true;
+            gridSizeCalced = true;
         }
         return gridsize;
     }
 
-    //TODO
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (Drawable field : fields)
@@ -80,13 +74,8 @@ public class View extends JPanel {
             movable.Draw(g);
     }
 
-    //TODO ?Unnecessary? - This is done by super.paint(g) in paintComponent
-    public void clear() {}
-
     public void validate() {
         window.repaint();
     }
 
-    //TODO ?Unnecessary?
-    public void Draw() { }
 }

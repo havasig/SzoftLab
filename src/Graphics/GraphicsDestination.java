@@ -31,10 +31,9 @@ public class GraphicsDestination implements Drawable {
 
     @Override
     public void Draw(Graphics g) {
-        //TODO splich
         int size = view.getGridsize();
         Point pos = destination.getPos();
-        g.drawImage(imageDestination, pos.x*size, pos.y*size, size, size, null);
-        GraphicsSplich.Draw(destination, g, pos,size );
+        g.drawImage(imageDestination, pos.x * size, pos.y * size, size, size, null);
+        GraphicsSplich.Draw(destination, g, pos, size);
     }
 }

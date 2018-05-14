@@ -29,15 +29,14 @@ public class GraphicsHole implements Drawable {
 
     @Override
     public void Draw(Graphics g) {
-        //TODO splich
         int size = view.getGridsize();
         Point pos = hole.getPos();
 
         if (hole.getState() == HoleState.Open) {
-            g.drawImage(imageOpen, pos.x*size, pos.y*size , size, size, null);
+            g.drawImage(imageOpen, pos.x * size, pos.y * size, size, size, null);
         } else {
-            g.drawImage(imageClosed, pos.x*size, pos.y*size , size, size, null);
-            GraphicsSplich.Draw(hole, g, pos,size );
+            g.drawImage(imageClosed, pos.x * size, pos.y * size, size, size, null);
+            GraphicsSplich.Draw(hole, g, pos, size);
         }
 
     }

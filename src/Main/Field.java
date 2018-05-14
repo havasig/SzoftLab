@@ -12,7 +12,7 @@ public class Field {
      */
     Movable movable;
 
-    Factory factory;
+    private Factory factory;
     /**
      * A mezo szomszedsagaban levo mezok
      */
@@ -30,7 +30,7 @@ public class Field {
      * A Field kontruktora.
      */
     public Field(Factory _factory) {
-        factory=_factory;
+        this.factory = _factory;
         neighbors = new HashMap<>();
         splich = FieldState.None;
         checked = false;
@@ -106,7 +106,9 @@ public class Field {
      * @param w: a Worker, ami lekerult rola.
      */
     void RemoveWorker(Worker w) {
-        movable = null;
+        if (movable == w) {
+            movable = null;
+        }
     }
 
     /**
@@ -119,6 +121,15 @@ public class Field {
     }
 
     /**
+     * Visszaadja a rajta levo kenoanyagot
+     *
+     * @return a rajta levo kenoanyag
+     */
+    public FieldState getSplich() {
+        return splich;
+    }
+
+    /**
      * Beallitja, hogy van rajta kenoanyag
      *
      * @param splich: a kenoaynag, ami rakerult.
@@ -127,13 +138,12 @@ public class Field {
         this.splich = splich;
     }
 
-    /**
-     * Visszaadja a rajta levo kenoanyagot
-     *
-     * @return a rajta levo kenoanyag
-     */
-    public FieldState getSplich() {
-        return splich;
+    boolean PseudoAccept() {
+        return true;
+    }
+
+    public Point getPos() {
+        return factory.getPos(this);
     }
 
     /**
@@ -159,14 +169,6 @@ public class Field {
             return value;
         }
 
-    }
-
-    boolean PseudoAccept() {
-        return true;
-    }
-
-    public Point getPos(){
-        return factory.getPos(this);
     }
 
 

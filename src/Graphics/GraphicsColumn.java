@@ -16,7 +16,7 @@ public class GraphicsColumn implements Drawable {
     private View view;
 
     public GraphicsColumn(Column _column) {
-        column = _column;
+        this.column = _column;
 
         try {
             imageColumn = ImageIO.read(new File("resources/column.png"));
@@ -34,7 +34,7 @@ public class GraphicsColumn implements Drawable {
     public void Draw(Graphics g) {
         int size = view.getGridsize();
         Point pos = column.getPos();
-        g.drawImage(imageColumn, pos.x*size, pos.y*size , size, size, null);
-        GraphicsSplich.Draw(column, g, pos,size );
+        g.drawImage(imageColumn, pos.x * size, pos.y * size, size, size, null);
+        GraphicsSplich.Draw(column, g, pos, size);
     }
 }

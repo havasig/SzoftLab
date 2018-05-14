@@ -2,25 +2,17 @@ package Main;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.awt.*;
 
 
-public class Menu extends JPanel{
-
+class Menu extends JPanel {
     //windowheight and width
     private int height = 600;
     private int width = 600;
-
-    public Menu(JFrame window) {
-        this.window = window;
-        menuInit();
-    }
-
-
     private JFrame window;
 
     private JButton start;
@@ -34,6 +26,11 @@ public class Menu extends JPanel{
     private int titleImageWidth = 0;
     private int titleImageHeight = 0;
 
+    Menu(JFrame window) {
+        this.window = window;
+        menuInit();
+    }
+
     private void menuInit() {
         setPreferredSize(new Dimension(width, height));
         setVisible(true);
@@ -45,11 +42,11 @@ public class Menu extends JPanel{
             start = new JButton(new ImageIcon(myPicture));
             startImageWidth = myPicture.getWidth();
             startImageHeight = myPicture.getHeight();
-            start.setBounds((window.getWidth()/2)-(startImageWidth/2), 300, startImageWidth, startImageHeight );
+            start.setBounds((window.getWidth() / 2) - (startImageWidth / 2), 300, startImageWidth, startImageHeight);
             this.add(start);
 
-        } catch (Exception ex) {
-            System.out.println(ex);
+        } catch (IOException ex) {
+            System.out.println(ex.getCause().toString());
         }
 
         try {
@@ -57,10 +54,10 @@ public class Menu extends JPanel{
             exit = new JButton(new ImageIcon(myPicture));
             exitImageWidth = myPicture.getWidth();
             exitImageHeight = myPicture.getHeight();
-            exit.setBounds((window.getWidth()/2)-(exitImageWidth/2), 400, exitImageWidth, exitImageHeight );
+            exit.setBounds((window.getWidth() / 2) - (exitImageWidth / 2), 400, exitImageWidth, exitImageHeight);
             this.add(exit);
-        } catch (Exception ex) {
-            System.out.println(ex);
+        } catch (IOException ex) {
+            System.out.println(ex.getCause().toString());
         }
 
         try {
@@ -68,27 +65,26 @@ public class Menu extends JPanel{
             title = new JLabel(new ImageIcon(myPicture));
             titleImageWidth = myPicture.getWidth();
             titleImageHeight = myPicture.getHeight();
-            title.setBounds((window.getWidth()/2)-(titleImageWidth/2), 50, titleImageWidth, titleImageHeight );
+            title.setBounds((window.getWidth() / 2) - (titleImageWidth / 2), 50, titleImageWidth, titleImageHeight);
             this.add(title);
 
-        } catch (Exception ex) {
-            System.out.println(ex);
+        } catch (IOException ex) {
+            System.out.println(ex.getCause().toString());
         }
 
         start.addActionListener(new StartButtonListener());
         exit.addActionListener(new ExitButtonListener());
-        this.addComponentListener(new ComponentAdapter( ) {
+        this.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent ev) {
-                start.setBounds((window.getWidth()/2)-(startImageWidth/2), 300, startImageWidth, startImageHeight );
-                exit.setBounds((window.getWidth()/2)-(exitImageWidth/2), 400, exitImageWidth, exitImageHeight );
-                title.setBounds((window.getWidth()/2)-(titleImageWidth/2), 50, titleImageWidth, titleImageHeight );
+                start.setBounds((window.getWidth() / 2) - (startImageWidth / 2), 300, startImageWidth, startImageHeight);
+                exit.setBounds((window.getWidth() / 2) - (exitImageWidth / 2), 400, exitImageWidth, exitImageHeight);
+                title.setBounds((window.getWidth() / 2) - (titleImageWidth / 2), 50, titleImageWidth, titleImageHeight);
             }
-        });
+        }
+        );
     }
 
-    boolean pushed = false;
-
-    public void Run() {
+    void Run() {
         window.add(this);
         window.pack();
     }
@@ -96,7 +92,6 @@ public class Menu extends JPanel{
     public class StartButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            pushed = true;
             Game.getInstance().StartGame();
         }
     }

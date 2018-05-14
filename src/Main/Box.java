@@ -43,8 +43,8 @@ public class Box extends Movable {
         dead = true;
     }
 
-    public boolean isDead() {
-        return dead;
+    public boolean isAlive() {
+        return !dead;
     }
 
     /**
@@ -157,12 +157,11 @@ public class Box extends Movable {
         locked = true;
     }
 
-    public boolean getLocked()
-    {
+    public boolean getLocked() {
         return locked;
     }
 
-    public Point getPos(){
+    public Point getPos() {
         return field.getPos();
     }
 }

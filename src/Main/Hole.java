@@ -68,8 +68,7 @@ public class Hole extends Field {
         state = HoleState.Closed;
     }
 
-    public HoleState getState()
-    {
+    public HoleState getState() {
         return state;
     }
 }

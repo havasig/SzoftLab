@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class GraphicsField implements Drawable {
 
-    private BufferedImage imageField;//TODO splich
+    private BufferedImage imageField;
     private Field field;
     private View view;
 
@@ -25,11 +25,10 @@ public class GraphicsField implements Drawable {
 
     @Override
     public void Draw(Graphics g) {
-        //TODO splich
         int size = view.getGridsize();
         Point pos = field.getPos();
-        g.drawImage(imageField, pos.x*size, pos.y*size , size, size, null);
-        GraphicsSplich.Draw(field, g, pos,size );
+        g.drawImage(imageField, pos.x * size, pos.y * size, size, size, null);
+        GraphicsSplich.Draw(field, g, pos, size);
     }
 
     @Override

@@ -13,8 +13,7 @@ public class GraphicsWorker implements Drawable {
     private View view;
     private BufferedImage workerImage;
 
-    public GraphicsWorker(Worker w)
-    {
+    public GraphicsWorker(Worker w) {
         worker = w;
         try {
             int i = worker.getIdentifier();
@@ -31,7 +30,7 @@ public class GraphicsWorker implements Drawable {
         int size = view.getGridsize();
         if (worker.isAlive()) {
             Point pos = worker.getPos();
-            g.drawImage(workerImage, pos.x*size + (int)(size*0.1), pos.y*size  + (int)(size*0.1), (int)(size*0.8), (int)(size*0.8), null);
+            g.drawImage(workerImage, pos.x * size + (int) (size * 0.1), pos.y * size + (int) (size * 0.1), (int) (size * 0.8), (int) (size * 0.8), null);
         }
     }
 

@@ -3,13 +3,8 @@ package Main;
 import Graphics.View;
 
 import javax.swing.*;
-import java.awt.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * A jatek fo futasaert felel, valamint a pontozast kezeli. A jatek lelke.
@@ -53,8 +48,7 @@ public class Game{
      * A jatek nézetét reprezentálja
      */
     private View view;
-    private boolean changed;
-    public Controller controller;  //Havi írta ide, le kéne dokumentálni
+    Controller controller;  //Havi írta ide, le kéne dokumentálni
 
     /**
      * @return a jatekban levo Worker-ek.
@@ -80,16 +74,15 @@ public class Game{
 
     public static void main(String[] args)
     {
-        game.createAndShowGUI(getInstance());
+        game.createAndShowGUI();
     }
 
     /**
      * A jatek inditasaert felel
      */
-    public void StartGame() {
+    void StartGame() {
         map = new Factory();
         workers = new HashMap<>();
-        changed = true;
         view = new View(this, window);
         window.remove(menu);
         window.add(view);
@@ -104,15 +97,14 @@ public class Game{
      * A jatek befejezeseert felel
      */
     void EndGame() {
-        String out;
-        out = "Game over.\nPoints:\n";
+        StringBuilder out = new StringBuilder("Game over.\nPoints:\n");
         HashMap<Integer, Worker> winners = new HashMap<>();
         int mostPoints = 0;
         for (Map.Entry<Integer, Worker> worker : Game.getInstance().getWorkers().entrySet()) {
             int points = worker.getValue().getPoints();
             Worker work = worker.getValue();
             int id = worker.getKey();
-            out = out + "Worker " + Integer.toString(id) + ": " + Integer.toString(points)+"\n";
+            out.append("Worker ").append(Integer.toString(id)).append(": ").append(Integer.toString(points)).append("\n");
 
             //Get the winner(s) while we write the points
             if (points >= mostPoints) {
@@ -127,22 +119,22 @@ public class Game{
         }
 
         if (winners.size() == 0) {
-            out = out + out + "Something went wrong, there are no winners!\n";
+            out.append(out).append("Something went wrong, there are no winners!\n");
             //System.out.println("Something went wrong, there are no winners!");
             return;
         }
 
         if (winners.size() > 1)
             //System.out.println("The winners are: ");
-            out = out + "The winners are: ";
+            out.append("The winners are: ");
         else
             //System.out.println("The winner is: ");
-            out = out + "The winner is: ";
+            out.append("The winner is: ");
         for (Map.Entry<Integer, Worker> winner : winners.entrySet()) {
             //System.out.println("Worker " + winner.getKey().toString());
-            out = out + "Worker " + winner.getKey().toString()+" ";
+            out.append("Worker ").append(winner.getKey().toString()).append(" ");
         }
-        int input = JOptionPane.showOptionDialog(null, out, "Results", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+        int input = JOptionPane.showOptionDialog(null, out.toString(), "Results", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
         if(input == JOptionPane.OK_OPTION)
         {
             window.remove(view);
@@ -194,13 +186,13 @@ public class Game{
      * @param id: ezen azonositoju Worker kezdemenyezte az elhelyezest.
      * @param f:  ilyen tipusu kenoanyagot helyez el
      */
-    public void placeObject(int id, Field.FieldState f) {
+    void placeObject(int id, Field.FieldState f) {
         workers.get(id).placeObject(f);
         view.validate();
     }
 
 
-    private void createAndShowGUI(Game game) {
+    private void createAndShowGUI() {
         //Create and set up the window.
         window = new JFrame("Sokoban");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

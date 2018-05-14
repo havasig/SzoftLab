@@ -28,16 +28,15 @@ public class GraphicsSwitch implements Drawable {
 
     @Override
     public void Draw(Graphics g) {
-        //TODO splich
         int size = view.getGridsize();
         Point pos = switch_.getPos();
 
         if (!switch_.getBox()) {
-            g.drawImage(imageSwitchOff, pos.x*size, pos.y*size, size, size, null);
+            g.drawImage(imageSwitchOff, pos.x * size, pos.y * size, size, size, null);
         } else {
-            g.drawImage(imageSwitchOn, pos.x*size, pos.y*size, size, size, null);
+            g.drawImage(imageSwitchOn, pos.x * size, pos.y * size, size, size, null);
         }
-        GraphicsSplich.Draw(switch_, g, pos,size );
+        GraphicsSplich.Draw(switch_, g, pos, size);
     }
 
     @Override
