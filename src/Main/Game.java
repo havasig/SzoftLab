@@ -87,7 +87,7 @@ public class Game{
         window.remove(menu);
         window.add(view);
         view.addKeyListener(new KeyEventHandler());
-        map.ReadMap("test2.txt");
+        map.ReadMap("level1.txt");
         window.setVisible(true);
         controller.fillChars();
         view.validate();
