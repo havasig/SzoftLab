@@ -36,9 +36,9 @@ public class GraphicsBox implements Drawable {
         int size = view.getGridsize();
         Point pos = box.getPos();
 
-        if (!box.getLocked()) {
+        if (!box.getLocked() && !box.isDead()) {
             g.drawImage(imageFree, pos.x*size + (int)(size*0.1), pos.y*size  + (int)(size*0.1), (int)(size*0.8), (int)(size*0.8), null);
-        } else {
+        } else if(!box.isDead()){
             g.drawImage(imageLocked, pos.x*size + (int)(size*0.1), pos.y*size  + (int)(size*0.1), (int)(size*0.8), (int)(size*0.8), null);
         }
     }

@@ -143,7 +143,6 @@ public class Game{
             //System.out.println("Worker " + winner.getKey().toString());
             out = out + "Worker " + winner.getKey().toString()+" ";
         }
-        JOptionPane.showMessageDialog(null, out);
         int input = JOptionPane.showOptionDialog(null, out, "Results", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
         if(input == JOptionPane.OK_OPTION)
         {

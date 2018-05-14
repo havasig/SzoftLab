@@ -12,12 +12,12 @@ public class Controller {
         int numberOfPlayers = Game.getInstance().getWorkers().size();
         switch(numberOfPlayers){
             case 3:
-                chars. add('u');
-                chars.add('i');
-                chars.add('o');
-                chars.add('j');
-                chars.add('k');
-                chars.add('l');
+                chars.add('8');
+                chars.add('4');
+                chars.add('5');
+                chars.add('6');
+                chars.add('7');
+                chars.add('9');
             case 2:
                 chars.add('q');
                 chars.add('w');
@@ -26,12 +26,12 @@ public class Controller {
                 chars.add('s');
                 chars.add('d');
 
-                chars.add('8');
-                chars.add('4');
-                chars.add('5');
-                chars.add('6');
-                chars.add('7');
-                chars.add('9');
+                chars. add('u');
+                chars.add('i');
+                chars.add('o');
+                chars.add('j');
+                chars.add('k');
+                chars.add('l');
 
         }
     }
@@ -62,26 +62,26 @@ public class Controller {
             char step = events.get(i).getKeyChar();
             System.out.print("asd");
             switch (step){
-                case '8': workerMove(1,Direction.Up); break;
-                case '4': workerMove(1,Direction.Left); break;
-                case '5': workerMove(1,Direction.Down); break;
-                case '6': workerMove(1,Direction.Right); break;
-                case '7': workerAction(1, Field.FieldState.Honey); break;
-                case '9': workerAction(1, Field.FieldState.Oil); break;
+                case '8': if(Game.getInstance().getWorkers().get(1).isAlive()) workerMove(1,Direction.Up); break;
+                case '4': if(Game.getInstance().getWorkers().get(1).isAlive()) workerMove(1,Direction.Left); break;
+                case '5': if(Game.getInstance().getWorkers().get(1).isAlive()) workerMove(1,Direction.Down); break;
+                case '6': if(Game.getInstance().getWorkers().get(1).isAlive()) workerMove(1,Direction.Right); break;
+                case '7': if(Game.getInstance().getWorkers().get(1).isAlive()) workerAction(1, Field.FieldState.Honey); break;
+                case '9': if(Game.getInstance().getWorkers().get(1).isAlive()) workerAction(1, Field.FieldState.Oil); break;
 
-                case 'w': workerMove(2,Direction.Up);break;
-                case 'a': workerMove(2,Direction.Left); break;
-                case 's': workerMove(2,Direction.Down); break;
-                case 'd': workerMove(2,Direction.Right); break;
-                case 'q': workerAction(2, Field.FieldState.Honey); break;
-                case 'e': workerAction(2, Field.FieldState.Oil); break;
+                case 'w': if(Game.getInstance().getWorkers().get(2).isAlive()) workerMove(2,Direction.Up); break;
+                case 'a': if(Game.getInstance().getWorkers().get(2).isAlive()) workerMove(2,Direction.Left); break;
+                case 's': if(Game.getInstance().getWorkers().get(2).isAlive()) workerMove(2,Direction.Down); break;
+                case 'd': if(Game.getInstance().getWorkers().get(2).isAlive()) workerMove(2,Direction.Right); break;
+                case 'q': if(Game.getInstance().getWorkers().get(2).isAlive()) workerAction(2, Field.FieldState.Honey); break;
+                case 'e': if(Game.getInstance().getWorkers().get(2).isAlive()) workerAction(2, Field.FieldState.Oil); break;
 
-                case 'i': workerMove(3,Direction.Up); break;
-                case 'j': workerMove(3,Direction.Left); break;
-                case 'k': workerMove(3,Direction.Down); break;
-                case 'l': workerMove(3,Direction.Right); break;
-                case 'u': workerAction(3, Field.FieldState.Honey); break;
-                case 'o': workerAction(3, Field.FieldState.Oil); break;
+                case 'i': if(Game.getInstance().getWorkers().get(3).isAlive()) workerMove(3,Direction.Up); break;
+                case 'j': if(Game.getInstance().getWorkers().get(3).isAlive()) workerMove(3,Direction.Left); break;
+                case 'k': if(Game.getInstance().getWorkers().get(3).isAlive()) workerMove(3,Direction.Down); break;
+                case 'l': if(Game.getInstance().getWorkers().get(3).isAlive()) workerMove(3,Direction.Right); break;
+                case 'u': if(Game.getInstance().getWorkers().get(3).isAlive()) workerAction(3, Field.FieldState.Honey); break;
+                case 'o': if(Game.getInstance().getWorkers().get(3).isAlive()) workerAction(3, Field.FieldState.Oil); break;
             }
         }
         if(!events.isEmpty()){

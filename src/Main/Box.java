@@ -19,6 +19,8 @@ public class Box extends Movable {
      */
     private int defFriction;
 
+    private boolean dead = false;
+
     /**
      * Ez a Box konstruktora.
      *
@@ -38,6 +40,11 @@ public class Box extends Movable {
     @Override
     public void Die() {
         field.RemoveBox(this);
+        dead = true;
+    }
+
+    public boolean isDead() {
+        return dead;
     }
 
     /**
