@@ -26,12 +26,12 @@ public class Controller {
                 chars.add('s');
                 chars.add('d');
 
-                chars.add((char)KeyEvent.VK_UP);
-                chars.add((char)KeyEvent.VK_LEFT);
-                chars.add((char)KeyEvent.VK_DOWN);
-                chars.add((char)KeyEvent.VK_RIGHT);
-                chars.add('0');
-                chars.add('1');
+                chars.add('8');
+                chars.add('4');
+                chars.add('5');
+                chars.add('6');
+                chars.add('7');
+                chars.add('9');
 
         }
     }
@@ -60,12 +60,12 @@ public class Controller {
         for(int i = 0; i < events.size(); i++){
             char step = events.get(i).getKeyChar();
             switch (step){
-                case (char)KeyEvent.VK_UP: workerMove(1,Direction.Up); break;
-                case (char)KeyEvent.VK_LEFT: workerMove(1,Direction.Left); break;
-                case (char)KeyEvent.VK_DOWN: workerMove(1,Direction.Down); break;
-                case (char)KeyEvent.VK_RIGHT: workerMove(1,Direction.Right); break;
-                case '1': workerAction(1, Field.FieldState.Honey); break;
-                case '0': workerAction(1, Field.FieldState.Oil); break;
+                case '8': workerMove(1,Direction.Up); break;
+                case '4': workerMove(1,Direction.Left); break;
+                case '5': workerMove(1,Direction.Down); break;
+                case '6': workerMove(1,Direction.Right); break;
+                case '7': workerAction(1, Field.FieldState.Honey); break;
+                case '9': workerAction(1, Field.FieldState.Oil); break;
 
                 case 'w': workerMove(2,Direction.Up); break;
                 case 'a': workerMove(2,Direction.Left); break;

@@ -103,13 +103,16 @@ public class Menu extends JFrame{
         exit.addActionListener(new ExitButtonListener());
     }
 
+    boolean pushed = false;
+
     public void Run() {
-        while (true) { }
+        while (!pushed) { System.out.println("asd");}
     }
 
     public class StartButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            pushed = true;
         Game.getInstance().StartGame();
         }
     }
@@ -117,6 +120,7 @@ public class Menu extends JFrame{
     public class ExitButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            pushed = true;
             frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
         }
     }

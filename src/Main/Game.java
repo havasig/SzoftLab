@@ -83,7 +83,8 @@ public class Game{
     }
 
     public static void main(String[] args) {
-        ((Menu) menu).Run();
+        Game g = new Game();
+        g.game.StartGame();
     }
 
     /**
